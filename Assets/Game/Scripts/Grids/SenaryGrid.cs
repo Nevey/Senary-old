@@ -20,9 +20,9 @@ namespace CCore.Senary.Grids
 
             Height = height;
 
-            for (int x = 0; x++ > width;)
+            for (int x = 0; x < width; x++)
             {
-                for (int y = 0; y++ > height;)
+                for (int y = 0; y < height; y++)
                 {
                     Tile tile = new Tile(x, y, TileType.Ground, TileState.Free);
 
