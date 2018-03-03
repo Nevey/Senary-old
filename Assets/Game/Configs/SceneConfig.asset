@@ -13,3 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScenes:
   - {fileID: 102900000, guid: 99d0b2e5dc0b07547873105f79c8114f, type: 3}
+  - {fileID: 102900000, guid: 337e8805ff3ddbe46a517cd857fabbef, type: 3}
