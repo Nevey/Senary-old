@@ -1,0 +1,3 @@
+[submodule "Assets/CCore-Unity"]
+	path = Assets/CCore-Unity
+	url = https://gitlab.com/its-just-nils/CCore-Unity.git
