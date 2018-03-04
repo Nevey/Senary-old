@@ -51,7 +51,6 @@ namespace CCore.Senary.Editors
             playerColors[5] = Color.yellow;
             playerColors[6] = Color.grey;
         }
-
         
         private Tile2D GetClosestTile(Vector2 position)
         {
