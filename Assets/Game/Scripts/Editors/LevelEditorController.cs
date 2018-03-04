@@ -11,6 +11,8 @@ namespace CCore.Senary.Editors
 {
     public class LevelEditorController
     {
+        private const string levelAssetPath = "Assets/Game/Configs/Levels/{0}.asset";
+
         private Texture2D groundHexTexture;
 
         private Texture2D hqHexTexture;
@@ -215,14 +217,14 @@ namespace CCore.Senary.Editors
 
             levelConfig.SetLevelData(grid);
 
-            string assetPath = String.Format("Assets/Game/Configs/{0}.asset", levelName);
+            string assetPath = String.Format(levelAssetPath, levelName);
 
             AssetHelper.CreateAsset<LevelConfig>(levelConfig, assetPath);
         }
 
         public void LoadLevel(string levelName)
         {
-            string assetPath = String.Format("Assets/Game/Configs/{0}.asset", levelName);
+            string assetPath = String.Format(levelAssetPath, levelName);
 
             LevelConfig levelConfig = AssetHelper.LoadAssetAtPath<LevelConfig>(assetPath);
 
