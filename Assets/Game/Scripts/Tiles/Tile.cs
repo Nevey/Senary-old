@@ -1,5 +1,6 @@
 using System;
 using CCore.Senary.Grids;
+using CCore.Senary.Players;
 using UnityEngine;
 
 namespace CCore.Senary.Tiles
@@ -20,7 +21,7 @@ namespace CCore.Senary.Tiles
         /// Returns the tile owner object, this could be null if this tile was not owned by anyone
         /// </summary>
         /// <returns></returns>
-        public TileOwner TileOwner { get; private set; }
+        public Player Owner { get; private set; }
 
         public Tile(int x, int y, TileType tileType, TileState tileState)
         {
@@ -30,7 +31,7 @@ namespace CCore.Senary.Tiles
 
             TileState = tileState;
 
-            TileOwner = null;
+            Owner = null;
         }
 
         public void IncrementTileType()
