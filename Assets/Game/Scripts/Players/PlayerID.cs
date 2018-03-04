@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace CCore.Senary.Players
 {
     public class PlayerID
@@ -6,11 +8,15 @@ namespace CCore.Senary.Players
 
         public string Name { get; private set; }
 
-        public PlayerID(int id, string name)
+        public Color Color { get; private set; }
+
+        public PlayerID(int id, string name, Color color)
         {
             ID = id;
 
             Name = name;
+
+            Color = color;
         }
     }
 }

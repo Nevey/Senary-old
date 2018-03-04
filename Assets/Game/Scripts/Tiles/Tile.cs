@@ -49,5 +49,10 @@ namespace CCore.Senary.Tiles
                 TileType++;
             }
         }
+
+        public void SetOwner(Player owner)
+        {
+            Owner = owner;
+        }
     }
 }

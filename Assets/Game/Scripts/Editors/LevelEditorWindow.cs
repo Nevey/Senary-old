@@ -1,6 +1,9 @@
 using System;
 using CCore.Assets;
+using CCore.Editors;
+using CCore.Input;
 using CCore.Senary.Grids;
+using CCore.Senary.Players;
 using CCore.Senary.Tiles;
 using UnityEditor;
 using UnityEngine;
@@ -18,6 +21,10 @@ namespace CCore.Senary.Editors
         private Texture2D hqHexTexture;
 
         private GenericGrid<Tile2D> grid;
+
+        private Player[] players;
+
+        private Color[] playerColors;
         
         [MenuItem("Senary/LevelEditor")]
         public static void ShowWindow()
@@ -30,6 +37,21 @@ namespace CCore.Senary.Editors
             titleContent = new GUIContent("v0.0.1");
 
             LoadTextures();
+
+            playerColors = new Color[7];
+
+            playerColors[0] = Color.red;
+            playerColors[1] = Color.blue;
+            playerColors[2] = Color.cyan;
+            playerColors[3] = Color.magenta;
+            playerColors[4] = Color.green;
+            playerColors[5] = Color.yellow;
+            playerColors[6] = Color.grey;
+        }
+
+        protected override void Update()
+        {
+            // UpdateAvailablePlayers();
         }
 
         protected override void OnGUI()
@@ -43,29 +65,34 @@ namespace CCore.Senary.Editors
 
             DrawLevelProperties();
 
+            DrawPlayersInfo();
+
             DrawLevelGrid();
         }
         
-        protected override void OnMouseDown(Vector2 position)
+        protected override void OnMouseDown(Vector2 position, MouseButton mouseButton)
         {
-            if (grid == null)
+            if (mouseButton == MouseButton.Left)
             {
-                return;
+                UpdateTileType(position);
             }
 
-            Tile2D tile = GetClosestTile(position);
+            UpdateAvailablePlayers();
 
-            tile.IncrementTileType();
+            if (mouseButton == MouseButton.Right)
+            {
+                UpdateTileOwner(position);
+            }
 
             Repaint();
         }
 
-        protected override void OnMouseDrag(Vector2 position)
+        protected override void OnMouseDrag(Vector2 position, MouseButton mouseButton)
         {
             // throw new NotImplementedException();
         }
 
-        protected override void OnMouseUp(Vector2 position)
+        protected override void OnMouseUp(Vector2 position, MouseButton mouseButton)
         {
             // throw new NotImplementedException();
         }
@@ -82,7 +109,7 @@ namespace CCore.Senary.Editors
             grid = new GenericGrid<Tile2D>(gridWidth, gridHeight);
 
             float startX = 20f;
-            float startY = 120f;
+            float startY = 150f;
 
             for (int x = 0; x < grid.Width; x++)
             {
@@ -103,6 +130,42 @@ namespace CCore.Senary.Editors
                     grid.Tiles[x, y].SetRect(rect);
                 }
             }
+        }
+
+        private void UpdateTileType(Vector2 position)
+        {
+            if (grid == null)
+            {
+                return;
+            }
+
+            Tile2D tile = GetClosestTile(position);
+
+            tile.IncrementTileType();
+        }
+
+        private void UpdateTileOwner(Vector2 position)
+        {
+            if (grid == null || players == null || players.Length == 0)
+            {
+                return;
+            }
+
+            Tile2D tile = GetClosestTile(position);
+
+            if (tile.Owner == null)
+            {
+                tile.SetOwner(players[0]);
+
+                return;
+            }
+
+            // Immediately increment index with + 1
+            int playerIndex = Array.IndexOf(players, tile.Owner) + 1;
+
+            playerIndex = playerIndex == players.Length ? 0 : playerIndex;
+
+            tile.SetOwner(players[playerIndex]);
         }
 
         private Tile2D GetClosestTile(Vector2 position)
@@ -151,7 +214,28 @@ namespace CCore.Senary.Editors
                 }
             }
 
-            return maxPlayerCount;
+            return maxPlayerCount > playerColors.Length ? playerColors.Length : maxPlayerCount;
+        }
+
+        private void UpdateAvailablePlayers()
+        {
+            int playerCount = GetMaxPlayerCount();
+
+            if (players != null && players.Length == playerCount)
+            {
+                return;
+            }
+
+            players = new Player[playerCount];
+
+            for (int i = 0; i < playerCount; i++)
+            {
+                PlayerID playerID = new PlayerID(i, "player_" + i, playerColors[i]);
+
+                Player player = new Player(playerID);
+
+                players[i] = player;
+            }
         }
 
         private void DrawTopHeader()
@@ -206,10 +290,20 @@ namespace CCore.Senary.Editors
         {
             // Show amount of possible players
             // Show amount of current players
+            GUIStyle style = new GUIStyle();
 
-            // TODO: Add functionality to let players own HQ's
+            int maxNumberOfPlayers = GetMaxPlayerCount();
 
-            
+            if (maxNumberOfPlayers < 2)
+            {
+                style.normal.textColor = Color.red;
+            }
+            else
+            {
+                style.normal.textColor = Color.green;
+            }
+
+            EditorGUILayout.LabelField("Max Possible Players:", maxNumberOfPlayers.ToString(), style);
         }
 
         private void DrawLevelGrid()
@@ -240,7 +334,14 @@ namespace CCore.Senary.Editors
                         break;
                 }
 
+                if (tile.Owner != null)
+                {
+                    GUI.color = tile.Owner.PlayerID.Color;
+                }
+
                 GUI.DrawTexture(tile.Rect, tileTexture);
+
+                GUI.color = Color.white;
             }
         }
     }
