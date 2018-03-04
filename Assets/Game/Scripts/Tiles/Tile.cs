@@ -4,34 +4,33 @@ using UnityEngine;
 
 namespace CCore.Senary.Tiles
 {
-    public class Tile
+    public abstract class Tile
     {
-        public GridPosition GridPosition { get; private set; }
-
-        public TilePosition TilePosition { get; private set; }
+        /// <summary>
+        /// Returns grid coordinates object
+        /// </summary>
+        /// <returns></returns>
+        public GridCoordinates GridCoordinates { get; private set; }
 
         public TileType TileType { get; private set; }
 
         public TileState TileState { get; private set; }
 
+        /// <summary>
+        /// Returns the tile owner object, this could be null if this tile was not owned by anyone
+        /// </summary>
+        /// <returns></returns>
         public TileOwner TileOwner { get; private set; }
 
         public Tile(int x, int y, TileType tileType, TileState tileState)
         {
-            GridPosition = new GridPosition(x, y);
-
-            TilePosition = new TilePosition();
+            GridCoordinates = new GridCoordinates(x, y);
 
             TileType = tileType;
 
             TileState = tileState;
 
             TileOwner = null;
-        }
-
-        public void SetTilePosition(Vector2 position)
-        {
-            TilePosition.SetPosition(position);
         }
 
         public void IncrementTileType()

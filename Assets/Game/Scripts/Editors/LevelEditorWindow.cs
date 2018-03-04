@@ -19,7 +19,7 @@ namespace CCore.Senary.Editors
 
         private Texture2D hqHexTexture;
 
-        private SenaryGrid grid;
+        private GenericGrid<Tile2D> grid;
         
         [MenuItem("Senary/LevelEditor")]
         public static void ShowWindow()
@@ -65,7 +65,7 @@ namespace CCore.Senary.Editors
                     return;
                 }
 
-                Tile tile = GetClosestTile(e.position);
+                Tile2D tile = GetClosestTile(e.position);
 
                 tile.IncrementTileType();
 
@@ -82,7 +82,7 @@ namespace CCore.Senary.Editors
 
         private void CreateGrid()
         {
-            grid = new SenaryGrid(gridWidth, gridHeight);
+            grid = new GenericGrid<Tile2D>(gridWidth, gridHeight);
 
             float startX = 20f;
             float startY = 120f;
@@ -91,38 +91,36 @@ namespace CCore.Senary.Editors
             {
                 for (int y = 0; y < grid.Height; y++)
                 {
-                    Vector2 position = new Vector2(
+                    Rect rect = new Rect(
                         startX + groundHexTexture.width * x,
-                        startY + (groundHexTexture.height * .75f) * y
+                        startY + (groundHexTexture.height * .75f) * y,
+                        groundHexTexture.width,
+                        groundHexTexture.height
                     );
 
                     if (y % 2 == 0)
                     {
-                        position.x += groundHexTexture.width * .5f;
+                        rect.x += groundHexTexture.width * .5f;
                     }
 
-                    // Adding half width and height so position of tile is center of texture
-                    position.x += groundHexTexture.width * .5f;
-                    position.y += groundHexTexture.height * .5f;
-
-                    grid.Tiles[x, y].SetTilePosition(position);
+                    grid.Tiles[x, y].SetRect(rect);
                 }
             }
         }
 
-        private Tile GetClosestTile(Vector2 position)
+        private Tile2D GetClosestTile(Vector2 position)
         {
             float distance = 10000f;
 
-            Tile closestTile = null;
+            Tile2D closestTile = null;
 
             for (int x = 0; x < grid.Width; x++)
             {
                 for (int y = 0; y < grid.Height; y++)
                 {
-                    Tile tile = grid.Tiles[x, y];
+                    Tile2D tile = grid.Tiles[x, y];
 
-                    float localDistance = Vector2.Distance(tile.TilePosition.Position, position);
+                    float localDistance = Vector2.Distance(tile.CenterPosition, position);
 
                     if (localDistance < distance)
                     {
@@ -195,14 +193,7 @@ namespace CCore.Senary.Editors
             {
                 for (int y = 0; y < grid.Height; y++)
                 {
-                    Tile tile = grid.Tiles[x, y];
-
-                    Rect rect = new Rect(
-                        tile.TilePosition.Position.x,
-                        tile.TilePosition.Position.y,
-                        groundHexTexture.width,
-                        groundHexTexture.height
-                    );
+                    Tile2D tile = grid.Tiles[x, y];
 
                     Texture2D tileTexture;
 
@@ -225,7 +216,7 @@ namespace CCore.Senary.Editors
                             break;
                     }
 
-                    GUI.DrawTexture(rect, tileTexture);
+                    GUI.DrawTexture(tile.Rect, tileTexture);
                 }
             }
         }

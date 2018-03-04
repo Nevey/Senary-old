@@ -1,20 +1,21 @@
+using System;
 using CCore.Senary.Tiles;
 
 namespace CCore.Senary.Grids
 {
-    public class SenaryGrid
+    public class GenericGrid<T> where T : class
     {
-        private Tile[,] tiles;
+        private T[,] tiles;
 
-        public Tile[,] Tiles { get { return tiles; } }
+        public T[,] Tiles { get { return tiles; } }
 
         public int Width { get; private set; }
 
         public int Height { get; private set; }
 
-        public SenaryGrid(int width, int height)
+        public GenericGrid(int width, int height)
         {
-            tiles = new Tile[width, height];
+            tiles = new T[width, height];
 
             Width = width;
 
@@ -24,7 +25,7 @@ namespace CCore.Senary.Grids
             {
                 for (int y = 0; y < height; y++)
                 {
-                    Tile tile = new Tile(x, y, TileType.Ground, TileState.Free);
+                    T tile = (T)Activator.CreateInstance(typeof(T), x, y, TileType.Ground, TileState.Free);
 
                     tiles[x, y] = tile;
                 }
