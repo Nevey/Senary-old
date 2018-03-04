@@ -5,9 +5,9 @@ namespace CCore.Senary.Grids
 {
     public class GenericGrid<T> where T : class
     {
-        private T[,] tiles;
+        public T[,] Tiles { get; private set; }
 
-        public T[,] Tiles { get { return tiles; } }
+        public T[] FlattenedTiles { get; private set; }
 
         public int Width { get; private set; }
 
@@ -15,11 +15,15 @@ namespace CCore.Senary.Grids
 
         public GenericGrid(int width, int height)
         {
-            tiles = new T[width, height];
+            Tiles = new T[width, height];
+
+            FlattenedTiles = new T[width * height];
 
             Width = width;
 
             Height = height;
+
+            int index = 0;
 
             for (int x = 0; x < width; x++)
             {
@@ -27,7 +31,11 @@ namespace CCore.Senary.Grids
                 {
                     T tile = (T)Activator.CreateInstance(typeof(T), x, y, TileType.Ground, TileState.Free);
 
-                    tiles[x, y] = tile;
+                    Tiles[x, y] = tile;
+
+                    FlattenedTiles[index] = tile;
+
+                    index++;
                 }
             }
         }

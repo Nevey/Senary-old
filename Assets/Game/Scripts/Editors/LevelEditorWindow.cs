@@ -131,6 +131,29 @@ namespace CCore.Senary.Editors
             return closestTile;
         }
 
+        private int GetMaxPlayerCount()
+        {
+            if (grid == null)
+            {
+                return 0;
+            }
+
+            int maxPlayerCount = 0;
+
+            // Get the amount of HQ's in the grid
+            for (int i = 0; i < grid.FlattenedTiles.Length; i++)
+            {
+                Tile2D tile = grid.FlattenedTiles[i];
+
+                if (tile.TileType == TileType.HQ)
+                {
+                    maxPlayerCount++;
+                }
+            }
+
+            return maxPlayerCount;
+        }
+
         private void DrawTopHeader()
         {
             EditorGUILayout.Space();
@@ -179,6 +202,16 @@ namespace CCore.Senary.Editors
             EditorGUILayout.EndHorizontal();
         }
 
+        private void DrawPlayersInfo()
+        {
+            // Show amount of possible players
+            // Show amount of current players
+
+            // TODO: Add functionality to let players own HQ's
+
+            
+        }
+
         private void DrawLevelGrid()
         {
             if (grid == null)
@@ -186,31 +219,28 @@ namespace CCore.Senary.Editors
                 return;
             }
 
-            for (int x = 0; x < grid.Width; x++)
+            for (int i = 0; i < grid.FlattenedTiles.Length; i++)
             {
-                for (int y = 0; y < grid.Height; y++)
-                {
-                    Tile2D tile = grid.Tiles[x, y];
+                Tile2D tile = grid.FlattenedTiles[i];
 
-                    Texture2D tileTexture;
+                Texture2D tileTexture;
 
-                    switch (tile.TileType)
-                    {                        
-                        case TileType.HQ:
-                            tileTexture = hqHexTexture;
-                            break;
-                        
-                        case TileType.None:
-                            tileTexture = null;
-                            continue;
-                        
-                        default:
-                            tileTexture = groundHexTexture;
-                            break;
-                    }
-
-                    GUI.DrawTexture(tile.Rect, tileTexture);
+                switch (tile.TileType)
+                {                        
+                    case TileType.HQ:
+                        tileTexture = hqHexTexture;
+                        break;
+                    
+                    case TileType.None:
+                        tileTexture = null;
+                        continue;
+                    
+                    default:
+                        tileTexture = groundHexTexture;
+                        break;
                 }
+
+                GUI.DrawTexture(tile.Rect, tileTexture);
             }
         }
     }
