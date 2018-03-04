@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace CCore.Senary.Tiles
 {
+    // Rename to "TileLevelEditor" or "TileEditor" or "LevelEditorTile"
+    [Serializable]
     public class Tile2D : Tile
     {
         /// <summary>

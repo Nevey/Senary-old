@@ -14,6 +14,8 @@ namespace CCore.Senary.Editors
     {
         private LevelEditorController levelEditorController;
 
+        private string levelName;
+
         private int gridWidth;
 
         private int gridHeight;
@@ -100,6 +102,10 @@ namespace CCore.Senary.Editors
 
         private void DrawLevelProperties()
         {
+            levelName = EditorGUILayout.TextField("Level Name", levelName);
+
+            EditorGUILayout.Space();
+
             gridWidth = EditorGUILayout.IntSlider("Grid Width", gridWidth, 4, 20);
 
             gridHeight = EditorGUILayout.IntSlider("Grid Height", gridHeight, 4, 20);
@@ -117,9 +123,12 @@ namespace CCore.Senary.Editors
 
             if (GUILayout.Button("SAVE LEVEL"))
             {
-                // TODO: Decide on format (.asset, .json ... .asset has preference -> look at CubeWorlds!)
-                // Save at a pre-defined location in the project
-                // Test loading of levels...
+                levelEditorController.SaveLevel(levelName);
+            }
+
+            if (GUILayout.Button("LOAD LEVEL"))
+            {
+                levelEditorController.LoadLevel(levelName);
             }
 
             GUILayout.FlexibleSpace();
@@ -129,8 +138,8 @@ namespace CCore.Senary.Editors
 
         private void DrawPlayersInfo()
         {
-            // Show amount of possible players
-            // Show amount of current players
+            EditorGUILayout.Space();
+
             GUIStyle style = new GUIStyle();
 
             int maxNumberOfPlayers = levelEditorController.GetMaxPlayerCount();

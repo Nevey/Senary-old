@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace CCore.Senary.Tiles
 {
+    [Serializable]
     public abstract class Tile
     {
         /// <summary>
@@ -53,11 +54,15 @@ namespace CCore.Senary.Tiles
         public void SetOwner(Player owner)
         {
             Owner = owner;
+
+            TileState = TileState.Owned;
         }
 
         public void ClearOwner()
         {
             Owner = null;
+
+            TileState = TileState.Free;
         }
     }
 }

@@ -1,8 +1,10 @@
 using System;
 using CCore.Assets;
+using CCore.Senary.Configs;
 using CCore.Senary.Grids;
 using CCore.Senary.Players;
 using CCore.Senary.Tiles;
+using UnityEditor;
 using UnityEngine;
 
 namespace CCore.Senary.Editors
@@ -83,7 +85,7 @@ namespace CCore.Senary.Editors
             grid = new GenericGrid<Tile2D>(gridWidth, gridHeight);
 
             float startX = 20f;
-            float startY = 150f;
+            float startY = 180f;
 
             for (int x = 0; x < grid.Width; x++)
             {
@@ -196,6 +198,28 @@ namespace CCore.Senary.Editors
             }
 
             return maxPlayerCount > playerColors.Length ? playerColors.Length : maxPlayerCount;
+        }
+        
+        public void SaveLevel(string levelName)
+        {
+            LevelConfig levelConfig = ScriptableObject.CreateInstance<LevelConfig>();
+
+            levelConfig.SetLevelData(grid);
+
+            string assetPath = String.Format("Assets/Game/Configs/{0}.asset", levelName);
+
+            AssetDatabase.CreateAsset(levelConfig, assetPath);
+
+            AssetDatabase.SaveAssets();
+        }
+
+        public void LoadLevel(string levelName)
+        {
+            string assetPath = String.Format("Assets/Game/Configs/{0}.asset", levelName);
+
+            LevelConfig levelConfig = AssetHelper.LoadAssetAtPath<LevelConfig>(assetPath);
+
+            grid = levelConfig.Grid;
         }
     }
 }

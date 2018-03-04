@@ -1,8 +1,11 @@
+using System;
+
 namespace CCore.Senary.Grids
 {
     /// <summary>
     /// Contains coordinates in grid space
     /// </summary>
+    [Serializable]
     public class GridCoordinates
     {
         public int x { get; private set; }

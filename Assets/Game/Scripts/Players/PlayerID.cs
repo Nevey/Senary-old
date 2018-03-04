@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace CCore.Senary.Players
 {
+    [Serializable]
     public class PlayerID
     {
         public int ID { get; private set; }

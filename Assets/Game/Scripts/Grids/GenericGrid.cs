@@ -3,6 +3,7 @@ using CCore.Senary.Tiles;
 
 namespace CCore.Senary.Grids
 {
+    [Serializable]
     public class GenericGrid<T> where T : class
     {
         public T[,] Tiles { get; private set; }
