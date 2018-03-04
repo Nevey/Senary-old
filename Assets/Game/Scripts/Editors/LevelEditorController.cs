@@ -84,6 +84,11 @@ namespace CCore.Senary.Editors
                 }
             }
 
+            if (distance > groundHexTexture.height * 0.5f)
+            {
+                return null;
+            }
+
             return closestTile;
         }
 
@@ -128,7 +133,11 @@ namespace CCore.Senary.Editors
 
             Tile2D tile = GetClosestTile(position, windowRect);
 
-            tile.IncrementTileType();
+            if (tile != null)
+            {
+                tile.IncrementTileType();
+            }
+
         }
 
         public void UpdateTileOwner(Vector2 position, Rect windowRect)
@@ -139,6 +148,11 @@ namespace CCore.Senary.Editors
             }
 
             Tile2D tile = GetClosestTile(position, windowRect);
+
+            if (tile == null)
+            {
+                return;
+            }
 
             if (tile.Owner == null)
             {
@@ -163,6 +177,11 @@ namespace CCore.Senary.Editors
             }
 
             Tile2D tile = GetClosestTile(position, windowRect);
+
+            if (tile == null)
+            {
+                return;
+            }
 
             tile.ClearOwner();
         }
