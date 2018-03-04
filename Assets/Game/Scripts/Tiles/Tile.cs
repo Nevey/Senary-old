@@ -54,5 +54,10 @@ namespace CCore.Senary.Tiles
         {
             Owner = owner;
         }
+
+        public void ClearOwner()
+        {
+            Owner = null;
+        }
     }
 }

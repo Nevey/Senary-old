@@ -49,11 +49,6 @@ namespace CCore.Senary.Editors
             playerColors[6] = Color.grey;
         }
 
-        protected override void Update()
-        {
-            // UpdateAvailablePlayers();
-        }
-
         protected override void OnGUI()
         {
             base.OnGUI();
@@ -82,6 +77,11 @@ namespace CCore.Senary.Editors
             if (mouseButton == MouseButton.Right)
             {
                 UpdateTileOwner(position);
+            }
+
+            if (mouseButton == MouseButton.Middle)
+            {
+                ClearTileOwner(position);
             }
 
             Repaint();
@@ -166,6 +166,18 @@ namespace CCore.Senary.Editors
             playerIndex = playerIndex == players.Length ? 0 : playerIndex;
 
             tile.SetOwner(players[playerIndex]);
+        }
+
+        private void ClearTileOwner(Vector2 position)
+        {
+            if (grid == null)
+            {
+                return;
+            }
+
+            Tile2D tile = GetClosestTile(position);
+
+            tile.ClearOwner();
         }
 
         private Tile2D GetClosestTile(Vector2 position)
