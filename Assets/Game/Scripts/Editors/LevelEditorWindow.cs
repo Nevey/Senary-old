@@ -12,19 +12,11 @@ namespace CCore.Senary.Editors
 {
     public class LevelEditorWindow : BaseEditorWindow
     {
+        private LevelEditorController levelEditorController;
+
         private int gridWidth;
 
         private int gridHeight;
-
-        private Texture2D groundHexTexture;
-
-        private Texture2D hqHexTexture;
-
-        private GenericGrid<Tile2D> grid;
-
-        private Player[] players;
-
-        private Color[] playerColors;
         
         [MenuItem("Senary/LevelEditor")]
         public static void ShowWindow()
@@ -36,17 +28,7 @@ namespace CCore.Senary.Editors
         {
             titleContent = new GUIContent("v0.0.1");
 
-            LoadTextures();
-
-            playerColors = new Color[7];
-
-            playerColors[0] = Color.red;
-            playerColors[1] = Color.blue;
-            playerColors[2] = Color.cyan;
-            playerColors[3] = Color.magenta;
-            playerColors[4] = Color.green;
-            playerColors[5] = Color.yellow;
-            playerColors[6] = Color.grey;
+            levelEditorController = new LevelEditorController();
         }
 
         protected override void OnGUI()
@@ -69,19 +51,19 @@ namespace CCore.Senary.Editors
         {
             if (mouseButton == MouseButton.Left)
             {
-                UpdateTileType(position);
+                levelEditorController.UpdateTileType(position);
             }
 
-            UpdateAvailablePlayers();
+            levelEditorController.UpdateAvailablePlayers();
 
             if (mouseButton == MouseButton.Right)
             {
-                UpdateTileOwner(position);
+                levelEditorController.UpdateTileOwner(position);
             }
 
             if (mouseButton == MouseButton.Middle)
             {
-                ClearTileOwner(position);
+                levelEditorController.ClearTileOwner(position);
             }
 
             Repaint();
@@ -95,159 +77,6 @@ namespace CCore.Senary.Editors
         protected override void OnMouseUp(Vector2 position, MouseButton mouseButton)
         {
             // throw new NotImplementedException();
-        }
-
-        private void LoadTextures()
-        {
-            groundHexTexture = AssetHelper.LoadAsset<Texture2D>("groundHex");
-
-            hqHexTexture = AssetHelper.LoadAsset<Texture2D>("hqHex");
-        }
-
-        private void CreateGrid()
-        {
-            grid = new GenericGrid<Tile2D>(gridWidth, gridHeight);
-
-            float startX = 20f;
-            float startY = 150f;
-
-            for (int x = 0; x < grid.Width; x++)
-            {
-                for (int y = 0; y < grid.Height; y++)
-                {
-                    Rect rect = new Rect(
-                        startX + groundHexTexture.width * x,
-                        startY + (groundHexTexture.height * .75f) * y,
-                        groundHexTexture.width,
-                        groundHexTexture.height
-                    );
-
-                    if (y % 2 == 0)
-                    {
-                        rect.x += groundHexTexture.width * .5f;
-                    }
-
-                    grid.Tiles[x, y].SetRect(rect);
-                }
-            }
-        }
-
-        private void UpdateTileType(Vector2 position)
-        {
-            if (grid == null)
-            {
-                return;
-            }
-
-            Tile2D tile = GetClosestTile(position);
-
-            tile.IncrementTileType();
-        }
-
-        private void UpdateTileOwner(Vector2 position)
-        {
-            if (grid == null || players == null || players.Length == 0)
-            {
-                return;
-            }
-
-            Tile2D tile = GetClosestTile(position);
-
-            if (tile.Owner == null)
-            {
-                tile.SetOwner(players[0]);
-
-                return;
-            }
-
-            // Immediately increment index with + 1
-            int playerIndex = Array.IndexOf(players, tile.Owner) + 1;
-
-            playerIndex = playerIndex == players.Length ? 0 : playerIndex;
-
-            tile.SetOwner(players[playerIndex]);
-        }
-
-        private void ClearTileOwner(Vector2 position)
-        {
-            if (grid == null)
-            {
-                return;
-            }
-
-            Tile2D tile = GetClosestTile(position);
-
-            tile.ClearOwner();
-        }
-
-        private Tile2D GetClosestTile(Vector2 position)
-        {
-            float distance = 10000f;
-
-            Tile2D closestTile = null;
-
-            for (int x = 0; x < grid.Width; x++)
-            {
-                for (int y = 0; y < grid.Height; y++)
-                {
-                    Tile2D tile = grid.Tiles[x, y];
-
-                    float localDistance = Vector2.Distance(tile.CenterPosition, position);
-
-                    if (localDistance < distance)
-                    {
-                        closestTile = tile;
-
-                        distance = localDistance;
-                    }
-                }
-            }
-
-            return closestTile;
-        }
-
-        private int GetMaxPlayerCount()
-        {
-            if (grid == null)
-            {
-                return 0;
-            }
-
-            int maxPlayerCount = 0;
-
-            // Get the amount of HQ's in the grid
-            for (int i = 0; i < grid.FlattenedTiles.Length; i++)
-            {
-                Tile2D tile = grid.FlattenedTiles[i];
-
-                if (tile.TileType == TileType.HQ)
-                {
-                    maxPlayerCount++;
-                }
-            }
-
-            return maxPlayerCount > playerColors.Length ? playerColors.Length : maxPlayerCount;
-        }
-
-        private void UpdateAvailablePlayers()
-        {
-            int playerCount = GetMaxPlayerCount();
-
-            if (players != null && players.Length == playerCount)
-            {
-                return;
-            }
-
-            players = new Player[playerCount];
-
-            for (int i = 0; i < playerCount; i++)
-            {
-                PlayerID playerID = new PlayerID(i, "player_" + i, playerColors[i]);
-
-                Player player = new Player(playerID);
-
-                players[i] = player;
-            }
         }
 
         private void DrawTopHeader()
@@ -283,7 +112,7 @@ namespace CCore.Senary.Editors
 
             if (GUILayout.Button("CREATE GRID"))
             {
-                CreateGrid();
+                levelEditorController.CreateGrid(gridWidth, gridHeight);
             }
 
             if (GUILayout.Button("SAVE LEVEL"))
@@ -304,7 +133,7 @@ namespace CCore.Senary.Editors
             // Show amount of current players
             GUIStyle style = new GUIStyle();
 
-            int maxNumberOfPlayers = GetMaxPlayerCount();
+            int maxNumberOfPlayers = levelEditorController.GetMaxPlayerCount();
 
             if (maxNumberOfPlayers < 2)
             {
@@ -320,21 +149,21 @@ namespace CCore.Senary.Editors
 
         private void DrawLevelGrid()
         {
-            if (grid == null)
+            if (levelEditorController.Grid == null)
             {
                 return;
             }
 
-            for (int i = 0; i < grid.FlattenedTiles.Length; i++)
+            for (int i = 0; i < levelEditorController.Grid.FlattenedTiles.Length; i++)
             {
-                Tile2D tile = grid.FlattenedTiles[i];
+                Tile2D tile = levelEditorController.Grid.FlattenedTiles[i];
 
                 Texture2D tileTexture;
 
                 switch (tile.TileType)
                 {                        
                     case TileType.HQ:
-                        tileTexture = hqHexTexture;
+                        tileTexture = levelEditorController.HqHexTexture;
                         break;
                     
                     case TileType.None:
@@ -342,7 +171,7 @@ namespace CCore.Senary.Editors
                         continue;
                     
                     default:
-                        tileTexture = groundHexTexture;
+                        tileTexture = levelEditorController.GroundHexTexture;
                         break;
                 }
 
