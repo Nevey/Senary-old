@@ -208,9 +208,7 @@ namespace CCore.Senary.Editors
 
             string assetPath = String.Format("Assets/Game/Configs/{0}.asset", levelName);
 
-            AssetDatabase.CreateAsset(levelConfig, assetPath);
-
-            AssetDatabase.SaveAssets();
+            AssetHelper.CreateAsset<LevelConfig>(levelConfig, assetPath);
         }
 
         public void LoadLevel(string levelName)
