@@ -7,10 +7,8 @@ using UnityEngine;
 
 namespace CCore.Senary.Editors
 {
-    public class LevelEditorWindow : EditorWindow
+    public class LevelEditorWindow : BaseEditorWindow
     {
-        private EditorEvents editorEvents = new EditorEvents();
-
         private int gridWidth;
 
         private int gridHeight;
@@ -24,7 +22,7 @@ namespace CCore.Senary.Editors
         [MenuItem("Senary/LevelEditor")]
         public static void ShowWindow()
         {
-            EditorWindow.GetWindow(typeof(LevelEditorWindow));
+            ShowWindow<LevelEditorWindow>();
         }
 
         private void Awake()
@@ -32,21 +30,14 @@ namespace CCore.Senary.Editors
             titleContent = new GUIContent("v0.0.1");
 
             LoadTextures();
-
-            editorEvents.EditorMouseEvent += OnEditorMouseEvent;
         }
 
-        private void OnDestroy()
+        protected override void OnGUI()
         {
-            editorEvents.EditorMouseEvent -= OnEditorMouseEvent;
-        }
-
-        private void OnGUI()
-        {
+            base.OnGUI();
+            
             // TODO: Define min size after level grid drawing is functioning
             minSize = new Vector2(300f, 200f);
-
-            editorEvents.OnGUI();
 
             DrawTopHeader();
 
@@ -54,23 +45,29 @@ namespace CCore.Senary.Editors
 
             DrawLevelGrid();
         }
-
         
-        private void OnEditorMouseEvent(object sender, EditorMouseEventArgs e)
+        protected override void OnMouseDown(Vector2 position)
         {
-            if (e.editorMouseState == EditorMouseState.Down)
+            if (grid == null)
             {
-                if (grid == null)
-                {
-                    return;
-                }
-
-                Tile2D tile = GetClosestTile(e.position);
-
-                tile.IncrementTileType();
-
-                Repaint();
+                return;
             }
+
+            Tile2D tile = GetClosestTile(position);
+
+            tile.IncrementTileType();
+
+            Repaint();
+        }
+
+        protected override void OnMouseDrag(Vector2 position)
+        {
+            // throw new NotImplementedException();
+        }
+
+        protected override void OnMouseUp(Vector2 position)
+        {
+            // throw new NotImplementedException();
         }
 
         private void LoadTextures()
@@ -198,11 +195,7 @@ namespace CCore.Senary.Editors
                     Texture2D tileTexture;
 
                     switch (tile.TileType)
-                    {
-                        case TileType.Ground:
-                            tileTexture = groundHexTexture;
-                            break;
-                        
+                    {                        
                         case TileType.HQ:
                             tileTexture = hqHexTexture;
                             break;
