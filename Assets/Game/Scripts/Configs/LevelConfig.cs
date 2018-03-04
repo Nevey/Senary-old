@@ -7,11 +7,11 @@ namespace CCore.Senary.Configs
     public class LevelConfig : ScriptableObject
     {
         [HideInInspector]
-        [SerializeField] private GenericGrid<Tile2D> grid;
+        [SerializeField] private GenericGrid<EditorTile> grid;
 
-        public GenericGrid<Tile2D> Grid { get { return grid; } }
+        public GenericGrid<EditorTile> Grid { get { return grid; } }
 
-        public void SetLevelData(GenericGrid<Tile2D> grid)
+        public void SetLevelData(GenericGrid<EditorTile> grid)
         {
             this.grid = grid;
         }

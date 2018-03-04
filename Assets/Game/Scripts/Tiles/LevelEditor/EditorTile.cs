@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace CCore.Senary.Tiles
 {
-    // Rename to "TileLevelEditor" or "TileEditor" or "LevelEditorTile"
     [Serializable]
-    public class Tile2D : Tile
+    public class EditorTile : Tile
     {
         /// <summary>
         /// Dimensions of the tile
@@ -26,7 +25,7 @@ namespace CCore.Senary.Tiles
         /// <returns></returns>
         public Vector2 CenterPosition { get; private set; }
 
-        public Tile2D(int x, int y, TileType tileType, TileState tileState)
+        public EditorTile(int x, int y, TileType tileType, TileState tileState)
             : base(x, y, tileType, tileState)
         {
 

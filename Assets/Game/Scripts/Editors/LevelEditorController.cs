@@ -17,7 +17,7 @@ namespace CCore.Senary.Editors
 
         private Texture2D hqHexTexture;
 
-        private GenericGrid<Tile2D> grid;
+        private GenericGrid<EditorTile> grid;
 
         private Player[] players;
 
@@ -27,7 +27,7 @@ namespace CCore.Senary.Editors
 
         public Texture2D HqHexTexture { get { return hqHexTexture; } }
 
-        public GenericGrid<Tile2D> Grid { get { return grid; } }
+        public GenericGrid<EditorTile> Grid { get { return grid; } }
 
         public LevelEditorController()
         {
@@ -56,17 +56,17 @@ namespace CCore.Senary.Editors
             playerColors[6] = Color.grey;
         }
         
-        private Tile2D GetClosestTile(Vector2 position, Rect windowRect)
+        private EditorTile GetClosestTile(Vector2 position, Rect windowRect)
         {
             float distance = 10000f;
 
-            Tile2D closestTile = null;
+            EditorTile closestTile = null;
 
             for (int x = 0; x < grid.Width; x++)
             {
                 for (int y = 0; y < grid.Height; y++)
                 {
-                    Tile2D tile = grid.Tiles[x, y];
+                    EditorTile tile = grid.Tiles[x, y];
 
                     Vector2 centerPosition = tile.CenterPosition;
 
@@ -94,7 +94,7 @@ namespace CCore.Senary.Editors
 
         public void CreateGrid(int gridWidth, int gridHeight)
         {
-            grid = new GenericGrid<Tile2D>(gridWidth, gridHeight);
+            grid = new GenericGrid<EditorTile>(gridWidth, gridHeight);
 
             for (int x = 0; x < grid.Width; x++)
             {
@@ -131,7 +131,7 @@ namespace CCore.Senary.Editors
                 return;
             }
 
-            Tile2D tile = GetClosestTile(position, windowRect);
+            EditorTile tile = GetClosestTile(position, windowRect);
 
             if (tile != null)
             {
@@ -147,7 +147,7 @@ namespace CCore.Senary.Editors
                 return;
             }
 
-            Tile2D tile = GetClosestTile(position, windowRect);
+            EditorTile tile = GetClosestTile(position, windowRect);
 
             if (tile == null)
             {
@@ -176,7 +176,7 @@ namespace CCore.Senary.Editors
                 return;
             }
 
-            Tile2D tile = GetClosestTile(position, windowRect);
+            EditorTile tile = GetClosestTile(position, windowRect);
 
             if (tile == null)
             {
@@ -219,7 +219,7 @@ namespace CCore.Senary.Editors
             // Get the amount of HQ's in the grid
             for (int i = 0; i < grid.FlattenedTiles.Length; i++)
             {
-                Tile2D tile = grid.FlattenedTiles[i];
+                EditorTile tile = grid.FlattenedTiles[i];
 
                 if (tile.TileType == TileType.HQ)
                 {

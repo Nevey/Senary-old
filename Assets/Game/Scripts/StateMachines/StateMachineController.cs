@@ -10,7 +10,7 @@ namespace CCore.Senary.StateMachines
             gameStateMachine = new GameStateMachine();
 
             // TODO: Call "statemachine.start" instead
-            gameStateMachine.DoTransition<PlayerInputTransition>();
+            gameStateMachine.DoTransition<CreateLevelTransition>();
         }
     }
 }

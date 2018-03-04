@@ -6,6 +6,8 @@ namespace CCore.Senary.StateMachines
     {
         public GameStateMachine()
         {
+            AddTransition<CreateLevelTransition, CreateLevelState>();
+            
             AddTransition<PlayerInputTransition, PlayerInputState>();
         }
     }
