@@ -54,7 +54,7 @@ namespace CCore.Senary.Editors
             playerColors[6] = Color.grey;
         }
         
-        private Tile2D GetClosestTile(Vector2 position)
+        private Tile2D GetClosestTile(Vector2 position, Rect windowRect)
         {
             float distance = 10000f;
 
@@ -66,7 +66,12 @@ namespace CCore.Senary.Editors
                 {
                     Tile2D tile = grid.Tiles[x, y];
 
-                    float localDistance = Vector2.Distance(tile.CenterPosition, position);
+                    Vector2 centerPosition = tile.CenterPosition;
+
+                    // TODO: Half window width should become a "grid offset" variable
+                    centerPosition.x += windowRect.width * 0.5f;
+
+                    float localDistance = Vector2.Distance(centerPosition, position);
 
                     if (localDistance < distance)
                     {
@@ -84,19 +89,23 @@ namespace CCore.Senary.Editors
         {
             grid = new GenericGrid<Tile2D>(gridWidth, gridHeight);
 
-            float startX = 20f;
-            float startY = 180f;
-
             for (int x = 0; x < grid.Width; x++)
             {
                 for (int y = 0; y < grid.Height; y++)
                 {
                     Rect rect = new Rect(
-                        startX + groundHexTexture.width * x,
-                        startY + (groundHexTexture.height * .75f) * y,
+                        groundHexTexture.width * x,
+                        (groundHexTexture.height * .75f) * y,
                         groundHexTexture.width,
                         groundHexTexture.height
                     );
+
+                    // Adding some offsets for positioning reasons
+                    rect.x -= rect.width * (gridWidth * 0.5f);
+                    rect.x -= rect.width * 0.25f;
+
+                    // TODO: Define this magic number more nicely
+                    rect.y += 180f;
 
                     if (y % 2 == 0)
                     {
@@ -108,26 +117,26 @@ namespace CCore.Senary.Editors
             }
         }
 
-        public void UpdateTileType(Vector2 position)
+        public void UpdateTileType(Vector2 position, Rect windowRect)
         {
             if (grid == null)
             {
                 return;
             }
 
-            Tile2D tile = GetClosestTile(position);
+            Tile2D tile = GetClosestTile(position, windowRect);
 
             tile.IncrementTileType();
         }
 
-        public void UpdateTileOwner(Vector2 position)
+        public void UpdateTileOwner(Vector2 position, Rect windowRect)
         {
             if (grid == null || players == null || players.Length == 0)
             {
                 return;
             }
 
-            Tile2D tile = GetClosestTile(position);
+            Tile2D tile = GetClosestTile(position, windowRect);
 
             if (tile.Owner == null)
             {
@@ -144,14 +153,14 @@ namespace CCore.Senary.Editors
             tile.SetOwner(players[playerIndex]);
         }
 
-        public void ClearTileOwner(Vector2 position)
+        public void ClearTileOwner(Vector2 position, Rect windowRect)
         {
             if (grid == null)
             {
                 return;
             }
 
-            Tile2D tile = GetClosestTile(position);
+            Tile2D tile = GetClosestTile(position, windowRect);
 
             tile.ClearOwner();
         }

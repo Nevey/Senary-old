@@ -53,19 +53,19 @@ namespace CCore.Senary.Editors
         {
             if (mouseButton == MouseButton.Left)
             {
-                levelEditorController.UpdateTileType(position);
+                levelEditorController.UpdateTileType(position, windowRect);
             }
 
             levelEditorController.UpdateAvailablePlayers();
 
             if (mouseButton == MouseButton.Right)
             {
-                levelEditorController.UpdateTileOwner(position);
+                levelEditorController.UpdateTileOwner(position, windowRect);
             }
 
             if (mouseButton == MouseButton.Middle)
             {
-                levelEditorController.ClearTileOwner(position);
+                levelEditorController.ClearTileOwner(position, windowRect);
             }
 
             Repaint();
@@ -167,6 +167,11 @@ namespace CCore.Senary.Editors
             {
                 Tile2D tile = levelEditorController.Grid.FlattenedTiles[i];
 
+                if (tile.Owner != null)
+                {
+                    GUI.color = tile.Owner.PlayerID.Color;
+                }
+
                 Texture2D tileTexture;
 
                 switch (tile.TileType)
@@ -184,12 +189,12 @@ namespace CCore.Senary.Editors
                         break;
                 }
 
-                if (tile.Owner != null)
-                {
-                    GUI.color = tile.Owner.PlayerID.Color;
-                }
+                Rect rect = tile.Rect;
 
-                GUI.DrawTexture(tile.Rect, tileTexture);
+                // TODO: Half window width should become a "grid offset" variable
+                rect.x += windowRect.width * 0.5f;
+
+                GUI.DrawTexture(rect, tileTexture);
 
                 GUI.color = Color.white;
             }
