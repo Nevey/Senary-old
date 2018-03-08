@@ -7,23 +7,29 @@ namespace CCore.Senary.Tiles
     [Serializable]
     public class EditorTile : Tile
     {
+        private Rect rect;
+
+        private Vector2 position;
+
+        private Vector2 centerPosition;
+
         /// <summary>
         /// Dimensions of the tile
         /// </summary>
         /// <returns></returns>
-        public Rect Rect { get; private set; }
+        public Rect Rect { get { return rect; } }
 
         /// <summary>
         /// Top left point of the tile
         /// </summary>
         /// <returns></returns>
-        public Vector2 Position { get; private set; }
+        public Vector2 Position { get { return position; } }
 
         /// <summary>
         /// Center point of the tile
         /// </summary>
         /// <returns></returns>
-        public Vector2 CenterPosition { get; private set; }
+        public Vector2 CenterPosition { get { return centerPosition; } }
 
         public EditorTile(int x, int y, TileType tileType, TileState tileState)
             : base(x, y, tileType, tileState)
@@ -33,14 +39,14 @@ namespace CCore.Senary.Tiles
 
         public void SetRect(Rect rect)
         {
-            Rect = rect;
+            this.rect = rect;
 
-            Position = new Vector2(
+            this.position = new Vector2(
                 rect.x,
                 rect.y
             );
 
-            CenterPosition = new Vector2(
+            this.centerPosition = new Vector2(
                 rect.x + rect.width * 0.5f,
                 rect.y + rect.height * 0.5f
             );

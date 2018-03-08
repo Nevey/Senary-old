@@ -5,11 +5,13 @@ namespace CCore.Senary.Players
     [Serializable]
     public class Player
     {
-        public PlayerID PlayerID { get; private set; }
+        private PlayerID playerID;
+
+        public PlayerID PlayerID { get { return playerID; } }
 
         public Player(PlayerID playerID)
         {
-            PlayerID = playerID;
+            this.playerID = playerID;
         }
     }
 }

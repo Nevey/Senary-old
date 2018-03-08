@@ -1,28 +1,37 @@
 using System;
 using CCore.Senary.Tiles;
+using UnityEngine;
 
 namespace CCore.Senary.Grids
 {
     [Serializable]
-    public class GenericGrid<T> where T : class
+    public class GenericGrid<T> where T : Tile
     {
-        public T[,] Tiles { get; private set; }
+        private T[,] tiles;
 
-        public T[] FlattenedTiles { get; private set; }
+        private T[] flattenedTiles;
 
-        public int Width { get; private set; }
+        private int width;
 
-        public int Height { get; private set; }
+        private int height;
+
+        public T[,] Tiles { get { return tiles; } }
+
+        public T[] FlattenedTiles { get { return flattenedTiles; } }
+
+        public int Width { get { return width; } }
+
+        public int Height { get { return height; } }
 
         public GenericGrid(int width, int height)
         {
-            Tiles = new T[width, height];
+            tiles = new T[width, height];
 
-            FlattenedTiles = new T[width * height];
+            flattenedTiles = new T[width * height];
 
-            Width = width;
+            this.width = width;
 
-            Height = height;
+            this.height = height;
 
             int index = 0;
 
@@ -32,9 +41,9 @@ namespace CCore.Senary.Grids
                 {
                     T tile = (T)Activator.CreateInstance(typeof(T), x, y, TileType.Ground, TileState.Free);
 
-                    Tiles[x, y] = tile;
+                    tiles[x, y] = tile;
 
-                    FlattenedTiles[index] = tile;
+                    flattenedTiles[index] = tile;
 
                     index++;
                 }

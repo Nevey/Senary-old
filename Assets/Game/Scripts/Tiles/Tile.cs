@@ -8,31 +8,39 @@ namespace CCore.Senary.Tiles
     [Serializable]
     public abstract class Tile
     {
+        private GridCoordinates gridCoordinates;
+
+        private TileType tileType;
+
+        private TileState tileState;
+
+        private Player owner;
+        
         /// <summary>
         /// Returns grid coordinates object
         /// </summary>
         /// <returns></returns>
-        public GridCoordinates GridCoordinates { get; private set; }
+        public GridCoordinates GridCoordinates { get { return gridCoordinates; } }
 
-        public TileType TileType { get; private set; }
+        public TileType TileType { get { return tileType; } }
 
-        public TileState TileState { get; private set; }
+        public TileState TileState { get { return tileState; } }
 
         /// <summary>
         /// Returns the tile owner object, this could be null if this tile was not owned by anyone
         /// </summary>
         /// <returns></returns>
-        public Player Owner { get; private set; }
+        public Player Owner { get { return owner; } }
 
         public Tile(int x, int y, TileType tileType, TileState tileState)
         {
-            GridCoordinates = new GridCoordinates(x, y);
+            this.gridCoordinates = new GridCoordinates(x, y);
 
-            TileType = tileType;
+            this.tileType = tileType;
 
-            TileState = tileState;
+            this.tileState = tileState;
 
-            Owner = null;
+            owner = null;
         }
 
         public void IncrementTileType()
@@ -43,26 +51,26 @@ namespace CCore.Senary.Tiles
 
             if (index == enumLength - 1)
             {
-                TileType = (TileType)0;
+                tileType = (TileType)0;
             }
             else
             {
-                TileType++;
+                tileType++;
             }
         }
 
         public void SetOwner(Player owner)
         {
-            Owner = owner;
+            this.owner = owner;
 
-            TileState = TileState.Owned;
+            tileState = TileState.Owned;
         }
 
         public void ClearOwner()
         {
-            Owner = null;
+            owner = null;
 
-            TileState = TileState.Free;
+            tileState = TileState.Free;
         }
     }
 }

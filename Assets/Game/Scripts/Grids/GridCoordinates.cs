@@ -8,8 +8,12 @@ namespace CCore.Senary.Grids
     [Serializable]
     public class GridCoordinates
     {
-        public int x { get; private set; }
-        public int y { get; private set; }
+        private int x;
+        
+        private int y;
+
+        public int X { get { return x; } }
+        public int Y { get { return y; } }
 
         public GridCoordinates(int x, int y)
         {

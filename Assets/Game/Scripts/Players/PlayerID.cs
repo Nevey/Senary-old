@@ -6,19 +6,25 @@ namespace CCore.Senary.Players
     [Serializable]
     public class PlayerID
     {
-        public int ID { get; private set; }
+        private int id;
 
-        public string Name { get; private set; }
+        private string name;
 
-        public Color Color { get; private set; }
+        private Color color;
+
+        public int ID { get { return id; } }
+
+        public string Name { get { return name; } }
+
+        public Color Color { get { return color; } }
 
         public PlayerID(int id, string name, Color color)
         {
-            ID = id;
+            this.id = id;
 
-            Name = name;
+            this.name = name;
 
-            Color = color;
+            this.color = color;
         }
     }
 }
