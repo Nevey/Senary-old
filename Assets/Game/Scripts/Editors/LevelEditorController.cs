@@ -1,6 +1,7 @@
 using System;
 using CCore.Assets;
 using CCore.Senary.Configs;
+using CCore.Senary.Constants;
 using CCore.Senary.Grids;
 using CCore.Senary.Players;
 using CCore.Senary.Tiles;
@@ -11,13 +12,11 @@ namespace CCore.Senary.Editors
 {
     public class LevelEditorController
     {
-        private const string levelAssetPath = "Assets/Game/Configs/Levels/{0}.asset";
-
         private Texture2D groundHexTexture;
 
         private Texture2D hqHexTexture;
 
-        private EditorGrid grid;
+        private GenericGrid<Tile> grid;
 
         private Player[] players;
 
@@ -27,7 +26,7 @@ namespace CCore.Senary.Editors
 
         public Texture2D HqHexTexture { get { return hqHexTexture; } }
 
-        public GenericGrid<EditorTile> Grid { get { return grid; } }
+        public GenericGrid<Tile> Grid { get { return grid; } }
 
         public LevelEditorController()
         {
@@ -66,7 +65,7 @@ namespace CCore.Senary.Editors
             {
                 for (int y = 0; y < grid.Height; y++)
                 {
-                    EditorTile tile = grid.Tiles[x, y];
+                    EditorTile tile = (EditorTile)grid.Tiles[x, y];
 
                     Vector2 centerPosition = tile.CenterPosition;
 
@@ -118,14 +117,18 @@ namespace CCore.Senary.Editors
                         rect.x += groundHexTexture.width * .5f;
                     }
 
-                    grid.Tiles[x, y].SetRect(rect);
+                    EditorTile tile = (EditorTile)grid.Tiles[x, y];
+
+                    tile.SetRect(rect);
+
+                    // grid.Tiles[x, y].SetRect(rect);
                 }
             }
         }
 
         public void CreateNewGrid(int gridWidth, int gridHeight)
         {
-            grid = new EditorGrid(gridWidth, gridHeight);
+            grid = new GenericGrid<Tile>(gridWidth, gridHeight);
 
             SetTileRects();
         }
@@ -225,7 +228,7 @@ namespace CCore.Senary.Editors
             // Get the amount of HQ's in the grid
             for (int i = 0; i < grid.FlattenedTiles.Length; i++)
             {
-                EditorTile tile = grid.FlattenedTiles[i];
+                EditorTile tile = (EditorTile)grid.FlattenedTiles[i];
 
                 if (tile.TileType == TileType.HQ)
                 {
@@ -242,14 +245,14 @@ namespace CCore.Senary.Editors
 
             levelConfig.SetLevelData(grid);
 
-            string assetPath = String.Format(levelAssetPath, levelName);
+            string assetPath = String.Format(LevelConstants.levelAssetPath, levelName);
 
             AssetHelper.CreateAsset<LevelConfig>(levelConfig, assetPath);
         }
 
         public void LoadLevel(string levelName)
         {
-            string assetPath = String.Format(levelAssetPath, levelName);
+            string assetPath = String.Format(LevelConstants.levelAssetPath, levelName);
 
             LevelConfig levelConfig = AssetHelper.LoadAssetAtPath<LevelConfig>(assetPath);
 

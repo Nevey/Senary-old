@@ -19,6 +19,9 @@ namespace CCore.Senary.Tiles
 
         [SerializeField]
         private Player owner;
+
+        [SerializeField]
+        private string name;
         
         /// <summary>
         /// Returns grid coordinates object
@@ -36,6 +39,8 @@ namespace CCore.Senary.Tiles
         /// <returns></returns>
         public Player Owner { get { return owner; } }
 
+        public string Name { get { return name; } }
+
         public Tile(int x, int y, TileType tileType, TileState tileState)
         {
             this.gridCoordinates = new GridCoordinates(x, y);
@@ -43,6 +48,8 @@ namespace CCore.Senary.Tiles
             this.tileType = tileType;
 
             this.tileState = tileState;
+
+            this.name = String.Format("Tile-{0}-{1}", gridCoordinates.X, gridCoordinates.Y);
 
             ClearOwner();
         }
