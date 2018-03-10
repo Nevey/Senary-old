@@ -60,7 +60,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 0
         y: 4
-      tileType: 1
+      tileType: 2
       tileState: 0
       owner:
         playerID:
@@ -852,7 +852,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 8
         y: 4
-      tileType: 1
+      tileType: 2
       tileState: 0
       owner:
         playerID:

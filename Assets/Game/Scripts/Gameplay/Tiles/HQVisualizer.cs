@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace CCore.Senary.Gameplay.Tiles
 {
+    // TODO: Rename to TileView or TileVisualizer
     public class HQVisualizer : MonoBehaviour
     {
         [SerializeField] private GameObject hqGameObject;

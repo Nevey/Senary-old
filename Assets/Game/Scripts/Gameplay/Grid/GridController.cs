@@ -18,6 +18,8 @@ namespace CCore.Senary.Gameplay.Grid
 
         private GenericGrid grid;
 
+        public GenericGrid Grid { get { return grid; } }
+
         private void Awake()
         {
             GameStateMachine.Instance.GetState<CreateLevelState>().EnterEvent += OnCreateLevelStateEnter;

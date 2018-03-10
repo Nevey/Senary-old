@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 422752529}
   - component: {fileID: 422752528}
+  - component: {fileID: 422752530}
   m_Layer: 0
   m_Name: GridController
   m_TagString: Untagged
@@ -142,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loggingEnabled: 1
   loggingColor: {r: 1, g: 1, b: 1, a: 1}
-  levelName: Level_2
+  levelName: Level_1
   tilePrefab: {fileID: 1295244709602228, guid: bd711cf55565c1144aa01a17e72cb4b8, type: 2}
 --- !u!4 &422752529
 Transform:
@@ -157,6 +158,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &422752530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 422752527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1923d7577e8437d4aad7fb45bfa6b94b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggingEnabled: 1
+  loggingColor: {r: 0, g: 0.7058823, b: 0.2093306, a: 1}
 --- !u!1 &553931265
 GameObject:
   m_ObjectHideFlags: 0
