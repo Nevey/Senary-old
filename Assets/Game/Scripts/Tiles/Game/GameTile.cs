@@ -26,12 +26,12 @@ namespace CCore.Senary.Tiles
             Vector3 position = new Vector3(
                 tileSize.x * gridCoordinates.X,
                 0f,
-                (tileSize.z * 0.75f) * gridCoordinates.Y
+                -(tileSize.z * 0.75f) * gridCoordinates.Y
             );
 
             position.x -= tileSize.x * (gridWidth * 0.5f);
             position.x -= tileSize.x * 0.25f;
-            position.z -= tileSize.z * (gridHeight * 0.5f);
+            position.z += tileSize.z * (gridHeight * 0.5f);
 
             if (gridCoordinates.Y % 2 == 0)
             {

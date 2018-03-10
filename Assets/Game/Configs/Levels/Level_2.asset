@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c698f9798ea6ff34893ff968daa38f42, type: 3}
-  m_Name: asd
+  m_Name: Level_2
   m_EditorClassIdentifier: 
   grid:
     flattenedTiles:
@@ -49,7 +49,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 0
         y: 3
-      tileType: 1
+      tileType: 2
       tileState: 0
       owner:
         playerID:
@@ -71,7 +71,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 0
         y: 5
-      tileType: 1
+      tileType: 0
       tileState: 0
       owner:
         playerID:
@@ -82,7 +82,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 0
         y: 6
-      tileType: 1
+      tileType: 0
       tileState: 0
       owner:
         playerID:
@@ -203,13 +203,13 @@ MonoBehaviour:
     - gridCoordinates:
         x: 2
         y: 3
-      tileType: 2
-      tileState: 1
+      tileType: 1
+      tileState: 0
       owner:
         playerID:
-          id: 1
-          name: player_1
-          color: {r: 0, g: 0, b: 1, a: 1}
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
       name: Tile-2-3
     - gridCoordinates:
         x: 2
@@ -236,13 +236,13 @@ MonoBehaviour:
     - gridCoordinates:
         x: 2
         y: 6
-      tileType: 1
-      tileState: 0
+      tileType: 2
+      tileState: 1
       owner:
         playerID:
-          id: -1
-          name: None
-          color: {r: 1, g: 1, b: 1, a: 1}
+          id: 0
+          name: player_0
+          color: {r: 1, g: 0, b: 0, a: 1}
       name: Tile-2-6
     - gridCoordinates:
         x: 3
@@ -280,7 +280,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 3
         y: 3
-      tileType: 1
+      tileType: 0
       tileState: 0
       owner:
         playerID:
@@ -302,13 +302,13 @@ MonoBehaviour:
     - gridCoordinates:
         x: 3
         y: 5
-      tileType: 2
-      tileState: 1
+      tileType: 1
+      tileState: 0
       owner:
         playerID:
-          id: 2
-          name: player_2
-          color: {r: 0, g: 1, b: 1, a: 1}
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
       name: Tile-3-5
     - gridCoordinates:
         x: 3
@@ -324,6 +324,17 @@ MonoBehaviour:
     - gridCoordinates:
         x: 4
         y: 0
+      tileType: 2
+      tileState: 1
+      owner:
+        playerID:
+          id: 1
+          name: player_1
+          color: {r: 0, g: 0, b: 1, a: 1}
+      name: Tile-4-0
+    - gridCoordinates:
+        x: 4
+        y: 1
       tileType: 1
       tileState: 0
       owner:
@@ -331,17 +342,6 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
-      name: Tile-4-0
-    - gridCoordinates:
-        x: 4
-        y: 1
-      tileType: 2
-      tileState: 1
-      owner:
-        playerID:
-          id: 0
-          name: player_0
-          color: {r: 1, g: 0, b: 0, a: 1}
       name: Tile-4-1
     - gridCoordinates:
         x: 4
@@ -357,7 +357,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 4
         y: 3
-      tileType: 1
+      tileType: 0
       tileState: 0
       owner:
         playerID:
@@ -390,7 +390,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 4
         y: 6
-      tileType: 0
+      tileType: 1
       tileState: 0
       owner:
         playerID:
@@ -445,7 +445,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 5
         y: 4
-      tileType: 0
+      tileType: 1
       tileState: 0
       owner:
         playerID:
@@ -456,7 +456,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 5
         y: 5
-      tileType: 0
+      tileType: 1
       tileState: 0
       owner:
         playerID:
@@ -467,7 +467,7 @@ MonoBehaviour:
     - gridCoordinates:
         x: 5
         y: 6
-      tileType: 0
+      tileType: 1
       tileState: 0
       owner:
         playerID:
@@ -475,5 +475,159 @@ MonoBehaviour:
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
       name: Tile-5-6
-    width: 6
+    - gridCoordinates:
+        x: 6
+        y: 0
+      tileType: 0
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-0
+    - gridCoordinates:
+        x: 6
+        y: 1
+      tileType: 1
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-1
+    - gridCoordinates:
+        x: 6
+        y: 2
+      tileType: 1
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-2
+    - gridCoordinates:
+        x: 6
+        y: 3
+      tileType: 1
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-3
+    - gridCoordinates:
+        x: 6
+        y: 4
+      tileType: 1
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-4
+    - gridCoordinates:
+        x: 6
+        y: 5
+      tileType: 1
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-5
+    - gridCoordinates:
+        x: 6
+        y: 6
+      tileType: 0
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-6
+    - gridCoordinates:
+        x: 7
+        y: 0
+      tileType: 0
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-0
+    - gridCoordinates:
+        x: 7
+        y: 1
+      tileType: 0
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-1
+    - gridCoordinates:
+        x: 7
+        y: 2
+      tileType: 0
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-2
+    - gridCoordinates:
+        x: 7
+        y: 3
+      tileType: 2
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-3
+    - gridCoordinates:
+        x: 7
+        y: 4
+      tileType: 0
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-4
+    - gridCoordinates:
+        x: 7
+        y: 5
+      tileType: 0
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-5
+    - gridCoordinates:
+        x: 7
+        y: 6
+      tileType: 0
+      tileState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-6
+    width: 8
     height: 7
