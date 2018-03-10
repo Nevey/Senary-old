@@ -1,3 +1,4 @@
+using CCore.Senary.Gameplay;
 using UnityEngine;
 
 namespace CCore.Senary.Tiles
@@ -8,17 +9,15 @@ namespace CCore.Senary.Tiles
 
         public GameObject TileMesh { get { return tileMesh; } }
 
-        public void SetupTile(GameObject prefab, Transform parent, int gridWidth, int gridHeight)
+        private void CreateMesh(GameObject prefab, Transform parent)
         {
-            if (tileType == TileType.None)
-            {
-                return;
-            }
-
             tileMesh = GameObject.Instantiate(prefab);
 
             tileMesh.transform.parent = parent;
+        }
 
+        private void SetupPosition(int gridWidth, int gridHeight)
+        {
             Renderer tileRenderer = tileMesh.GetComponent<Renderer>();
 
             Vector3 tileSize = tileRenderer.bounds.size;
@@ -31,7 +30,7 @@ namespace CCore.Senary.Tiles
 
             position.x -= tileSize.x * (gridWidth * 0.5f);
             position.x -= tileSize.x * 0.25f;
-            position.y -= tileSize.y * (gridHeight * 0.5f);
+            position.z -= tileSize.z * (gridHeight * 0.5f);
 
             if (gridCoordinates.Y % 2 == 0)
             {
@@ -39,6 +38,29 @@ namespace CCore.Senary.Tiles
             }
 
             tileMesh.transform.localPosition = position;
+        }
+
+        private void SetupHQVizualizer()
+        {
+            HQVisualizer hqVisualizer = tileMesh.GetComponent<HQVisualizer>();
+
+            bool isVisible = tileType == TileType.HQ;
+
+            hqVisualizer.SetHQVisible(isVisible);
+        }
+
+        public void SetupTile(GameObject prefab, Transform parent, int gridWidth, int gridHeight)
+        {
+            if (tileType == TileType.None)
+            {
+                return;
+            }
+
+            CreateMesh(prefab, parent);
+
+            SetupPosition(gridWidth, gridHeight);
+
+            SetupHQVizualizer();
         }
     }
 }
