@@ -16,7 +16,7 @@ namespace CCore.Senary.Editors
 
         private Texture2D hqHexTexture;
 
-        private GenericGrid<Tile> grid;
+        private EditorGrid grid;
 
         private Player[] players;
 
@@ -26,7 +26,7 @@ namespace CCore.Senary.Editors
 
         public Texture2D HqHexTexture { get { return hqHexTexture; } }
 
-        public GenericGrid<Tile> Grid { get { return grid; } }
+        public EditorGrid Grid { get { return grid; } }
 
         public LevelEditorController()
         {
@@ -128,7 +128,7 @@ namespace CCore.Senary.Editors
 
         public void CreateNewGrid(int gridWidth, int gridHeight)
         {
-            grid = new GenericGrid<Tile>(gridWidth, gridHeight);
+            grid = new EditorGrid(gridWidth, gridHeight);
 
             SetTileRects();
         }
