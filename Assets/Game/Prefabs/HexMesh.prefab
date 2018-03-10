@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4960388375129722}
   - component: {fileID: 33133249837811496}
   - component: {fileID: 23599514763108554}
-  - component: {fileID: 114353006446806504}
+  - component: {fileID: 114037337299336652}
   m_Layer: 0
   m_Name: HexMesh
   m_TagString: Untagged
@@ -169,7 +169,7 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
---- !u!114 &114353006446806504
+--- !u!114 &114037337299336652
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -177,9 +177,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1295244709602228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35b081f98ba2e024597df17eb1b002df, type: 3}
+  m_Script: {fileID: 11500000, guid: f3379d7ba846b4941a995444970cd911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   loggingEnabled: 1
-  loggingColor: {r: 0, g: 0.5076066, b: 0.8088235, a: 1}
+  loggingColor: {r: 1, g: 1, b: 1, a: 1}
   hqGameObject: {fileID: 1272692870094242}
