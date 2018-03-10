@@ -8,12 +8,16 @@ namespace CCore.Senary.Tiles
     [Serializable]
     public abstract class Tile
     {
+        [SerializeField]
         private GridCoordinates gridCoordinates;
 
+        [SerializeField]
         private TileType tileType;
 
+        [SerializeField]
         private TileState tileState;
 
+        [SerializeField]
         private Player owner;
         
         /// <summary>
@@ -40,7 +44,7 @@ namespace CCore.Senary.Tiles
 
             this.tileState = tileState;
 
-            owner = null;
+            ClearOwner();
         }
 
         public void IncrementTileType()
@@ -68,7 +72,7 @@ namespace CCore.Senary.Tiles
 
         public void ClearOwner()
         {
-            owner = null;
+            owner = Player.Dummy;
 
             tileState = TileState.Free;
         }

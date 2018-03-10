@@ -118,7 +118,7 @@ namespace CCore.Senary.Editors
 
             if (GUILayout.Button("CREATE GRID"))
             {
-                levelEditorController.CreateGrid(gridWidth, gridHeight);
+                levelEditorController.CreateNewGrid(gridWidth, gridHeight);
             }
 
             if (GUILayout.Button("SAVE LEVEL"))

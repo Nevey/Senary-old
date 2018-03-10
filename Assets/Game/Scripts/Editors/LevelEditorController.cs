@@ -92,10 +92,9 @@ namespace CCore.Senary.Editors
             return closestTile;
         }
 
-        public void CreateGrid(int gridWidth, int gridHeight)
+        // TODO: Move to EditorTile?
+        private void SetTileRects()
         {
-            grid = new EditorGrid(gridWidth, gridHeight);
-
             for (int x = 0; x < grid.Width; x++)
             {
                 for (int y = 0; y < grid.Height; y++)
@@ -108,7 +107,7 @@ namespace CCore.Senary.Editors
                     );
 
                     // Adding some offsets for positioning reasons
-                    rect.x -= rect.width * (gridWidth * 0.5f);
+                    rect.x -= rect.width * (grid.Width * 0.5f);
                     rect.x -= rect.width * 0.25f;
 
                     // TODO: Define this magic number more nicely
@@ -122,6 +121,13 @@ namespace CCore.Senary.Editors
                     grid.Tiles[x, y].SetRect(rect);
                 }
             }
+        }
+
+        public void CreateNewGrid(int gridWidth, int gridHeight)
+        {
+            grid = new EditorGrid(gridWidth, gridHeight);
+
+            SetTileRects();
         }
 
         public void UpdateTileType(Vector2 position, Rect windowRect)
@@ -248,6 +254,10 @@ namespace CCore.Senary.Editors
             LevelConfig levelConfig = AssetHelper.LoadAssetAtPath<LevelConfig>(assetPath);
 
             grid = levelConfig.Grid;
+
+            grid.CreateTwoDimensionalGrid();
+
+            SetTileRects();
         }
     }
 }

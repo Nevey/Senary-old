@@ -7,12 +7,16 @@ namespace CCore.Senary.Grids
     [Serializable]
     public class GenericGrid<T> where T : Tile
     {
+        [NonSerialized]
         private T[,] tiles;
 
+        [SerializeField]
         private T[] flattenedTiles;
 
+        [SerializeField]
         private int width;
 
+        [SerializeField]
         private int height;
 
         public T[,] Tiles { get { return tiles; } }
@@ -25,13 +29,11 @@ namespace CCore.Senary.Grids
 
         public GenericGrid(int width, int height)
         {
-            tiles = new T[width, height];
-
-            flattenedTiles = new T[width * height];
-
             this.width = width;
 
             this.height = height;
+
+            flattenedTiles = new T[width * height];
 
             int index = 0;
 
@@ -41,9 +43,29 @@ namespace CCore.Senary.Grids
                 {
                     T tile = (T)Activator.CreateInstance(typeof(T), x, y, TileType.Ground, TileState.Free);
 
-                    tiles[x, y] = tile;
-
                     flattenedTiles[index] = tile;
+
+                    index++;
+                }
+            }
+            
+            CreateTwoDimensionalGrid();
+        }
+
+        /// <summary>
+        /// Creates a two dimensional grid based on the flattened grid list
+        /// </summary>
+        public void CreateTwoDimensionalGrid()
+        {
+            tiles = new T[width, height];
+
+            int index = 0;
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    tiles[x, y] = flattenedTiles[index];
 
                     index++;
                 }

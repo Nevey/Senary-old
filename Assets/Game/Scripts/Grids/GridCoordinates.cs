@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace CCore.Senary.Grids
 {
@@ -8,8 +9,10 @@ namespace CCore.Senary.Grids
     [Serializable]
     public class GridCoordinates
     {
+        [SerializeField]
         private int x;
         
+        [SerializeField]
         private int y;
 
         public int X { get { return x; } }
