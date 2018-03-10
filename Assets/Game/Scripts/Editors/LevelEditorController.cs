@@ -16,7 +16,7 @@ namespace CCore.Senary.Editors
 
         private Texture2D hqHexTexture;
 
-        private EditorGrid grid;
+        private GenericGrid grid;
 
         private Player[] players;
 
@@ -26,7 +26,7 @@ namespace CCore.Senary.Editors
 
         public Texture2D HqHexTexture { get { return hqHexTexture; } }
 
-        public EditorGrid Grid { get { return grid; } }
+        public GenericGrid Grid { get { return grid; } }
 
         public LevelEditorController()
         {
@@ -55,17 +55,17 @@ namespace CCore.Senary.Editors
             playerColors[6] = Color.grey;
         }
         
-        private EditorTile GetClosestTile(Vector2 position, Rect windowRect)
+        private Tile GetClosestTile(Vector2 position, Rect windowRect)
         {
             float distance = 10000f;
 
-            EditorTile closestTile = null;
+            Tile closestTile = null;
 
             for (int x = 0; x < grid.Width; x++)
             {
                 for (int y = 0; y < grid.Height; y++)
                 {
-                    EditorTile tile = (EditorTile)grid.Tiles[x, y];
+                    Tile tile = grid.Tiles[x, y];
 
                     Vector2 centerPosition = tile.CenterPosition;
 
@@ -91,7 +91,7 @@ namespace CCore.Senary.Editors
             return closestTile;
         }
 
-        // TODO: Move to EditorTile?
+        // TODO: Move to Tile?
         private void SetTileRects()
         {
             for (int x = 0; x < grid.Width; x++)
@@ -117,18 +117,14 @@ namespace CCore.Senary.Editors
                         rect.x += groundHexTexture.width * .5f;
                     }
 
-                    EditorTile tile = (EditorTile)grid.Tiles[x, y];
-
-                    tile.SetRect(rect);
-
-                    // grid.Tiles[x, y].SetRect(rect);
+                    grid.Tiles[x, y].SetRect(rect);
                 }
             }
         }
 
         public void CreateNewGrid(int gridWidth, int gridHeight)
         {
-            grid = new EditorGrid(gridWidth, gridHeight);
+            grid = new GenericGrid(gridWidth, gridHeight);
 
             SetTileRects();
         }
@@ -140,7 +136,7 @@ namespace CCore.Senary.Editors
                 return;
             }
 
-            EditorTile tile = GetClosestTile(position, windowRect);
+            Tile tile = GetClosestTile(position, windowRect);
 
             if (tile != null)
             {
@@ -156,7 +152,7 @@ namespace CCore.Senary.Editors
                 return;
             }
 
-            EditorTile tile = GetClosestTile(position, windowRect);
+            Tile tile = GetClosestTile(position, windowRect);
 
             if (tile == null)
             {
@@ -185,7 +181,7 @@ namespace CCore.Senary.Editors
                 return;
             }
 
-            EditorTile tile = GetClosestTile(position, windowRect);
+            Tile tile = GetClosestTile(position, windowRect);
 
             if (tile == null)
             {
@@ -228,7 +224,7 @@ namespace CCore.Senary.Editors
             // Get the amount of HQ's in the grid
             for (int i = 0; i < grid.FlattenedTiles.Length; i++)
             {
-                EditorTile tile = (EditorTile)grid.FlattenedTiles[i];
+                Tile tile = grid.FlattenedTiles[i];
 
                 if (tile.TileType == TileType.HQ)
                 {

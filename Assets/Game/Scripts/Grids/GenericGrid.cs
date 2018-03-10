@@ -5,6 +5,12 @@ using UnityEngine;
 namespace CCore.Senary.Grids
 {
     [Serializable]
+    public class GenericGrid : GenericGrid<Tile>
+    {
+        public GenericGrid(int width, int height) : base(width, height) { }
+    }
+
+    [Serializable]
     public class GenericGrid<T> where T : Tile
     {
         [NonSerialized]

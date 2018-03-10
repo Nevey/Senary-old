@@ -23,6 +23,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-0
     - gridCoordinates:
         x: 0
         y: 1
@@ -33,6 +34,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-1
     - gridCoordinates:
         x: 0
         y: 2
@@ -43,6 +45,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-2
     - gridCoordinates:
         x: 0
         y: 3
@@ -53,16 +56,18 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-3
     - gridCoordinates:
         x: 0
         y: 4
-      tileType: 2
+      tileType: 1
       tileState: 0
       owner:
         playerID:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-4
     - gridCoordinates:
         x: 0
         y: 5
@@ -73,6 +78,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-5
     - gridCoordinates:
         x: 0
         y: 6
@@ -83,6 +89,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-6
     - gridCoordinates:
         x: 0
         y: 7
@@ -93,6 +100,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-7
     - gridCoordinates:
         x: 0
         y: 8
@@ -103,6 +111,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-8
     - gridCoordinates:
         x: 1
         y: 0
@@ -113,6 +122,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-0
     - gridCoordinates:
         x: 1
         y: 1
@@ -123,6 +133,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-1
     - gridCoordinates:
         x: 1
         y: 2
@@ -133,6 +144,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-2
     - gridCoordinates:
         x: 1
         y: 3
@@ -143,6 +155,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-3
     - gridCoordinates:
         x: 1
         y: 4
@@ -153,6 +166,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-4
     - gridCoordinates:
         x: 1
         y: 5
@@ -163,6 +177,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-5
     - gridCoordinates:
         x: 1
         y: 6
@@ -173,6 +188,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-6
     - gridCoordinates:
         x: 1
         y: 7
@@ -183,6 +199,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-7
     - gridCoordinates:
         x: 1
         y: 8
@@ -193,6 +210,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-8
     - gridCoordinates:
         x: 2
         y: 0
@@ -203,6 +221,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-0
     - gridCoordinates:
         x: 2
         y: 1
@@ -213,6 +232,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-1
     - gridCoordinates:
         x: 2
         y: 2
@@ -223,6 +243,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-2
     - gridCoordinates:
         x: 2
         y: 3
@@ -233,6 +254,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-3
     - gridCoordinates:
         x: 2
         y: 4
@@ -243,6 +265,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-4
     - gridCoordinates:
         x: 2
         y: 5
@@ -253,6 +276,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-5
     - gridCoordinates:
         x: 2
         y: 6
@@ -263,6 +287,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-6
     - gridCoordinates:
         x: 2
         y: 7
@@ -273,6 +298,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-7
     - gridCoordinates:
         x: 2
         y: 8
@@ -283,6 +309,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-8
     - gridCoordinates:
         x: 3
         y: 0
@@ -293,6 +320,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-0
     - gridCoordinates:
         x: 3
         y: 1
@@ -303,6 +331,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-1
     - gridCoordinates:
         x: 3
         y: 2
@@ -313,6 +342,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-2
     - gridCoordinates:
         x: 3
         y: 3
@@ -323,6 +353,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-3
     - gridCoordinates:
         x: 3
         y: 4
@@ -333,6 +364,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-4
     - gridCoordinates:
         x: 3
         y: 5
@@ -343,6 +375,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-5
     - gridCoordinates:
         x: 3
         y: 6
@@ -353,6 +386,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-6
     - gridCoordinates:
         x: 3
         y: 7
@@ -363,6 +397,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-7
     - gridCoordinates:
         x: 3
         y: 8
@@ -373,6 +408,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-8
     - gridCoordinates:
         x: 4
         y: 0
@@ -383,6 +419,7 @@ MonoBehaviour:
           id: 1
           name: player_1
           color: {r: 0, g: 0, b: 1, a: 1}
+      name: Tile-4-0
     - gridCoordinates:
         x: 4
         y: 1
@@ -393,6 +430,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-4-1
     - gridCoordinates:
         x: 4
         y: 2
@@ -403,6 +441,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-4-2
     - gridCoordinates:
         x: 4
         y: 3
@@ -413,6 +452,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-4-3
     - gridCoordinates:
         x: 4
         y: 4
@@ -423,6 +463,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-4-4
     - gridCoordinates:
         x: 4
         y: 5
@@ -433,6 +474,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-4-5
     - gridCoordinates:
         x: 4
         y: 6
@@ -443,6 +485,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-4-6
     - gridCoordinates:
         x: 4
         y: 7
@@ -453,6 +496,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-4-7
     - gridCoordinates:
         x: 4
         y: 8
@@ -463,6 +507,7 @@ MonoBehaviour:
           id: 0
           name: player_0
           color: {r: 1, g: 0, b: 0, a: 1}
+      name: Tile-4-8
     - gridCoordinates:
         x: 5
         y: 0
@@ -473,6 +518,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-5-0
     - gridCoordinates:
         x: 5
         y: 1
@@ -483,6 +529,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-5-1
     - gridCoordinates:
         x: 5
         y: 2
@@ -493,6 +540,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-5-2
     - gridCoordinates:
         x: 5
         y: 3
@@ -503,6 +551,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-5-3
     - gridCoordinates:
         x: 5
         y: 4
@@ -513,6 +562,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-5-4
     - gridCoordinates:
         x: 5
         y: 5
@@ -523,6 +573,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-5-5
     - gridCoordinates:
         x: 5
         y: 6
@@ -533,6 +584,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-5-6
     - gridCoordinates:
         x: 5
         y: 7
@@ -543,6 +595,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-5-7
     - gridCoordinates:
         x: 5
         y: 8
@@ -553,6 +606,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-5-8
     - gridCoordinates:
         x: 6
         y: 0
@@ -563,6 +617,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-0
     - gridCoordinates:
         x: 6
         y: 1
@@ -573,6 +628,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-1
     - gridCoordinates:
         x: 6
         y: 2
@@ -583,6 +639,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-2
     - gridCoordinates:
         x: 6
         y: 3
@@ -593,6 +650,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-3
     - gridCoordinates:
         x: 6
         y: 4
@@ -603,6 +661,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-4
     - gridCoordinates:
         x: 6
         y: 5
@@ -613,6 +672,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-5
     - gridCoordinates:
         x: 6
         y: 6
@@ -623,6 +683,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-6
     - gridCoordinates:
         x: 6
         y: 7
@@ -633,6 +694,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-7
     - gridCoordinates:
         x: 6
         y: 8
@@ -643,6 +705,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-6-8
     - gridCoordinates:
         x: 7
         y: 0
@@ -653,6 +716,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-0
     - gridCoordinates:
         x: 7
         y: 1
@@ -663,6 +727,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-1
     - gridCoordinates:
         x: 7
         y: 2
@@ -673,6 +738,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-2
     - gridCoordinates:
         x: 7
         y: 3
@@ -683,6 +749,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-3
     - gridCoordinates:
         x: 7
         y: 4
@@ -693,6 +760,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-4
     - gridCoordinates:
         x: 7
         y: 5
@@ -703,6 +771,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-5
     - gridCoordinates:
         x: 7
         y: 6
@@ -713,6 +782,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-6
     - gridCoordinates:
         x: 7
         y: 7
@@ -723,6 +793,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-7
     - gridCoordinates:
         x: 7
         y: 8
@@ -733,6 +804,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-7-8
     - gridCoordinates:
         x: 8
         y: 0
@@ -743,6 +815,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-8-0
     - gridCoordinates:
         x: 8
         y: 1
@@ -753,6 +826,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-8-1
     - gridCoordinates:
         x: 8
         y: 2
@@ -763,6 +837,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-8-2
     - gridCoordinates:
         x: 8
         y: 3
@@ -773,16 +848,18 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-8-3
     - gridCoordinates:
         x: 8
         y: 4
-      tileType: 2
+      tileType: 1
       tileState: 0
       owner:
         playerID:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-8-4
     - gridCoordinates:
         x: 8
         y: 5
@@ -793,6 +870,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-8-5
     - gridCoordinates:
         x: 8
         y: 6
@@ -803,6 +881,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-8-6
     - gridCoordinates:
         x: 8
         y: 7
@@ -813,6 +892,7 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-8-7
     - gridCoordinates:
         x: 8
         y: 8
@@ -823,5 +903,6 @@ MonoBehaviour:
           id: -1
           name: None
           color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-8-8
     width: 9
     height: 9

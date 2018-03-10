@@ -165,7 +165,7 @@ namespace CCore.Senary.Editors
 
             for (int i = 0; i < levelEditorController.Grid.FlattenedTiles.Length; i++)
             {
-                EditorTile tile = levelEditorController.Grid.FlattenedTiles[i];
+                Tile tile = levelEditorController.Grid.FlattenedTiles[i];
 
                 if (tile.Owner != null)
                 {

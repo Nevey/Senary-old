@@ -6,7 +6,7 @@ using UnityEngine;
 namespace CCore.Senary.Tiles
 {
     [Serializable]
-    public abstract class Tile
+    public partial class Tile
     {
         [SerializeField]
         private GridCoordinates gridCoordinates;

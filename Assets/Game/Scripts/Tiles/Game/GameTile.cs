@@ -2,17 +2,11 @@ using UnityEngine;
 
 namespace CCore.Senary.Tiles
 {
-    public class GameTile : Tile
+    public partial class Tile
     {
         private GameObject tileMesh;
 
         public GameObject TileMesh { get { return tileMesh; } }
-
-        public GameTile(int x, int y, TileType tileType, TileState tileState)
-            : base(x, y, tileType, tileState)
-        {
-
-        }
 
         public void CreateMesh(GameObject prefab)
         {

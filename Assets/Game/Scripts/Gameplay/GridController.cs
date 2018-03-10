@@ -62,7 +62,7 @@ namespace CCore.Senary.Gameplay
                     //     rect.x += groundHexTexture.width * .5f;
                     // }
 
-                    GameTile tile = (GameTile)grid.Tiles[x, y];
+                    Tile tile = grid.Tiles[x, y];
 
                     tile.CreateMesh(tilePrefab);
 

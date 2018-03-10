@@ -6,12 +6,12 @@ namespace CCore.Senary.Configs
 {
     public class LevelConfig : ScriptableObject
     {
-        [SerializeField, HideInInspector]
-        private EditorGrid grid;
+        [SerializeField]
+        private GenericGrid grid;
 
-        public EditorGrid Grid { get { return grid; } }
+        public GenericGrid Grid { get { return grid; } }
 
-        public void SetLevelData(EditorGrid grid)
+        public void SetLevelData(GenericGrid grid)
         {
             this.grid = grid;
         }

@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace CCore.Senary.Tiles
 {
-    [Serializable]
-    public class EditorTile : Tile
+    public partial class Tile
     {
         private Rect rect;
 
@@ -30,12 +29,6 @@ namespace CCore.Senary.Tiles
         /// </summary>
         /// <returns></returns>
         public Vector2 CenterPosition { get { return centerPosition; } }
-
-        public EditorTile(int x, int y, TileType tileType, TileState tileState)
-            : base(x, y, tileType, tileState)
-        {
-
-        }
 
         public void SetRect(Rect rect)
         {
