@@ -6,20 +6,24 @@ namespace CCore.Senary.Tiles
 {
     public partial class Tile
     {
-        private GameObject tileMesh;
+        private GameObject tileGameObject;
 
-        public GameObject TileMesh { get { return tileMesh; } }
+        public GameObject TileMesh { get { return tileGameObject; } }
 
         private void CreateMesh(GameObject prefab, Transform parent)
         {
-            tileMesh = GameObject.Instantiate(prefab);
+            tileGameObject = GameObject.Instantiate(prefab);
 
-            tileMesh.transform.parent = parent;
+            tileGameObject.transform.parent = parent;
+
+            TileData tileData = tileGameObject.GetComponent<TileData>();
+
+            tileData.SetData(this);
         }
 
         private void SetupPosition(int gridWidth, int gridHeight)
         {
-            Renderer tileRenderer = tileMesh.GetComponent<Renderer>();
+            Renderer tileRenderer = tileGameObject.GetComponent<Renderer>();
 
             Vector3 tileSize = tileRenderer.bounds.size;
 
@@ -38,12 +42,12 @@ namespace CCore.Senary.Tiles
                 position.x += tileSize.x * 0.5f;
             }
 
-            tileMesh.transform.localPosition = position;
+            tileGameObject.transform.localPosition = position;
         }
 
         private void SetupHQVizualizer()
         {
-            HQVisualizer hqVisualizer = tileMesh.GetComponent<HQVisualizer>();
+            HQVisualizer hqVisualizer = tileGameObject.GetComponent<HQVisualizer>();
 
             bool isVisible = tileType == TileType.HQ;
 

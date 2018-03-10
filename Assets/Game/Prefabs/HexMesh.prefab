@@ -38,7 +38,9 @@ GameObject:
   - component: {fileID: 4960388375129722}
   - component: {fileID: 33133249837811496}
   - component: {fileID: 23599514763108554}
+  - component: {fileID: 64197838245349172}
   - component: {fileID: 114037337299336652}
+  - component: {fileID: 114597048700657182}
   m_Layer: 0
   m_Name: HexMesh
   m_TagString: Untagged
@@ -148,6 +150,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1295244709602228}
   m_Mesh: {fileID: 4300000, guid: 8140a9dadf19a9747bf5106fa18b7374, type: 3}
+--- !u!64 &64197838245349172
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1295244709602228}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 8140a9dadf19a9747bf5106fa18b7374, type: 3}
 --- !u!102 &102764862104707456
 TextMesh:
   serializedVersion: 3
@@ -183,3 +199,16 @@ MonoBehaviour:
   loggingEnabled: 1
   loggingColor: {r: 1, g: 1, b: 1, a: 1}
   hqGameObject: {fileID: 1272692870094242}
+--- !u!114 &114597048700657182
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1295244709602228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a2807b68767a647a3023bb72b5bbaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggingEnabled: 1
+  loggingColor: {r: 0, g: 0.5536513, b: 0.7794118, a: 1}
