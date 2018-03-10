@@ -7,7 +7,7 @@ using CCore.Senary.StateMachines;
 using CCore.Senary.Tiles;
 using UnityEngine;
 
-namespace CCore.Senary.Gameplay
+namespace CCore.Senary.Gameplay.Grid
 {
     public class GridController : MonoBehaviour
     {

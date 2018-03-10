@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CCore.Senary.Gameplay
+namespace CCore.Senary.Gameplay.Tiles
 {
     public class HQVisualizer : MonoBehaviour
     {

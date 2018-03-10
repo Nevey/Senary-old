@@ -1,4 +1,5 @@
 using CCore.Senary.Gameplay;
+using CCore.Senary.Gameplay.Tiles;
 using UnityEngine;
 
 namespace CCore.Senary.Tiles
