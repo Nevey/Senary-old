@@ -1,3 +1,4 @@
+using System;
 using CCore.Senary.StateMachines.Game;
 using CCore.Senary.StateMachines.UI;
 
@@ -9,13 +10,13 @@ namespace CCore.Senary.StateMachines
 
         private GameStateMachine gameStateMachine = new GameStateMachine();
 
+        private void Awake()
+        {
+            
+        }
 
         private void Start()
         {
-            // TODO: Set start state instead of doing a transition
-            // TODO: Call "statemachine.start" instead
-            // gameStateMachine.DoTransition<CreateLevelTransition>();
-
             uiStateMachine.DoTransition<SplashTransition>();
         }
     }

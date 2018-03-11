@@ -11,10 +11,26 @@ namespace CCore.Senary.StateMachines.UI
             Instance = this;
             
             AddTransition<SplashTransition, SplashState>();
+
+            AddTransition<GameTransition, GameState>();
+
+            AddTransition<PauseGameTransition, PauseGameState>();
         }
     }
 
+    // ---------- States ---------- //
+
     public class SplashState : State { }
 
+    public class GameState : State { }
+
+    public class PauseGameState : State { }
+
+    // --------- Transitions ---------- //
+
     public class SplashTransition : Transition { }
+
+    public class GameTransition : Transition { }
+
+    public class PauseGameTransition : Transition { }
 }
