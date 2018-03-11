@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c698bff21c100e4a84fc92cb6a24979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggingEnabled: 1
+  loggingEnabled: 0
   loggingColor: {r: 0, g: 0.68213683, b: 0.8588236, a: 1}
 --- !u!114 &1346480892
 MonoBehaviour:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d94c210bba1fb4dac5b92156cea7e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggingEnabled: 1
+  loggingEnabled: 0
   loggingColor: {r: 0.8588236, g: 0.51429343, b: 0, a: 1}
 --- !u!114 &1346480893
 MonoBehaviour:
@@ -237,5 +237,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b845d21a5fc2fcd41a2202a44075cb3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggingEnabled: 1
+  loggingEnabled: 0
   loggingColor: {r: 0, g: 0.8588236, b: 0.46669358, a: 1}
