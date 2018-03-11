@@ -49,21 +49,21 @@ namespace CCore.Senary.Editors
             DrawLevelGrid();
         }
         
-        protected override void OnMouseDown(Vector2 position, MouseButton mouseButton)
+        protected override void OnMouseDown(Vector2 position, GUIMouseButton mouseButton)
         {
-            if (mouseButton == MouseButton.Left)
+            if (mouseButton == GUIMouseButton.Left)
             {
                 levelEditorController.UpdateTileType(position, windowRect);
             }
 
             levelEditorController.UpdateAvailablePlayers();
 
-            if (mouseButton == MouseButton.Right)
+            if (mouseButton == GUIMouseButton.Right)
             {
                 levelEditorController.UpdateTileOwner(position, windowRect);
             }
 
-            if (mouseButton == MouseButton.Middle)
+            if (mouseButton == GUIMouseButton.Middle)
             {
                 levelEditorController.ClearTileOwner(position, windowRect);
             }
@@ -71,12 +71,12 @@ namespace CCore.Senary.Editors
             Repaint();
         }
 
-        protected override void OnMouseDrag(Vector2 position, MouseButton mouseButton)
+        protected override void OnMouseDrag(Vector2 position, GUIMouseButton mouseButton)
         {
             // throw new NotImplementedException();
         }
 
-        protected override void OnMouseUp(Vector2 position, MouseButton mouseButton)
+        protected override void OnMouseUp(Vector2 position, GUIMouseButton mouseButton)
         {
             // throw new NotImplementedException();
         }
