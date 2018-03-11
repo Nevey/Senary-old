@@ -1,3 +1,5 @@
+using System;
+using CCore.Senary.StateMachines.Game;
 using CCore.Senary.Tiles;
 using UnityEngine;
 
@@ -15,6 +17,17 @@ namespace CCore.Senary.Gameplay.Grid
             gridController = GetComponent<GridController>();
 
             propertyBlock = new MaterialPropertyBlock();
+
+            GameStateMachine.Instance.GetState<CreateLevelState>().EnterEvent += OnCreateLevelStateEnter;
+
+            // TODO: don't use update loop
+            enabled = false;
+        }
+
+        private void OnCreateLevelStateEnter()
+        {
+            // TODO: don't use update loop
+            enabled = true;
         }
 
         private void Update()

@@ -19,11 +19,20 @@ namespace CCore.Senary.UI
 
         private void OnSplashStateEnter()
         {
-            DispatchRequestShow();
+            RequestShow();
         }
 
         private void OnPlayClicked()
         {
+            LocalHideCompletedEvent += OnLocalHideCompleted;
+
+            RequestHide();
+        }
+
+        private void OnLocalHideCompleted()
+        {
+            LocalHideCompletedEvent -= OnLocalHideCompleted;
+
             UIStateMachine.Instance.DoTransition<GameTransition>();
         }
     }

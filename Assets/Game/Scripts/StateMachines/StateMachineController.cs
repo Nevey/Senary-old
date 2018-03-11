@@ -6,18 +6,10 @@ namespace CCore.Senary.StateMachines
 {
     public class StateMachineController : MonoBehaviour
     {
+        [NonSerialized]
         private UIStateMachine uiStateMachine = new UIStateMachine();
 
+        [NonSerialized]
         private GameStateMachine gameStateMachine = new GameStateMachine();
-
-        private void Awake()
-        {
-            
-        }
-
-        private void Start()
-        {
-            uiStateMachine.DoTransition<SplashTransition>();
-        }
     }
 }

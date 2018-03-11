@@ -26,7 +26,11 @@ namespace CCore.Senary.Gameplay.Tiles
 
         private void OnDisable()
         {
-            PlayerInput.Instance.TapEvent -= OnTap;
+            // During editor time this is already null
+            if (PlayerInput.Instance != null)
+            {
+                PlayerInput.Instance.TapEvent -= OnTap;
+            }
         }
 
         private void OnTap(Vector2 position)
