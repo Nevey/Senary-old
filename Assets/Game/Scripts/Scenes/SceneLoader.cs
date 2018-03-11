@@ -21,8 +21,6 @@ namespace CCore.Senary.Scenes
             LoadGameScene();
         }
 
-        
-
         private void LoadUIScene()
         {
             SceneController.LoadSceneAdditive("UI", () =>
