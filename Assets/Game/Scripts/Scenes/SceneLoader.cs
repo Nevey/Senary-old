@@ -13,12 +13,19 @@ namespace CCore.Senary.Scenes
         {            
             UIStateMachine.Instance.GetState<GameState>().EnterEvent += OnGameStateEnter;
 
+            GameStateMachine.Instance.GetState<ThrowDiceState>().EnterEvent += OnThrowDiceStateEnter;
+
             LoadUIScene();
         }
 
         private void OnGameStateEnter()
         {
             LoadGameScene();
+        }
+
+        private void OnThrowDiceStateEnter()
+        {
+            LoadThrowDiceScene();
         }
 
         private void LoadUIScene()
@@ -42,6 +49,14 @@ namespace CCore.Senary.Scenes
                 {
                     GameStateMachine.Instance.DoTransition<CreateLevelTransition>();
                 }));
+            });
+        }
+
+        private void LoadThrowDiceScene()
+        {
+            SceneController.LoadSceneAdditive("ThrowDice", () =>
+            {
+                // TODO....?
             });
         }
 

@@ -18,13 +18,18 @@ namespace CCore.Senary.Gameplay.Grid
 
             propertyBlock = new MaterialPropertyBlock();
 
-            GameStateMachine.Instance.GetState<CreateLevelState>().EnterEvent += OnCreateLevelStateEnter;
+            GameStateMachine.Instance.GetState<CreateLevelState>().ExitEvent += OnCreateLevelStateExit;
 
             // TODO: don't use update loop
             enabled = false;
         }
 
-        private void OnCreateLevelStateEnter()
+        private void OnDestroy()
+        {
+            GameStateMachine.Instance.GetState<CreateLevelState>().ExitEvent -= OnCreateLevelStateExit;
+        }
+
+        private void OnCreateLevelStateExit()
         {
             // TODO: don't use update loop
             enabled = true;

@@ -21,12 +21,12 @@ namespace CCore.Senary.Gameplay.Grid
 
         private void Awake()
         {
-            GameStateMachine.Instance.GetState<CreateLevelState>().EnterEvent += OnCreateLevelStateEnter;
+            GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent += OnCreateLevelStateEnter;
         }
 
         private void OnDestroy()
         {
-            GameStateMachine.Instance.GetState<CreateLevelState>().EnterEvent -= OnCreateLevelStateEnter;
+            GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent -= OnCreateLevelStateEnter;
         }
 
         private void OnCreateLevelStateEnter()
@@ -46,6 +46,8 @@ namespace CCore.Senary.Gameplay.Grid
                     grid.Tiles[x, y].SetupTile(tilePrefab, transform, grid.Width, grid.Height);
                 }
             }
+
+            GameStateMachine.Instance.DoTransition<PlayerInputTransition>();
         }
     }
 }

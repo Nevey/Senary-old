@@ -6,10 +6,11 @@ namespace CCore.Senary.StateMachines
 {
     public class StateMachineController : MonoBehaviour
     {
-        [NonSerialized]
-        private UIStateMachine uiStateMachine = new UIStateMachine();
 
         [NonSerialized]
         private GameStateMachine gameStateMachine = new GameStateMachine();
+        
+        [NonSerialized]
+        private UIStateMachine uiStateMachine = new UIStateMachine();
     }
 }
