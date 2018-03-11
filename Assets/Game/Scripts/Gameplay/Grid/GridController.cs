@@ -3,8 +3,7 @@ using CCore.Assets;
 using CCore.Senary.Configs;
 using CCore.Senary.Constants;
 using CCore.Senary.Grids;
-using CCore.Senary.StateMachines;
-using CCore.Senary.Tiles;
+using CCore.Senary.StateMachines.Game;
 using UnityEngine;
 
 namespace CCore.Senary.Gameplay.Grid
