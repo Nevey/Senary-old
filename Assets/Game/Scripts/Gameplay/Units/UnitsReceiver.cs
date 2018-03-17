@@ -56,7 +56,7 @@ namespace CCore.Senary.Gameplay.Units
 
             if (newUnitsCount == 0)
             {
-                // DONE! move on to the next state
+                GameStateMachine.Instance.DoTransition<AttackTransition>();
             }
         }
     }

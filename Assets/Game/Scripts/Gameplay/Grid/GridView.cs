@@ -66,10 +66,13 @@ namespace CCore.Senary.Gameplay.Grid
 
                         Color targetColor = groundTileColor;
 
-                        if (tile.TileAction == TileAction.AvailableForTakeOver
-                            || tile.TileAction == TileAction.AvailableForReinforcement)
+                        if (GameStateMachine.Instance.CurrentState() == GameStateMachine.Instance.GetState<PlaceUnitsState>())
                         {
-                            targetColor = takeOverColor;
+                            if (tile.TileAction == TileAction.AvailableForTakeOver
+                                || tile.TileAction == TileAction.AvailableForReinforcement)
+                            {
+                                targetColor = takeOverColor;
+                            }
                         }
 
                         propertyBlock.SetColor("_Color", targetColor);

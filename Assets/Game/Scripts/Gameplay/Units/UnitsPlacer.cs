@@ -55,8 +55,6 @@ namespace CCore.Senary.Gameplay.Units
 
         private void OnPlaceUnitsStateEnter()
         {
-            // Tap a tile to add a unit
-            // units receiver decrement units
             PlayerInput.Instance.TapEvent += OnTap;
         }
 
@@ -90,6 +88,8 @@ namespace CCore.Senary.Gameplay.Units
                         {
                             UnitPlacedEvent();
                         }
+
+                        unitsReceiver.DecrementNewUnitCount();
                     }
                 }
             }
