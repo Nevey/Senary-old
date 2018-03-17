@@ -19,14 +19,14 @@ namespace CCore.Senary.UI
 
         private void OnSplashStateEnter()
         {
-            RequestShow();
+            Show();
         }
 
         private void OnPlayClicked()
         {
             LocalHideCompletedEvent += OnLocalHideCompleted;
 
-            RequestHide();
+            Hide();
         }
 
         private void OnLocalHideCompleted()

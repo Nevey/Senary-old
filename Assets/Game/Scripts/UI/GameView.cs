@@ -22,7 +22,7 @@ namespace CCore.Senary.UI
 
         private void OnGameStateEnter()
         {
-            RequestShow();
+            Show();
         }
 
         private void OnPlayerInputStateEnter()
