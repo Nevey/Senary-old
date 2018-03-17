@@ -121,9 +121,16 @@ namespace CCore.Senary.Gameplay.Grid
             }
         }
 
+        /// <summary>
+        /// Returns a list of tiles adjacent to given tile, including given tile
+        /// </summary>
+        /// <param name="tile"></param>
+        /// <returns></returns>
         private List<Tile> GetAdjacentTiles(Tile tile)
         {
             List<Tile> adjacentTiles = new List<Tile>();
+
+            adjacentTiles.Add(tile);
 
             Vector2 gridPosition = new Vector2(
                 tile.GridCoordinates.X,
@@ -172,7 +179,7 @@ namespace CCore.Senary.Gameplay.Grid
                 {
                     Tile tile = grid.Tiles[(int)gridPosition.x, (int)gridPosition.y];
 
-                    if (tile.TileType != TileType.None)
+                    if (tile.TileType != TileType.None && !tiles.Contains(tile))
                     {
                         tiles.Add(tile);
                     }
