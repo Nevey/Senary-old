@@ -12,6 +12,8 @@ namespace CCore.Senary.Gameplay.Tiles
 
         private TileData tileData;
 
+        public event Action TileTappedEvent;
+
         private void Awake()
         {
             collider = GetComponent<Collider>();
@@ -44,6 +46,11 @@ namespace CCore.Senary.Gameplay.Tiles
                 if (hit.collider == collider)
                 {
                     Log("Tapped on tile {0}", tileData.Tile.Name);
+
+                    if (TileTappedEvent != null)
+                    {
+                        TileTappedEvent();
+                    }
                 }
             }
         }
