@@ -12,8 +12,6 @@ namespace CCore.Senary.Gameplay.Tiles
 
         private TileData tileData;
 
-        public event Action TileTappedEvent;
-
         private void Awake()
         {
             collider = GetComponent<Collider>();
