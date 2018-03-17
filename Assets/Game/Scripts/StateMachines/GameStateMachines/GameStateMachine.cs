@@ -12,6 +12,10 @@ namespace CCore.Senary.StateMachines.Game
             
             AddTransition<CreateLevelTransition, CreateLevelState>();
 
+            AddTransition<AnimateHQTransition, AnimateHQState>();
+
+            AddTransition<AddInitialUnitsTransition, AddInitialUnitsState>();
+
             AddTransition<SelectStartPlayerTransition, SelectStartPlayerState>();
             
             AddTransition<ReceiveUnitsTransition, ReceiveUnitsState>();
@@ -26,6 +30,10 @@ namespace CCore.Senary.StateMachines.Game
 
     public class CreateLevelState : State { }
 
+    public class AnimateHQState : State { }
+
+    public class AddInitialUnitsState : State { }
+
     public class SelectStartPlayerState : State { }
 
     public class ReceiveUnitsState : State { }
@@ -37,6 +45,10 @@ namespace CCore.Senary.StateMachines.Game
     // --------- Transitions ---------- //
 
     public class CreateLevelTransition : Transition { }
+
+    public class AnimateHQTransition : Transition { }
+
+    public class AddInitialUnitsTransition : Transition { }
 
     public class SelectStartPlayerTransition : Transition { }
 

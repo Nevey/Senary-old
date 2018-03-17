@@ -47,7 +47,7 @@ namespace CCore.Senary.Gameplay.Grid
                 }
             }
 
-            GameStateMachine.Instance.DoTransition<SelectStartPlayerTransition>();
+            GameStateMachine.Instance.DoTransition<AnimateHQTransition>();
         }
     }
 }

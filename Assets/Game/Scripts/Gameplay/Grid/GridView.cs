@@ -23,7 +23,7 @@ namespace CCore.Senary.Gameplay.Grid
 
             propertyBlock = new MaterialPropertyBlock();
 
-            GameStateMachine.Instance.GetState<CreateLevelState>().ExitEvent += OnCreateLevelStateExit;
+            GameStateMachine.Instance.GetState<AnimateHQState>().EnterEvent += OnAnimateHQStateEnter;
 
 #if UNITY_EDITOR
             enabled = false;
@@ -32,10 +32,10 @@ namespace CCore.Senary.Gameplay.Grid
 
         private void OnDestroy()
         {
-            GameStateMachine.Instance.GetState<CreateLevelState>().ExitEvent -= OnCreateLevelStateExit;
+            GameStateMachine.Instance.GetState<CreateLevelState>().EnterEvent -= OnAnimateHQStateEnter;
         }
 
-        private void OnCreateLevelStateExit()
+        private void OnAnimateHQStateEnter()
         {
 #if UNITY_EDITOR
             enabled = true;
@@ -88,7 +88,15 @@ namespace CCore.Senary.Gameplay.Grid
 
                 if (tile.TileType == TileType.HQ)
                 {
-                    tile.TileMesh.GetComponent<TileView>().AnimateStartHQ(0.25f * hqIndex);
+                    tile.TileMesh.GetComponent<TileView>().AnimateStartHQ(0.25f * hqIndex, () =>
+                    {
+                        hqIndex--;
+
+                        if (hqIndex == 0)
+                        {
+                            GameStateMachine.Instance.DoTransition<AddInitialUnitsTransition>();
+                        }
+                    });
 
                     hqIndex++;
                 }

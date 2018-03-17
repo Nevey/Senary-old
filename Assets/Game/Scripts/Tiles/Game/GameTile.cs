@@ -1,5 +1,6 @@
 using CCore.Senary.Gameplay;
 using CCore.Senary.Gameplay.Tiles;
+using CCore.Senary.Players;
 using UnityEngine;
 
 namespace CCore.Senary.Tiles
@@ -73,8 +74,17 @@ namespace CCore.Senary.Tiles
             SetupHQVizualizer();
         }
 
-        public void AddUnits(int amount)
+        public void AddUnits(int amount, Player player)
         {
+            if (Owner == player || Owner.PlayerID.ID == -1)
+            {
+                SetOwner(player);
+            }
+            else
+            {
+                return;
+            }
+
             unitCount += amount;
 
             tileGameObject.GetComponent<TileView>().AnimateAddUnits(unitCount);

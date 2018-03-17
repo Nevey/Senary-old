@@ -19,9 +19,35 @@ namespace CCore.Senary.Gameplay.Units
 
         private void Awake()
         {
+            GameStateMachine.Instance.GetState<AddInitialUnitsState>().EnterEvent += OnAddInitialUnitsStateEnter;
+            
             GameStateMachine.Instance.GetState<PlaceUnitsState>().EnterEvent += OnPlaceUnitsStateEnter;
 
             GameStateMachine.Instance.GetState<PlaceUnitsState>().ExitEvent += OnPlaceUnitsStateExit;
+        }
+
+        private void OnDestroy()
+        {
+            GameStateMachine.Instance.GetState<AddInitialUnitsState>().EnterEvent -= OnAddInitialUnitsStateEnter;
+            
+            GameStateMachine.Instance.GetState<PlaceUnitsState>().EnterEvent -= OnPlaceUnitsStateEnter;
+
+            GameStateMachine.Instance.GetState<PlaceUnitsState>().ExitEvent -= OnPlaceUnitsStateExit;
+        }
+
+        private void OnAddInitialUnitsStateEnter()
+        {
+            for (int i = 0; i < gridController.Grid.FlattenedTiles.Length; i++)
+            {
+                Tile tile = gridController.Grid.FlattenedTiles[i];
+
+                if (tile.TileType == TileType.HQ && tile.Owner.PlayerID.ID != -1)
+                {
+                    tile.AddUnits(1, tile.Owner);
+                }
+            }
+
+            GameStateMachine.Instance.DoTransition<SelectStartPlayerTransition>();
         }
 
         private void OnPlaceUnitsStateEnter()
@@ -52,13 +78,10 @@ namespace CCore.Senary.Gameplay.Units
                 if (tileInput.TapTile(position))
                 {
                     // TODO: Only able to tap tiles which are adjacent to owned tiles
-                    if (tile.Owner == turnController.CurrentPlayer
-                        || tile.Owner.PlayerID.ID == -1)
-                    {
-                        tile.AddUnits(1);
 
-                        Log("Added one unit to tapped tile. Unit count is now {0}.", tile.UnitCount);
-                    }
+                    tile.AddUnits(1, turnController.CurrentPlayer);
+
+                    Log("Added one unit to tapped tile. Unit count is now {0}.", tile.UnitCount);
                 }
             }
         }
