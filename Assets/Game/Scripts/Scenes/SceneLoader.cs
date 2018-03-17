@@ -54,10 +54,7 @@ namespace CCore.Senary.Scenes
 
         private void LoadThrowDiceScene()
         {
-            SceneController.LoadSceneAdditive("ThrowDice", () =>
-            {
-                // TODO....?
-            });
+            SceneController.LoadSceneAdditive("ThrowDice");
         }
 
         private IEnumerator Wait(Action callback)
