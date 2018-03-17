@@ -44,7 +44,7 @@ namespace CCore.Senary.Tiles
             tileGameObject.transform.localPosition = position;
         }
 
-        private void SetupHQVizualizer()
+        public void SetupHQVizualizer()
         {
             HQVisualizer hqVisualizer = tileGameObject.GetComponent<HQVisualizer>();
 

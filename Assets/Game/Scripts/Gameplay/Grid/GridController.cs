@@ -38,7 +38,7 @@ namespace CCore.Senary.Gameplay.Grid
             grid = levelConfig.Grid;
 
             grid.CreateTwoDimensionalGrid();
-
+            
             for (int x = 0; x < grid.Width; x++)
             {
                 for (int y = 0; y < grid.Height; y++)

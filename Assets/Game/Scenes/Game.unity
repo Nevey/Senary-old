@@ -171,6 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loggingEnabled: 1
   loggingColor: {r: 0.2901961, g: 0.5019608, b: 0.8313726, a: 1}
+  groundTileColor: {r: 1, g: 1, b: 1, a: 1}
+  hqTileColor: {r: 1, g: 0.8798107, b: 0.20784312, a: 1}
 --- !u!1 &553931265
 GameObject:
   m_ObjectHideFlags: 0
