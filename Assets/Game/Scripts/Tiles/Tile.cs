@@ -36,7 +36,7 @@ namespace CCore.Senary.Tiles
         /// <summary>
         /// Returns the tile owner object, this could be null if this tile was not owned by anyone
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Player</returns>
         public Player Owner { get { return owner; } }
 
         public string Name { get { return name; } }

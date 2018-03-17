@@ -34,7 +34,6 @@ namespace CCore.Senary.Tiles
             );
 
             position.x -= tileSize.x * (gridWidth * 0.5f);
-            position.x -= tileSize.x * 0.25f;
             position.z += tileSize.z * (gridHeight * 0.5f);
 
             if (gridCoordinates.Y % 2 == 0)

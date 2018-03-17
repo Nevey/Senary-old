@@ -7,22 +7,15 @@ using UnityEngine.UI;
 
 namespace CCore.Senary.UI
 {
-    public class GameView : UIView
+    public class BottomGameView : UIView
     {
         [SerializeField] private Button throwButton;
         
         protected override void Setup()
         {
-            UIStateMachine.Instance.GetState<GameState>().EnterEvent += OnGameStateEnter;
+            // GameStateMachine.Instance.GetState<ReceiveUnitsState>().EnterEvent += OnPlayerInputStateEnter;
 
-            GameStateMachine.Instance.GetState<PlayerInputState>().EnterEvent += OnPlayerInputStateEnter;
-
-            GameStateMachine.Instance.GetState<PlayerInputState>().ExitEvent += OnPlayerInputStateExit;
-        }
-
-        private void OnGameStateEnter()
-        {
-            Show();
+            // GameStateMachine.Instance.GetState<ReceiveUnitsState>().ExitEvent += OnPlayerInputStateExit;
         }
 
         private void OnPlayerInputStateEnter()

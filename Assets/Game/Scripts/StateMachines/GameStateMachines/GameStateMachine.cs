@@ -11,8 +11,10 @@ namespace CCore.Senary.StateMachines.Game
             Instance = this;
             
             AddTransition<CreateLevelTransition, CreateLevelState>();
+
+            AddTransition<SelectStartPlayerTransition, SelectStartPlayerState>();
             
-            AddTransition<PlayerInputTransition, PlayerInputState>();
+            AddTransition<ReceiveUnitsTransition, ReceiveUnitsState>();
 
             AddTransition<ThrowDiceTransition, ThrowDiceState>();
         }
@@ -22,7 +24,9 @@ namespace CCore.Senary.StateMachines.Game
 
     public class CreateLevelState : State { }
 
-    public class PlayerInputState : State { }
+    public class SelectStartPlayerState : State { }
+
+    public class ReceiveUnitsState : State { }
 
     public class ThrowDiceState : State { }
 
@@ -30,7 +34,9 @@ namespace CCore.Senary.StateMachines.Game
 
     public class CreateLevelTransition : Transition { }
 
-    public class PlayerInputTransition : Transition { }
+    public class SelectStartPlayerTransition : Transition { }
+
+    public class ReceiveUnitsTransition : Transition { }
 
     public class ThrowDiceTransition : Transition { }
 }
