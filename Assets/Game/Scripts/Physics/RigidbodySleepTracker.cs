@@ -40,6 +40,8 @@ namespace CCore.Senary.CPhysics
         {
             if (isSleeping)
             {
+                Log("Rigidbody started sleeping");
+
                 if (OnSleepEvent != null)
                 {
                     OnSleepEvent();
@@ -47,6 +49,8 @@ namespace CCore.Senary.CPhysics
             }
             else
             {
+                Log("Rigidbody stopped sleeping");
+                
                 if (OnAwakeEvent != null)
                 {
                     OnAwakeEvent();

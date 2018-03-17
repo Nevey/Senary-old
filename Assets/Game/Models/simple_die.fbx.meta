@@ -9,26 +9,36 @@ ModelImporter:
     100002: //RootNode
     100004: node_id4
     100006: node_id52
+    100008: node_id60
     400000: root 1
     400002: //RootNode
     400004: node_id4
     400006: node_id52
+    400008: node_id60
     2100000: Material_54
     2300000: root 1
     2300002: node_id4
     2300004: node_id52
+    2300006: node_id60
     3300000: root 1
     3300002: node_id4
     3300004: node_id52
+    3300006: node_id60
     4300000: root
     4300002: node_id4
     4300004: node_id52
+    4300006: node_id60
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material_59
     second: {fileID: 2100000, guid: ec8a75e99ef27514a8c35f65f8484df5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_82
+    second: {fileID: 2100000, guid: 3ec9e6e7b0750e5428781fe95f466028, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
