@@ -50,7 +50,7 @@ namespace CCore.Senary.CPhysics
             else
             {
                 Log("Rigidbody stopped sleeping");
-                
+
                 if (OnAwakeEvent != null)
                 {
                     OnAwakeEvent();

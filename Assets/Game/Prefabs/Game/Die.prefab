@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 54743993419485774}
   - component: {fileID: 114136898984485132}
   - component: {fileID: 114587051989094338}
+  - component: {fileID: 114157495319527876}
   m_Layer: 8
   m_Name: Die
   m_TagString: Untagged
@@ -188,6 +189,19 @@ MonoBehaviour:
   maxInitialVelocity: {x: 60, y: 0, z: 10}
   minInitialAngularVelocity: {x: -50, y: -200, z: -200}
   maxInitialAngularVelocity: {x: -200, y: 200, z: 200}
+--- !u!114 &114157495319527876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1468097181522442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c9049d1698034f49a821d185371b391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggingEnabled: 1
+  loggingColor: {r: 0.91372555, g: 0.8878973, b: 0, a: 1}
 --- !u!114 &114587051989094338
 MonoBehaviour:
   m_ObjectHideFlags: 1
