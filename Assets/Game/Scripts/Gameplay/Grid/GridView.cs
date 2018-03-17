@@ -88,7 +88,7 @@ namespace CCore.Senary.Gameplay.Grid
 
                 if (tile.TileType == TileType.HQ)
                 {
-                    tile.TileMesh.GetComponent<HQVisualizer>().AnimateStartHQ(0.25f * hqIndex);
+                    tile.TileMesh.GetComponent<TileView>().AnimateStartHQ(0.25f * hqIndex);
 
                     hqIndex++;
                 }

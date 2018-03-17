@@ -8,7 +8,11 @@ namespace CCore.Senary.Tiles
     {
         private GameObject tileGameObject;
 
+        private int unitCount;
+
         public GameObject TileMesh { get { return tileGameObject; } }
+
+        public int UnitCount { get { return unitCount; } }
 
         private void CreateMesh(GameObject prefab, Transform parent)
         {
@@ -46,7 +50,7 @@ namespace CCore.Senary.Tiles
 
         public void SetupHQVizualizer()
         {
-            HQVisualizer hqVisualizer = tileGameObject.GetComponent<HQVisualizer>();
+            TileView hqVisualizer = tileGameObject.GetComponent<TileView>();
 
             bool isVisible = tileType == TileType.HQ;
 
@@ -65,6 +69,13 @@ namespace CCore.Senary.Tiles
             SetupPosition(gridWidth, gridHeight);
 
             SetupHQVizualizer();
+        }
+
+        public void AddUnits(int amount)
+        {
+            unitCount += amount;
+
+            tileGameObject.GetComponent<TileView>().AnimateAddUnits(amount);
         }
     }
 }

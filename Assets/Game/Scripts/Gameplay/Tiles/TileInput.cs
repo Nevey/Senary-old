@@ -21,21 +21,7 @@ namespace CCore.Senary.Gameplay.Tiles
             tileData = GetComponent<TileData>();
         }
 
-        private void OnEnable()
-        {
-            PlayerInput.Instance.TapEvent += OnTap;
-        }
-
-        private void OnDisable()
-        {
-            // During editor time this is already null
-            if (PlayerInput.Instance != null)
-            {
-                PlayerInput.Instance.TapEvent -= OnTap;
-            }
-        }
-
-        private void OnTap(Vector2 position)
+        public bool TapTile(Vector2 position)
         {
             RaycastHit hit;
 
@@ -47,12 +33,11 @@ namespace CCore.Senary.Gameplay.Tiles
                 {
                     Log("Tapped on tile {0}", tileData.Tile.Name);
 
-                    if (TileTappedEvent != null)
-                    {
-                        TileTappedEvent();
-                    }
+                    return true;
                 }
             }
+
+            return false;
         }
     }
 }

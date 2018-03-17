@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace CCore.Senary.Gameplay.Tiles
 {
-    // TODO: Rename to TileView or TileVisualizer
-    public class HQVisualizer : MonoBehaviour
+    public class TileView : MonoBehaviour
     {
         [SerializeField] private GameObject hqGameObject;
 
@@ -41,6 +40,11 @@ namespace CCore.Senary.Gameplay.Tiles
             });
 
             scaleTween.Play();
+        }
+
+        public void AnimateAddUnits(int amount)
+        {
+            
         }
     }
 }
