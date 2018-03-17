@@ -5,16 +5,32 @@ namespace CCore.Senary.Gameplay.Tiles
 {
     public class TileView : MonoBehaviour
     {
-        [SerializeField] private GameObject hqGameObject;
+        [SerializeField] private TextMesh hqText;
 
-        public void SetHQVisible(bool visible)
+        [SerializeField] private TextMesh unitText;
+
+        private Vector3 originalUnitTextScale;
+
+        private void Awake()
         {
-            hqGameObject.SetActive(visible);
+            originalUnitTextScale = unitText.transform.localScale;
+        }
+
+        public void SetHQTextVisible(bool visible)
+        {
+            hqText.gameObject.SetActive(visible);
+        }
+
+        public void SetUnitTextVisible(bool visible)
+        {
+            unitText.gameObject.SetActive(visible);
         }
 
         public void AnimateStartHQ(float delay)
         {
-            SetHQVisible(false);
+            SetHQTextVisible(false);
+
+            GameObject hqGameObject = hqText.gameObject;
 
             Vector3 targetScale = hqGameObject.transform.localScale;
 
@@ -25,7 +41,7 @@ namespace CCore.Senary.Gameplay.Tiles
             scaleTween.SetDelay(delay);
             scaleTween.OnStart(() =>
             {
-                SetHQVisible(true);
+                SetHQTextVisible(true);
             });
 
             scaleTween.OnComplete(() =>
@@ -42,9 +58,25 @@ namespace CCore.Senary.Gameplay.Tiles
             scaleTween.Play();
         }
 
-        public void AnimateAddUnits(int amount)
+        public void AnimateAddUnits(int totalAmount)
         {
-            
+            SetUnitTextVisible(totalAmount > 0);
+
+            unitText.text = totalAmount.ToString();
+
+            Tween scaleTweenDown = unitText.transform.DOScale(originalUnitTextScale * 0.3f, 0.1f);
+
+            Tween scaleTweenUp = unitText.transform.DOScale(originalUnitTextScale, 0.25f);
+            scaleTweenUp.SetEase(Ease.OutBack);
+
+            scaleTweenDown.OnComplete(() =>
+            {
+                scaleTweenDown.Kill();
+
+                scaleTweenUp.Play();
+            });
+
+            scaleTweenDown.Play();
         }
     }
 }

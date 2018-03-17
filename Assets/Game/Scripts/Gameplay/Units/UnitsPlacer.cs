@@ -51,6 +51,7 @@ namespace CCore.Senary.Gameplay.Units
 
                 if (tileInput.TapTile(position))
                 {
+                    // TODO: Only able to tap tiles which are adjacent to owned tiles
                     if (tile.Owner == turnController.CurrentPlayer
                         || tile.Owner.PlayerID.ID == -1)
                     {

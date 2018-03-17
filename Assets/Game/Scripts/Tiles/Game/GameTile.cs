@@ -50,11 +50,13 @@ namespace CCore.Senary.Tiles
 
         public void SetupHQVizualizer()
         {
-            TileView hqVisualizer = tileGameObject.GetComponent<TileView>();
+            TileView tileView = tileGameObject.GetComponent<TileView>();
 
             bool isVisible = tileType == TileType.HQ;
 
-            hqVisualizer.SetHQVisible(isVisible);
+            tileView.SetHQTextVisible(isVisible);
+
+            tileView.SetUnitTextVisible(false);
         }
 
         public void SetupTile(GameObject prefab, Transform parent, int gridWidth, int gridHeight)
@@ -75,7 +77,7 @@ namespace CCore.Senary.Tiles
         {
             unitCount += amount;
 
-            tileGameObject.GetComponent<TileView>().AnimateAddUnits(amount);
+            tileGameObject.GetComponent<TileView>().AnimateAddUnits(unitCount);
         }
     }
 }
