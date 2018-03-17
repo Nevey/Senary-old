@@ -13,6 +13,8 @@ namespace CCore.Senary.Gameplay.Grid
         
         [SerializeField] private Color hqTileColor;
 
+        [SerializeField] private Color takeOverColor;
+
         private GridController gridController;
 
         private MaterialPropertyBlock propertyBlock;
@@ -61,7 +63,17 @@ namespace CCore.Senary.Gameplay.Grid
                 switch (tile.TileType)
                 {
                     case TileType.Ground:
-                        propertyBlock.SetColor("_Color", groundTileColor);
+
+                        Color targetColor = groundTileColor;
+
+                        if (tile.TileAction == TileAction.AvailableForTakeOver
+                            || tile.TileAction == TileAction.AvailableForReinforcement)
+                        {
+                            targetColor = takeOverColor;
+                        }
+
+                        propertyBlock.SetColor("_Color", targetColor);
+
                         break;
                     
                     case TileType.HQ:

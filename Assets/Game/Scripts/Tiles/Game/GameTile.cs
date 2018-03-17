@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CCore.Senary.Gameplay;
 using CCore.Senary.Gameplay.Tiles;
 using CCore.Senary.Players;
@@ -11,9 +12,21 @@ namespace CCore.Senary.Tiles
 
         private int unitCount;
 
+        private TileAction tileAction;
+
+        private TileData tileData;
+
+        private TileView tileView;
+
         public GameObject TileMesh { get { return tileGameObject; } }
 
         public int UnitCount { get { return unitCount; } }
+
+        public TileAction TileAction { get { return tileAction; } }
+
+        public TileData TileData { get { return tileData; } }
+
+        public TileView TileView { get { return tileView; } }
 
         private void CreateMesh(GameObject prefab, Transform parent)
         {
@@ -21,9 +34,13 @@ namespace CCore.Senary.Tiles
 
             tileGameObject.transform.parent = parent;
 
-            TileData tileData = tileGameObject.GetComponent<TileData>();
+            tileGameObject.name = Name;
+
+            tileData = tileGameObject.GetComponent<TileData>();
 
             tileData.SetData(this);
+
+            tileView = tileGameObject.GetComponent<TileView>();
         }
 
         private void SetupPosition(int gridWidth, int gridHeight)
@@ -74,20 +91,29 @@ namespace CCore.Senary.Tiles
             SetupHQVizualizer();
         }
 
-        public void AddUnits(int amount, Player player)
+        public void SetAvailability(TileAction tileAction)
         {
-            if (Owner == player || Owner.PlayerID.ID == -1)
+            this.tileAction = tileAction;
+
+            // Do some visualization..
+        }
+
+        public bool AddUnits(int amount, Player player)
+        {
+            if (owner == player || tileState == TileState.Free)
             {
                 SetOwner(player);
             }
             else
             {
-                return;
+                return false;
             }
 
             unitCount += amount;
 
-            tileGameObject.GetComponent<TileView>().AnimateAddUnits(unitCount);
+            tileView.AnimateAddUnits(unitCount);
+
+            return true;
         }
     }
 }

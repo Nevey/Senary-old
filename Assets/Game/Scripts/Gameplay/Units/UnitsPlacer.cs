@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CCore.Senary.Gameplay.Grid;
 using CCore.Senary.Gameplay.Tiles;
 using CCore.Senary.Gameplay.Turns;
@@ -16,6 +17,8 @@ namespace CCore.Senary.Gameplay.Units
         [SerializeField] private UnitsReceiver unitsReceiver;
 
         [SerializeField] private TurnController turnController;
+
+        public event Action UnitPlacedEvent;
 
         private void Awake()
         {
@@ -68,7 +71,7 @@ namespace CCore.Senary.Gameplay.Units
             {
                 Tile tile = gridController.Grid.FlattenedTiles[i];
 
-                if (tile.TileType == TileType.None)
+                if (tile.TileType == TileType.None || tile.TileAction == TileAction.NotAvailable)
                 {
                     continue;
                 }
@@ -77,11 +80,17 @@ namespace CCore.Senary.Gameplay.Units
 
                 if (tileInput.TapTile(position))
                 {
-                    // TODO: Only able to tap tiles which are adjacent to owned tiles
+                    bool addUnitsSuccess = tile.AddUnits(1, turnController.CurrentPlayer);
 
-                    tile.AddUnits(1, turnController.CurrentPlayer);
+                    if (addUnitsSuccess)
+                    {
+                        Log("Added one unit to tapped tile. Unit count is now {0}.", tile.UnitCount);
 
-                    Log("Added one unit to tapped tile. Unit count is now {0}.", tile.UnitCount);
+                        if (UnitPlacedEvent != null)
+                        {
+                            UnitPlacedEvent();
+                        }
+                    }
                 }
             }
         }

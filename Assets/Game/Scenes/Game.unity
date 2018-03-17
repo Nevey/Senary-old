@@ -145,6 +145,8 @@ MonoBehaviour:
   loggingColor: {r: 0.2901961, g: 0.5019608, b: 0.8313726, a: 1}
   levelName: Level_1
   tilePrefab: {fileID: 1295244709602228, guid: bd711cf55565c1144aa01a17e72cb4b8, type: 2}
+  turnController: {fileID: 925811490}
+  unitsPlacer: {fileID: 651063946}
 --- !u!4 &422752529
 Transform:
   m_ObjectHideFlags: 0
@@ -173,6 +175,7 @@ MonoBehaviour:
   loggingColor: {r: 0.2901961, g: 0.5019608, b: 0.8313726, a: 1}
   groundTileColor: {r: 1, g: 1, b: 1, a: 1}
   hqTileColor: {r: 1, g: 0.8798107, b: 0.20784312, a: 1}
+  takeOverColor: {r: 0.14345856, g: 0.9044118, b: 0, a: 1}
 --- !u!1 &553931265
 GameObject:
   m_ObjectHideFlags: 0
