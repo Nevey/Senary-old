@@ -76,6 +76,8 @@ namespace CCore.Senary.Gameplay.Turns
             {
                 TurnStartedEvent();
             }
+
+            GameStateMachine.Instance.DoTransition<ReceiveUnitsTransition>();
         }
     }
 }

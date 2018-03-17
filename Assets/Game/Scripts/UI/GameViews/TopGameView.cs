@@ -15,6 +15,7 @@ namespace CCore.Senary.UI
 
         protected override void Setup()
         {
+            // TODO: Think about finding component of type TurnController and remove singleton from it
             TurnController.Instance.TurnStartedEvent += OnTurnStarted;
 
             unFormattedString = playerTurnText.text;

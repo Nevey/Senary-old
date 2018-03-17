@@ -16,6 +16,8 @@ namespace CCore.Senary.StateMachines.Game
             
             AddTransition<ReceiveUnitsTransition, ReceiveUnitsState>();
 
+            AddTransition<PlaceUnitsTransition, PlaceUnitsState>();
+
             AddTransition<ThrowDiceTransition, ThrowDiceState>();
         }
     }
@@ -28,6 +30,8 @@ namespace CCore.Senary.StateMachines.Game
 
     public class ReceiveUnitsState : State { }
 
+    public class PlaceUnitsState : State { }
+
     public class ThrowDiceState : State { }
 
     // --------- Transitions ---------- //
@@ -37,6 +41,8 @@ namespace CCore.Senary.StateMachines.Game
     public class SelectStartPlayerTransition : Transition { }
 
     public class ReceiveUnitsTransition : Transition { }
+
+    public class PlaceUnitsTransition : Transition { }
 
     public class ThrowDiceTransition : Transition { }
 }
