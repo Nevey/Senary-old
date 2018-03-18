@@ -97,7 +97,7 @@ namespace CCore.Senary.Gameplay.Attacking
             }
             else
             {
-                Log("Defender wins with {0} vs {1}", attackingThrowResult, defendingThrowResult);
+                Log("Defender wins with {0} vs {1}", defendingThrowResult, attackingThrowResult);
 
                 DefenderWins();
             }
