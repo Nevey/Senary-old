@@ -1,6 +1,8 @@
 using System;
+using CCore.Senary.Gameplay.Attacking;
 using CCore.Senary.StateMachines.Game;
 using CCore.Senary.StateMachines.UI;
+using CCore.Senary.Tiles;
 using CCore.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,28 +11,23 @@ namespace CCore.Senary.UI
 {
     public class BottomGameView : UIView
     {
-        [SerializeField] private Button throwButton;
+        [SerializeField] private Button endTurnButton;
         
         protected override void Setup()
         {
-            // GameStateMachine.Instance.GetState<ReceiveUnitsState>().EnterEvent += OnPlayerInputStateEnter;
-
-            // GameStateMachine.Instance.GetState<ReceiveUnitsState>().ExitEvent += OnPlayerInputStateExit;
+            GameStateMachine.Instance.GetState<ManuallyEndTurnState>().EnterEvent += OnManuallyEndTurnStateEnter;
         }
 
-        private void OnPlayerInputStateEnter()
+        private void OnManuallyEndTurnStateEnter()
         {
-            throwButton.onClick.AddListener(OnThrowClicked);
+            endTurnButton.onClick.AddListener(EndTurnButtonClicked);
         }
 
-        private void OnPlayerInputStateExit()
+        private void EndTurnButtonClicked()
         {
-            throwButton.onClick.RemoveListener(OnThrowClicked);
-        }
+            endTurnButton.onClick.RemoveListener(EndTurnButtonClicked);
 
-        private void OnThrowClicked()
-        {
-            GameStateMachine.Instance.DoTransition<ThrowDiceTransition>();
+            GameStateMachine.Instance.DoTransition<CheckForWinLostTransition>();
         }
     }
 }

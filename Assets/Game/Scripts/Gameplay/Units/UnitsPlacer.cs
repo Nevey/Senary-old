@@ -18,7 +18,7 @@ namespace CCore.Senary.Gameplay.Units
 
         [SerializeField] private TurnController turnController;
 
-        public event Action UnitPlacedEvent;
+        private List<Tile> availableTiles;
 
         private void Awake()
         {
@@ -56,6 +56,8 @@ namespace CCore.Senary.Gameplay.Units
         private void OnPlaceUnitsStateEnter()
         {
             PlayerInput.Instance.TapEvent += OnTap;
+
+            availableTiles = GetAvailableTiles();
         }
 
         private void OnPlaceUnitsStateExit()
@@ -63,20 +65,63 @@ namespace CCore.Senary.Gameplay.Units
             PlayerInput.Instance.TapEvent -= OnTap;
         }
 
-        private void OnTap(Vector2 position)
+        private List<Tile> GetAvailableTiles()
         {
-            for (int i = 0; i < gridController.Grid.FlattenedTiles.Length; i++)
-            {
-                Tile tile = gridController.Grid.FlattenedTiles[i];
+            List<Tile> tiles = new List<Tile>();
 
-                if (tile.TileType == TileType.None || tile.TileAction == TileAction.NotAvailable)
+            for (int i = 0; i < GridController.Instance.Grid.FlattenedTiles.Length; i++)
+            {
+                Tile tile = GridController.Instance.Grid.FlattenedTiles[i];
+
+                if (tile.TileType == TileType.None
+                    || tile.Owner != turnController.CurrentPlayer)
                 {
                     continue;
                 }
 
-                TileInput tileInput = tile.TileMesh.GetComponent<TileInput>();
+                List<Tile> adjacentTiles = GridController.Instance.GetAdjacentTiles(tile);
 
-                if (tileInput.TapTile(position))
+                for (int k = 0; k < adjacentTiles.Count; k++)
+                {
+                    Tile adjacentTile = adjacentTiles[k];
+
+                    if (adjacentTile.TileOwnedState == TileOwnedState.Owned)
+                    {
+                        if (adjacentTile.Owner == turnController.CurrentPlayer)
+                        {
+                            // adjacentTile.SetTileGameState(TileGameState.AvailableAsTarget);
+                            adjacentTile.SetTileGameState(TileGameState.AvailableForReinforcement);
+
+                            if (!tiles.Contains(adjacentTile))
+                            {
+                                tiles.Add(adjacentTile);
+                            }
+                        }
+                    }
+                    else if (adjacentTile.TileOwnedState == TileOwnedState.Free)
+                    {
+                        adjacentTile.SetTileGameState(TileGameState.AvailableForTakeOver);
+
+                        if (!tiles.Contains(adjacentTile))
+                        {
+                            tiles.Add(adjacentTile);
+                        }
+                    }
+                }
+            }
+
+            return tiles;
+        }
+
+        private void OnTap(Vector2 position)
+        {
+            bool isFinished = false;
+
+            for (int i = 0; i < availableTiles.Count; i++)
+            {
+                Tile tile = availableTiles[i];
+
+                if (tile.TileInput.TapTile(position))
                 {
                     bool addUnitsSuccess = tile.AddUnits(1, turnController.CurrentPlayer);
 
@@ -84,14 +129,23 @@ namespace CCore.Senary.Gameplay.Units
                     {
                         Log("Added one unit to tapped tile. Unit count is now {0}.", tile.UnitCount);
 
-                        if (UnitPlacedEvent != null)
-                        {
-                            UnitPlacedEvent();
-                        }
-
-                        unitsReceiver.DecrementNewUnitCount();
+                        isFinished = unitsReceiver.DecrementNewUnitCount();
                     }
                 }
+            }
+
+            for (int i = 0; i < availableTiles.Count; i++)
+            {
+                availableTiles[i].SetTileGameState(TileGameState.NotAvailable);
+            }
+
+            if (isFinished)
+            {
+                GameStateMachine.Instance.DoTransition<AttackTransition>();
+            }
+            else
+            {
+                availableTiles = GetAvailableTiles();
             }
         }
     }

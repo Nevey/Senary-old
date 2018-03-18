@@ -8,7 +8,7 @@ namespace CCore.Senary.UI
     {
         protected override void Setup()
         {
-            GameStateMachine.Instance.GetState<ThrowDiceState>().EnterEvent += OnThrowDiceStateEnter;
+            // GameStateMachine.Instance.GetState<ThrowDiceState>().EnterEvent += OnThrowDiceStateEnter;
         }
 
         private void OnThrowDiceStateEnter()

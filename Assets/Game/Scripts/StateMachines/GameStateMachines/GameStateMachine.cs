@@ -24,7 +24,13 @@ namespace CCore.Senary.StateMachines.Game
 
             AddTransition<AttackTransition, AttackState>();
 
-            AddTransition<ThrowDiceTransition, ThrowDiceState>();
+            AddTransition<BattleTransition, BattleState>();
+
+            AddTransition<ManuallyEndTurnTransition, ManuallyEndTurnState>();
+
+            AddTransition<CheckForWinLostTransition, CheckForWinLoseState>();
+
+            AddTransition<IncrementPlayerTurnTransition, IncrementPlayerTurn>();
         }
     }
 
@@ -44,7 +50,13 @@ namespace CCore.Senary.StateMachines.Game
 
     public class AttackState : State { }
 
-    public class ThrowDiceState : State { }
+    public class BattleState : State { }
+
+    public class ManuallyEndTurnState : State { }
+
+    public class CheckForWinLoseState : State { }
+
+    public class IncrementPlayerTurn : State { }
 
     // --------- Transitions ---------- //
 
@@ -62,5 +74,11 @@ namespace CCore.Senary.StateMachines.Game
 
     public class AttackTransition : Transition { }
 
-    public class ThrowDiceTransition : Transition { }
+    public class BattleTransition : Transition { }
+
+    public class ManuallyEndTurnTransition : Transition { }
+
+    public class CheckForWinLostTransition : Transition { }
+
+    public class IncrementPlayerTurnTransition : Transition { }
 }

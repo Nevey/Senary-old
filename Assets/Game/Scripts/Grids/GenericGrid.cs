@@ -47,7 +47,7 @@ namespace CCore.Senary.Grids
             {
                 for (int y = 0; y < height; y++)
                 {
-                    T tile = (T)Activator.CreateInstance(typeof(T), x, y, TileType.Ground, TileState.Free);
+                    T tile = (T)Activator.CreateInstance(typeof(T), x, y, TileType.Ground, TileOwnedState.Free);
 
                     flattenedTiles[index] = tile;
 

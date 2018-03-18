@@ -3,7 +3,7 @@ using System;
 namespace CCore.Senary.Tiles
 {
     [Serializable]
-    public enum TileState
+    public enum TileOwnedState
     {
         Free,
         Owned,

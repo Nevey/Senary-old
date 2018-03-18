@@ -15,6 +15,10 @@ namespace CCore.Senary.Gameplay.Grid
 
         [SerializeField] private Color takeOverColor;
 
+        [SerializeField] private Color victimColor;
+
+        [SerializeField] private Color attackerColor;
+
         private GridController gridController;
 
         private MaterialPropertyBlock propertyBlock;
@@ -68,10 +72,25 @@ namespace CCore.Senary.Gameplay.Grid
 
                         if (GameStateMachine.Instance.CurrentState() == GameStateMachine.Instance.GetState<PlaceUnitsState>())
                         {
-                            if (tile.TileAction == TileAction.AvailableForTakeOver
-                                || tile.TileAction == TileAction.AvailableForReinforcement)
+                            if (tile.TileGameState == TileGameState.AvailableForTakeOver
+                                || tile.TileGameState == TileGameState.AvailableForReinforcement)
                             {
                                 targetColor = takeOverColor;
+                            }
+                        }
+
+                        if (GameStateMachine.Instance.CurrentState() == GameStateMachine.Instance.GetState<AttackState>())
+                        {
+                            if (tile.TileGameState == TileGameState.AvailableAsTarget
+                                || tile.TileGameState == TileGameState.SelectedAsTarget)
+                            {
+                                targetColor = victimColor;
+                            }
+
+                            if (tile.TileGameState == TileGameState.AvailableAsAttacker
+                                || tile.TileGameState == TileGameState.SelectedAsAttacker)
+                            {
+                                targetColor = attackerColor;
                             }
                         }
 

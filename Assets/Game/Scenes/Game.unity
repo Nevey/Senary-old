@@ -176,6 +176,8 @@ MonoBehaviour:
   groundTileColor: {r: 1, g: 1, b: 1, a: 1}
   hqTileColor: {r: 1, g: 0.8798107, b: 0.20784312, a: 1}
   takeOverColor: {r: 0.14345856, g: 0.9044118, b: 0, a: 1}
+  victimColor: {r: 0, g: 0.7941176, b: 0.7283975, a: 1}
+  attackerColor: {r: 0.9191176, g: 0, b: 0, a: 1}
 --- !u!1 &553931265
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,3 +347,88 @@ MonoBehaviour:
   loggingEnabled: 1
   loggingColor: {r: 0.74509805, g: 0.30980393, b: 0.6784314, a: 1}
   gridController: {fileID: 422752528}
+--- !u!1 &1186594856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1186594858}
+  - component: {fileID: 1186594857}
+  m_Layer: 0
+  m_Name: WinLoseController
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1186594857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186594856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b172aa52a0ca0734d90116238c94efb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggingEnabled: 1
+  loggingColor: {r: 0.80392164, g: 0.69803923, b: 0.16078432, a: 1}
+--- !u!4 &1186594858
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186594856}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1366253560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1366253561}
+  - component: {fileID: 1366253562}
+  m_Layer: 0
+  m_Name: AttackController
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1366253561
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1366253560}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1366253562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1366253560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908835ea54544ba4fbc556d29dffaf4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggingEnabled: 1
+  loggingColor: {r: 0.72156864, g: 0.18039216, b: 0.18039216, a: 1}
+  gridController: {fileID: 0}

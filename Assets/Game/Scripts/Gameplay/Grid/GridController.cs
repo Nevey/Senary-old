@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace CCore.Senary.Gameplay.Grid
 {
-    public class GridController : MonoBehaviour
+    public class GridController : MonoBehaviourSingleton<GridController>
     {
         // TODO: Define loading the level better
         [SerializeField] private string levelName = "Level_1";
@@ -30,20 +30,6 @@ namespace CCore.Senary.Gameplay.Grid
         private void Awake()
         {
             GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent += OnCreateLevelStateEnter;
-
-            GameStateMachine.Instance.GetState<PlaceUnitsState>().EnterEvent += OnPlaceUnitsStateEnter;
-
-            GameStateMachine.Instance.GetState<PlaceUnitsState>().ExitEvent += OnPlaceUnitsStateExit;
-        }
-
-
-        private void OnDestroy()
-        {
-            GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent -= OnCreateLevelStateEnter;
-
-            GameStateMachine.Instance.GetState<PlaceUnitsState>().EnterEvent -= OnPlaceUnitsStateEnter;
-
-            GameStateMachine.Instance.GetState<PlaceUnitsState>().ExitEvent -= OnPlaceUnitsStateExit;
         }
 
         private void OnCreateLevelStateEnter()
@@ -67,66 +53,12 @@ namespace CCore.Senary.Gameplay.Grid
             GameStateMachine.Instance.DoTransition<AnimateHQTransition>();
         }
 
-        private void OnPlaceUnitsStateEnter()
-        {
-            UpdateGridTileActions();
-
-            unitsPlacer.UnitPlacedEvent += OnUnitPlacedEvent;
-        }
-
-        private void OnPlaceUnitsStateExit()
-        {
-            unitsPlacer.UnitPlacedEvent -= OnUnitPlacedEvent;
-        }
-
-        private void OnUnitPlacedEvent()
-        {
-            UpdateGridTileActions();
-        }
-
-        private void UpdateGridTileActions()
-        {
-            for (int i = 0; i < grid.FlattenedTiles.Length; i++)
-            {
-                Tile tile = grid.FlattenedTiles[i];
-
-                if (tile.TileType == TileType.None
-                    || tile.Owner != turnController.CurrentPlayer)
-                {
-                    continue;
-                }
-
-                List<Tile> adjacentTiles = GetAdjacentTiles(tile);
-
-                for (int k = 0; k < adjacentTiles.Count; k++)
-                {
-                    Tile adjacentTile = adjacentTiles[k];
-
-                    if (adjacentTile.TileState == TileState.Owned)
-                    {
-                        if (adjacentTile.Owner != turnController.CurrentPlayer)
-                        {
-                            adjacentTile.SetAvailability(TileAction.AvailableForAttack);
-                        }
-                        else
-                        {
-                            adjacentTile.SetAvailability(TileAction.AvailableForReinforcement);
-                        }
-                    }
-                    else if (adjacentTile.TileState == TileState.Free)
-                    {
-                        adjacentTile.SetAvailability(TileAction.AvailableForTakeOver);
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// Returns a list of tiles adjacent to given tile, including given tile
         /// </summary>
         /// <param name="tile"></param>
         /// <returns></returns>
-        private List<Tile> GetAdjacentTiles(Tile tile)
+        public List<Tile> GetAdjacentTiles(Tile tile)
         {
             List<Tile> adjacentTiles = new List<Tile>();
 

@@ -15,7 +15,7 @@ namespace CCore.Senary.Tiles
         private TileType tileType;
 
         [SerializeField]
-        private TileState tileState;
+        private TileOwnedState tileOwnedState;
 
         [SerializeField]
         private Player owner;
@@ -31,7 +31,7 @@ namespace CCore.Senary.Tiles
 
         public TileType TileType { get { return tileType; } }
 
-        public TileState TileState { get { return tileState; } }
+        public TileOwnedState TileOwnedState { get { return tileOwnedState; } }
 
         /// <summary>
         /// Returns the tile owner object, this could be null if this tile was not owned by anyone
@@ -41,13 +41,13 @@ namespace CCore.Senary.Tiles
 
         public string Name { get { return name; } }
 
-        public Tile(int x, int y, TileType tileType, TileState tileState)
+        public Tile(int x, int y, TileType tileType, TileOwnedState tileOwnedState)
         {
             this.gridCoordinates = new GridCoordinates(x, y);
 
             this.tileType = tileType;
 
-            this.tileState = tileState;
+            this.tileOwnedState = tileOwnedState;
 
             this.name = String.Format("Tile-{0}-{1}", gridCoordinates.X, gridCoordinates.Y);
 
@@ -74,14 +74,14 @@ namespace CCore.Senary.Tiles
         {
             this.owner = owner;
 
-            tileState = TileState.Owned;
+            tileOwnedState = TileOwnedState.Owned;
         }
 
         public void ClearOwner()
         {
             owner = Player.Dummy;
 
-            tileState = TileState.Free;
+            tileOwnedState = TileOwnedState.Free;
         }
     }
 }

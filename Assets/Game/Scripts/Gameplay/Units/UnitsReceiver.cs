@@ -50,14 +50,16 @@ namespace CCore.Senary.Gameplay.Units
             return ownedHQCount;
         }
 
-        public void DecrementNewUnitCount()
+        public bool DecrementNewUnitCount()
         {
             newUnitsCount--;
 
             if (newUnitsCount == 0)
             {
-                GameStateMachine.Instance.DoTransition<AttackTransition>();
+                return true;
             }
+
+            return false;
         }
     }
 }

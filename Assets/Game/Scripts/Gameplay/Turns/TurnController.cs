@@ -25,11 +25,8 @@ namespace CCore.Senary.Gameplay.Turns
         private void Awake()
         {
             GameStateMachine.Instance.GetState<SelectStartPlayerState>().EnterEvent += OnSelectStartPlayerStateEnter;
-        }
 
-        private void OnDestroy()
-        {
-            GameStateMachine.Instance.GetState<SelectStartPlayerState>().EnterEvent -= OnSelectStartPlayerStateEnter;
+            GameStateMachine.Instance.GetState<IncrementPlayerTurn>().EnterEvent += OnIncrementPlayerTurnStateEnter;
         }
 
         private void OnSelectStartPlayerStateEnter()
@@ -44,6 +41,18 @@ namespace CCore.Senary.Gameplay.Turns
             int randomIndex = UnityEngine.Random.Range(0, playerList.Count);
 
             GiveTurnToPlayer(playerList[randomIndex]);
+        }
+
+        private void OnIncrementPlayerTurnStateEnter()
+        {
+            int newPlayerIndex = playerList.IndexOf(currentPlayer) + 1;
+
+            if (newPlayerIndex == playerList.Count)
+            {
+                newPlayerIndex = 0;
+            }
+
+            GiveTurnToPlayer(playerList[newPlayerIndex]);
         }
 
         private List<Player> GetActivePlayers()

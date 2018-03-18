@@ -12,21 +12,25 @@ namespace CCore.Senary.Tiles
 
         private int unitCount;
 
-        private TileAction tileAction;
+        private TileGameState tileGameState;
 
         private TileData tileData;
 
         private TileView tileView;
 
+        private TileInput tileInput;
+
         public GameObject TileMesh { get { return tileGameObject; } }
 
         public int UnitCount { get { return unitCount; } }
 
-        public TileAction TileAction { get { return tileAction; } }
+        public TileGameState TileGameState { get { return tileGameState; } }
 
         public TileData TileData { get { return tileData; } }
 
         public TileView TileView { get { return tileView; } }
+
+        public TileInput TileInput { get { return tileInput; } }
 
         private void CreateMesh(GameObject prefab, Transform parent)
         {
@@ -41,6 +45,8 @@ namespace CCore.Senary.Tiles
             tileData.SetData(this);
 
             tileView = tileGameObject.GetComponent<TileView>();
+
+            tileInput = tileGameObject.GetComponent<TileInput>();
         }
 
         private void SetupPosition(int gridWidth, int gridHeight)
@@ -91,16 +97,16 @@ namespace CCore.Senary.Tiles
             SetupHQVizualizer();
         }
 
-        public void SetAvailability(TileAction tileAction)
+        public void SetTileGameState(TileGameState tileGameState)
         {
-            this.tileAction = tileAction;
+            this.tileGameState = tileGameState;
 
             // Do some visualization..
         }
 
         public bool AddUnits(int amount, Player player)
         {
-            if (owner == player || tileState == TileState.Free)
+            if (owner == player || tileOwnedState == TileOwnedState.Free)
             {
                 SetOwner(player);
             }

@@ -13,7 +13,7 @@ namespace CCore.Senary.Scenes
         {            
             UIStateMachine.Instance.GetState<GameState>().EnterEvent += OnGameStateEnter;
 
-            GameStateMachine.Instance.GetState<ThrowDiceState>().EnterEvent += OnThrowDiceStateEnter;
+            GameStateMachine.Instance.GetState<BattleState>().EnterEvent += OnBattleStateEnter;
 
             LoadUIScene();
         }
@@ -23,7 +23,7 @@ namespace CCore.Senary.Scenes
             LoadGameScene();
         }
 
-        private void OnThrowDiceStateEnter()
+        private void OnBattleStateEnter()
         {
             LoadThrowDiceScene();
         }
