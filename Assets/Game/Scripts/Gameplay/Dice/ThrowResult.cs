@@ -4,16 +4,40 @@ using UnityEngine;
 
 namespace CCore.Senary.Gameplay.Dice
 {
+    public enum DieType
+    {
+        Defender,
+        Attacker,
+    }
+
+    public class ThrowResultArgs : EventArgs
+    {
+        public DieType dieType;
+
+        public int throwResult;
+    }
+
     [RequireComponent(typeof(RigidbodySleepTracker))]
     public class ThrowResult : MonoBehaviour
     {
+        [SerializeField] private DieType dieType;
+
         private RigidbodySleepTracker sleepTracker;
+
+        private ThrowResultArgs throwResultArgs = new ThrowResultArgs();
+
+        public event EventHandler<ThrowResultArgs> ThrowResultEvent;
 
         private void Awake()
         {
             sleepTracker = GetComponent<RigidbodySleepTracker>();
 
             sleepTracker.OnSleepEvent += OnRigidbodySleep;
+        }
+
+        private void OnDestroy()
+        {
+            sleepTracker.OnSleepEvent -= OnRigidbodySleep;
         }
 
         private void OnRigidbodySleep()
@@ -45,12 +69,26 @@ namespace CCore.Senary.Gameplay.Dice
                 throwResult = 6;
             }
 
-            Log("Throw result is {0}", throwResult);
+            Log("{0}'s throw result is {1}", dieType, throwResult);
+
+            if (ThrowResultEvent != null)
+            {
+                throwResultArgs.dieType = dieType;
+                throwResultArgs.throwResult = throwResult;
+
+                ThrowResultEvent(this, throwResultArgs);
+            }
         }
 
-        private bool IsVectorPointingUp(Vector3 vector3)
+        private bool IsVectorPointingUp(Vector3 direction)
         {
-            return vector3.normalized == new Vector3(0f, 1f, 0f);
+            direction = new Vector3(
+                Mathf.Round(direction.x),
+                Mathf.Round(direction.y),
+                Mathf.Round(direction.z)
+            );
+            
+            return direction == Vector3.up;
         }
     }
 }

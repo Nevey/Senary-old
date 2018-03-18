@@ -176,8 +176,8 @@ MonoBehaviour:
   groundTileColor: {r: 1, g: 1, b: 1, a: 1}
   hqTileColor: {r: 1, g: 0.8798107, b: 0.20784312, a: 1}
   takeOverColor: {r: 0.14345856, g: 0.9044118, b: 0, a: 1}
-  victimColor: {r: 0, g: 0.7941176, b: 0.7283975, a: 1}
-  attackerColor: {r: 0.9191176, g: 0, b: 0, a: 1}
+  victimColor: {r: 0.91764706, g: 0, b: 0, a: 1}
+  attackerColor: {r: 0, g: 0.7960785, b: 0.7294118, a: 1}
 --- !u!1 &553931265
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,6 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1366253561}
   - component: {fileID: 1366253562}
+  - component: {fileID: 1366253563}
   m_Layer: 0
   m_Name: AttackController
   m_TagString: Untagged
@@ -431,4 +432,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loggingEnabled: 1
   loggingColor: {r: 0.72156864, g: 0.18039216, b: 0.18039216, a: 1}
-  gridController: {fileID: 0}
+--- !u!114 &1366253563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1366253560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c0f3d321f8b684eb5d7559d428a7bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggingEnabled: 1
+  loggingColor: {r: 0.72156864, g: 0.18039216, b: 0.18039216, a: 1}
+  throwDicePrefab: {fileID: 1331754603418202, guid: 902be7b06d13ded468e40f5e80b3dfde,
+    type: 2}

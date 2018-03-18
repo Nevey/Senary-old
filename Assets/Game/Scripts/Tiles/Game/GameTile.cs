@@ -121,5 +121,10 @@ namespace CCore.Senary.Tiles
 
             return true;
         }
+
+        public void ClearUnits()
+        {
+            unitCount = 0;
+        }
     }
 }

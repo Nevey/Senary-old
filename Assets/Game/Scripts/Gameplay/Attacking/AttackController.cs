@@ -20,25 +20,17 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private AttackStep attackStep = new AttackStep();
 
-        private List<Tile> targetTiles;
+        private List<Tile> defendingTiles;
 
-        private List<Tile> attackerTiles;
+        private List<Tile> attackingTiles;
 
-        private Tile targetTile;
+        private Tile defendingTile;
 
-        private Tile attackerTile;
+        private Tile attackingTile;
 
-        public Tile TargetTile { get { return targetTile; } }
+        public Tile DefendingTile { get { return defendingTile; } }
 
-        public Tile AttackerTile { get { return attackerTile; } }
-
-        public event Action TargetTileSelectedEvent;
-        
-        public event Action AttackStartedEvent;
-
-        public event Action AttackWonEvent;
-
-        public event Action AttackLostEvent;
+        public Tile AttackingTile { get { return attackingTile; } }
 
         private void Awake()
         {
@@ -56,14 +48,9 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private void OnAttackStateEnter()
         {
-            targetTiles = GetTargetTiles();
+            defendingTiles = GetTargetTiles();
 
             PlayerInput.Instance.TapEvent += OnTap;
-
-            if (targetTiles.Count == 0)
-            {
-                GameStateMachine.Instance.DoTransition<ManuallyEndTurnTransition>();
-            }
         }
 
         private void OnAttackStateExit()
@@ -112,7 +99,7 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private List<Tile> GetAttackerTiles()
         {
-            List<Tile> attackerTiles = GridController.Instance.GetAdjacentTiles(targetTile);
+            List<Tile> attackerTiles = GridController.Instance.GetAdjacentTiles(defendingTile);
 
             for (int i = attackerTiles.Count - 1; i >= 0; i--)
             {
@@ -137,17 +124,17 @@ namespace CCore.Senary.Gameplay.Attacking
             // TODO: Split this up in several game states?
             if (attackStep == AttackStep.SelectTarget)
             {
-                for (int i = 0; i < targetTiles.Count; i++)
+                for (int i = 0; i < defendingTiles.Count; i++)
                 {
-                    Tile tile = targetTiles[i];
+                    Tile tile = defendingTiles[i];
 
                     if (tile.TileInput.TapTile(position))
                     {
                         tile.SetTileGameState(TileGameState.SelectedAsTarget);
 
-                        targetTile = tile;
+                        defendingTile = tile;
 
-                        attackerTiles = GetAttackerTiles();
+                        attackingTiles = GetAttackerTiles();
 
                         attackStep = AttackStep.SelectAttacker;
 
@@ -156,11 +143,11 @@ namespace CCore.Senary.Gameplay.Attacking
                 }
 
                 // Reset all tiles
-                for (int i = 0; i < targetTiles.Count; i++)
+                for (int i = 0; i < defendingTiles.Count; i++)
                 {
-                    Tile tile = targetTiles[i];
+                    Tile tile = defendingTiles[i];
 
-                    if (tile == targetTile)
+                    if (tile == defendingTile)
                     {
                         continue;
                     }
@@ -170,26 +157,26 @@ namespace CCore.Senary.Gameplay.Attacking
             }
             else if (attackStep == AttackStep.SelectAttacker)
             {
-                for (int i = 0; i < attackerTiles.Count; i++)
+                for (int i = 0; i < attackingTiles.Count; i++)
                 {
-                    Tile tile = attackerTiles[i];
+                    Tile tile = attackingTiles[i];
 
                     if (tile.TileInput.TapTile(position))
                     {
                         tile.SetTileGameState(TileGameState.SelectedAsAttacker);
 
-                        attackerTile = tile;
+                        attackingTile = tile;
 
                         break;
                     }
                 }
 
                 // Reset all tiles
-                for (int i = 0; i < attackerTiles.Count; i++)
+                for (int i = 0; i < attackingTiles.Count; i++)
                 {
-                    Tile tile = attackerTiles[i];
+                    Tile tile = attackingTiles[i];
 
-                    if (tile == attackerTile)
+                    if (tile == attackingTile)
                     {
                         continue;
                     }

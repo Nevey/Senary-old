@@ -13,8 +13,6 @@ namespace CCore.Senary.Scenes
         {            
             UIStateMachine.Instance.GetState<GameState>().EnterEvent += OnGameStateEnter;
 
-            GameStateMachine.Instance.GetState<BattleState>().EnterEvent += OnBattleStateEnter;
-
             LoadUIScene();
         }
 
@@ -23,17 +21,12 @@ namespace CCore.Senary.Scenes
             LoadGameScene();
         }
 
-        private void OnBattleStateEnter()
-        {
-            LoadThrowDiceScene();
-        }
-
         private void LoadUIScene()
         {
             SceneController.LoadSceneAdditive("UI", () =>
             {
                 // Need to wait for end of frame so Awake and Start can be called on components first
-                StartCoroutine(Wait(() =>
+                StartCoroutine(WaitOneFrame(() =>
                 {
                     UIStateMachine.Instance.DoTransition<SplashTransition>();
                 }));
@@ -45,19 +38,14 @@ namespace CCore.Senary.Scenes
             SceneController.LoadSceneAdditive("Game", () =>
             {
                 // Need to wait for end of frame so Awake and Start can be called on components first
-                StartCoroutine(Wait(() =>
+                StartCoroutine(WaitOneFrame(() =>
                 {
                     GameStateMachine.Instance.DoTransition<CreateLevelTransition>();
                 }));
             });
         }
 
-        private void LoadThrowDiceScene()
-        {
-            SceneController.LoadSceneAdditive("ThrowDice");
-        }
-
-        private IEnumerator Wait(Action callback)
+        private IEnumerator WaitOneFrame(Action callback)
         {
             yield return new WaitForEndOfFrame();
 

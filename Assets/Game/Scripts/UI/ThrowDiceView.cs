@@ -8,10 +8,10 @@ namespace CCore.Senary.UI
     {
         protected override void Setup()
         {
-            // GameStateMachine.Instance.GetState<ThrowDiceState>().EnterEvent += OnThrowDiceStateEnter;
+            GameStateMachine.Instance.GetState<BattleState>().EnterEvent += OnBattleStateEnter;
         }
 
-        private void OnThrowDiceStateEnter()
+        private void OnBattleStateEnter()
         {
             Show();
         }
