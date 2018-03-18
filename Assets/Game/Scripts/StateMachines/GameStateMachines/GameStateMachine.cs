@@ -10,6 +10,8 @@ namespace CCore.Senary.StateMachines.Game
         {
             Instance = this;
             
+            // TODO: Add a state where the transition has to start from...
+
             AddTransition<CreateLevelTransition, CreateLevelState>();
 
             AddTransition<AnimateHQTransition, AnimateHQState>();
@@ -25,6 +27,10 @@ namespace CCore.Senary.StateMachines.Game
             AddTransition<AttackTransition, AttackState>();
 
             AddTransition<BattleTransition, BattleState>();
+
+            AddTransition<AttackerWinBattleTransition, AttackerWinBattleState>();
+
+            AddTransition<DefenderWinBattleTransition, DefenderWinBattleState>();
 
             AddTransition<CheckForWinLostTransition, CheckForWinLoseState>();
 
@@ -50,6 +56,10 @@ namespace CCore.Senary.StateMachines.Game
 
     public class BattleState : State { }
 
+    public class AttackerWinBattleState : State { }
+
+    public class DefenderWinBattleState : State { }
+
     public class CheckForWinLoseState : State { }
 
     public class IncrementPlayerTurn : State { }
@@ -71,6 +81,10 @@ namespace CCore.Senary.StateMachines.Game
     public class AttackTransition : Transition { }
 
     public class BattleTransition : Transition { }
+
+    public class AttackerWinBattleTransition : Transition { }
+
+    public class DefenderWinBattleTransition : Transition { }
 
     public class CheckForWinLostTransition : Transition { }
 

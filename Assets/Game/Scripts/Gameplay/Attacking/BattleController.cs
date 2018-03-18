@@ -110,6 +110,8 @@ namespace CCore.Senary.Gameplay.Attacking
             defendingTile.ClearUnits();
             defendingTile.ClearOwner();
 
+            GameStateMachine.Instance.DoTransition<AttackerWinBattleTransition>();
+
             // Go to attacker wins state
             // Go to invasion state
             // When done, go back to attack state
@@ -123,6 +125,8 @@ namespace CCore.Senary.Gameplay.Attacking
 
             attackingTile.AddUnits(-unitsToRemove, attackingTile.Owner);
 
+            GameStateMachine.Instance.DoTransition<DefenderWinBattleTransition>();
+            
             // Go to defender wins state
             // Go back to attack state
         }
