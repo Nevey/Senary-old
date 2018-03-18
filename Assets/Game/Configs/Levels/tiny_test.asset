@@ -1,0 +1,193 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c698f9798ea6ff34893ff968daa38f42, type: 3}
+  m_Name: tiny_test
+  m_EditorClassIdentifier: 
+  grid:
+    flattenedTiles:
+    - gridCoordinates:
+        x: 0
+        y: 0
+      tileType: 2
+      tileOwnedState: 1
+      owner:
+        playerID:
+          id: 1
+          name: player_1
+          color: {r: 0, g: 0, b: 1, a: 1}
+      name: Tile-0-0
+    - gridCoordinates:
+        x: 0
+        y: 1
+      tileType: 0
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-1
+    - gridCoordinates:
+        x: 0
+        y: 2
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-2
+    - gridCoordinates:
+        x: 0
+        y: 3
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-0-3
+    - gridCoordinates:
+        x: 1
+        y: 0
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-0
+    - gridCoordinates:
+        x: 1
+        y: 1
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-1
+    - gridCoordinates:
+        x: 1
+        y: 2
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-2
+    - gridCoordinates:
+        x: 1
+        y: 3
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-1-3
+    - gridCoordinates:
+        x: 2
+        y: 0
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-0
+    - gridCoordinates:
+        x: 2
+        y: 1
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-1
+    - gridCoordinates:
+        x: 2
+        y: 2
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-2
+    - gridCoordinates:
+        x: 2
+        y: 3
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-2-3
+    - gridCoordinates:
+        x: 3
+        y: 0
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-0
+    - gridCoordinates:
+        x: 3
+        y: 1
+      tileType: 1
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-1
+    - gridCoordinates:
+        x: 3
+        y: 2
+      tileType: 0
+      tileOwnedState: 0
+      owner:
+        playerID:
+          id: -1
+          name: None
+          color: {r: 1, g: 1, b: 1, a: 1}
+      name: Tile-3-2
+    - gridCoordinates:
+        x: 3
+        y: 3
+      tileType: 2
+      tileOwnedState: 1
+      owner:
+        playerID:
+          id: 0
+          name: player_0
+          color: {r: 1, g: 0, b: 0, a: 1}
+      name: Tile-3-3
+    width: 4
+    height: 4

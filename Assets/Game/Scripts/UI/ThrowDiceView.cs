@@ -9,11 +9,18 @@ namespace CCore.Senary.UI
         protected override void Setup()
         {
             GameStateMachine.Instance.GetState<BattleState>().EnterEvent += OnBattleStateEnter;
+
+            GameStateMachine.Instance.GetState<BattleState>().ExitEvent += OnBattleStateExit;
         }
 
         private void OnBattleStateEnter()
         {
             Show();
+        }
+
+        private void OnBattleStateExit()
+        {
+            Hide();
         }
     }
 }

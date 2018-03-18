@@ -16,7 +16,15 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private ThrowResult[] throwResults;
 
-        private List<ThrowResultArgs> receivedResults = new List<ThrowResultArgs>();
+        private int receivedResultCount = 0;
+
+        private BattleResult attackerResult;
+
+        private BattleResult defenderResult;
+
+        public BattleResult AttackerResult { get { return attackerResult; } }
+
+        public BattleResult DefenderResult { get { return defenderResult; } }
 
         private void Awake()
         {
@@ -40,64 +48,48 @@ namespace CCore.Senary.Gameplay.Attacking
             switch (e.dieType)
             {
                 case DieType.Attacker:
-                    e.throwResult *= AttackController.Instance.AttackingTile.UnitCount;
+
+                    attackerResult = new BattleResult(
+                        e.throwResult,
+                        AttackController.Instance.AttackingTile.UnitCount
+                    );
+
                     break;
                 
                 case DieType.Defender:
-                    e.throwResult *= AttackController.Instance.AttackingTile.UnitCount;
+
+                    defenderResult = new BattleResult(
+                        e.throwResult,
+                        AttackController.Instance.DefendingTile.UnitCount
+                    );
+                    
                     break;
             }
 
-            receivedResults.Add(e);
+            receivedResultCount++;
 
-            if (receivedResults.Count == throwResults.Length)
+            if (receivedResultCount == throwResults.Length)
             {
+                receivedResultCount = 0;
+
                 Compare();
             }
         }
 
         private void Compare()
         {
-            int attackingThrowResult = 0;
-            int defendingThrowResult = 0;
-
-            for (int i = 0; i < receivedResults.Count; i++)
-            {
-                ThrowResultArgs result = receivedResults[i];
-
-                // Safe since we only have 2 results at all times...
-                switch (result.dieType)
-                {
-                    case DieType.Attacker:
-                        attackingThrowResult = result.throwResult;
-                        break;
-                    
-                    case DieType.Defender:
-                        defendingThrowResult = result.throwResult;
-                        break;
-
-                    default:
-
-                        // In case weird stuff happens, just not let the game break
-                        attackingThrowResult = result.throwResult;
-                        defendingThrowResult = result.throwResult;
-
-                        LogWarning("No proper Die Type was assigned!");
-
-                        break;
-                }
-            }
-
+            Destroy(throwDice);
+            
             // Attacker only wins if throw is higher then defender throw
-            if (attackingThrowResult > defendingThrowResult)
+            if (attackerResult.FinalResult > defenderResult.FinalResult)
             {
-                Log("Attacker wins with {0} vs {1}", attackingThrowResult, defendingThrowResult);
+                Log("Attacker wins with {0} vs {1}", attackerResult.FinalResult, defenderResult.FinalResult);
 
                 AttackerWins();
             }
             else
             {
-                Log("Defender wins with {0} vs {1}", defendingThrowResult, attackingThrowResult);
+                Log("Defender wins with {0} vs {1}", defenderResult.FinalResult, attackerResult.FinalResult);
 
                 DefenderWins();
             }
