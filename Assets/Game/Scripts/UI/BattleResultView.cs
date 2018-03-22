@@ -1,5 +1,6 @@
 using System;
 using CCore.Senary.Gameplay.Attacking;
+using CCore.Senary.Input;
 using CCore.Senary.StateMachines.Game;
 using CCore.UI;
 using UnityEngine;
@@ -27,6 +28,10 @@ namespace CCore.Senary.UI
 
             GameStateMachine.Instance.GetState<DefenderWinBattleState>().EnterEvent += OnDefenderWintBattleStateEnter;
 
+            GameStateMachine.Instance.GetState<AttackerWinBattleState>().ExitEvent += OnAttackerWinBattleStateExit;
+
+            GameStateMachine.Instance.GetState<DefenderWinBattleState>().ExitEvent += OnDefenderWintBattleStateExit;
+
             originalResultString = resultText.text;
 
             originalAttackerString = attackerText.text;
@@ -42,6 +47,8 @@ namespace CCore.Senary.UI
             );
 
             ShowSpecificResults();
+
+            EnableInputListener();
         }
 
         private void OnDefenderWintBattleStateEnter()
@@ -52,6 +59,22 @@ namespace CCore.Senary.UI
             );
 
             ShowSpecificResults();
+
+            EnableInputListener();
+        }
+
+        private void OnAttackerWinBattleStateExit()
+        {
+            DisableInputListener();
+
+            Hide();
+        }
+
+        private void OnDefenderWintBattleStateExit()
+        {
+            DisableInputListener();
+
+            Hide();
         }
 
         private void ShowSpecificResults()
@@ -75,6 +98,28 @@ namespace CCore.Senary.UI
                 defenderResult.UnitCount,
                 defenderResult.FinalResult
             );
+        }
+
+        private void EnableInputListener()
+        {
+            PlayerInput.Instance.TapEvent += OnTap;
+        }
+
+        private void DisableInputListener()
+        {
+            PlayerInput.Instance.TapEvent -= OnTap;
+        }
+
+        private void OnTap(Vector2 position)
+        {
+            if (GameStateMachine.Instance.CurrentState() is AttackerWinBattleState)
+            {
+                GameStateMachine.Instance.DoTransition<InvasionTransition>();
+            }
+            else
+            {
+                GameStateMachine.Instance.DoTransition<AttackTransition>();
+            }
         }
     }
 }

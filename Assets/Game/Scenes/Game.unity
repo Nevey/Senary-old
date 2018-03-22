@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 1366253561}
   - component: {fileID: 1366253562}
   - component: {fileID: 1366253563}
+  - component: {fileID: 1366253564}
   m_Layer: 0
   m_Name: AttackController
   m_TagString: Untagged
@@ -447,3 +448,16 @@ MonoBehaviour:
   loggingColor: {r: 0.72156864, g: 0.18039216, b: 0.18039216, a: 1}
   throwDicePrefab: {fileID: 1331754603418202, guid: 902be7b06d13ded468e40f5e80b3dfde,
     type: 2}
+--- !u!114 &1366253564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1366253560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be3b31e9605d684d941d4cba575fb5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggingEnabled: 1
+  loggingColor: {r: 0.72156864, g: 0.18039216, b: 0.18039216, a: 1}

@@ -125,6 +125,8 @@ namespace CCore.Senary.Tiles
         public void ClearUnits()
         {
             unitCount = 0;
+
+            tileView.AnimateAddUnits(unitCount);
         }
     }
 }

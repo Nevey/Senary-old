@@ -16,11 +16,18 @@ namespace CCore.Senary.UI
         protected override void Setup()
         {
             GameStateMachine.Instance.GetState<AttackState>().EnterEvent += OnAttackStateEnter;
+
+            GameStateMachine.Instance.GetState<AttackState>().ExitEvent += OnAttackStateExit;
         }
 
         private void OnAttackStateEnter()
         {
             endTurnButton.onClick.AddListener(EndTurnButtonClicked);
+        }
+
+        private void OnAttackStateExit()
+        {
+            OnHide();
         }
 
         private void EndTurnButtonClicked()

@@ -32,6 +32,8 @@ namespace CCore.Senary.StateMachines.Game
 
             AddTransition<DefenderWinBattleTransition, DefenderWinBattleState>();
 
+            AddTransition<InvasionTransition, InvasionState>();
+
             AddTransition<CheckForWinLostTransition, CheckForWinLoseState>();
 
             AddTransition<IncrementPlayerTurnTransition, IncrementPlayerTurn>();
@@ -60,6 +62,8 @@ namespace CCore.Senary.StateMachines.Game
 
     public class DefenderWinBattleState : State { }
 
+    public class InvasionState : State { }
+
     public class CheckForWinLoseState : State { }
 
     public class IncrementPlayerTurn : State { }
@@ -85,6 +89,8 @@ namespace CCore.Senary.StateMachines.Game
     public class AttackerWinBattleTransition : Transition { }
 
     public class DefenderWinBattleTransition : Transition { }
+
+    public class InvasionTransition : Transition { }
 
     public class CheckForWinLostTransition : Transition { }
 
