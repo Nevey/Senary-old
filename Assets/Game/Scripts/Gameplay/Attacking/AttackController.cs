@@ -48,6 +48,16 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private void OnAttackStateEnter()
         {
+            if (attackingTile != null)
+            {
+                attackingTile.SetTileGameState(TileGameState.NotAvailable);
+            }
+
+            if (defendingTile != null)
+            {
+                defendingTile.SetTileGameState(TileGameState.NotAvailable);
+            }
+
             attackStep = AttackStep.SelectTarget;
 
             defendingTiles = GetTargetTiles();
