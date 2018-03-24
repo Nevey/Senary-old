@@ -27,6 +27,13 @@ namespace CCore.Senary.Gameplay.Attacking
             GameStateMachine.Instance.GetState<InvasionState>().ExitEvent += OnInvasionStateExit;
         }
 
+        private void OnDestroy()
+        {
+            GameStateMachine.Instance.GetState<InvasionState>().EnterEvent -= OnInvasionStateEnter;
+
+            GameStateMachine.Instance.GetState<InvasionState>().ExitEvent -= OnInvasionStateExit;
+        }
+
         private void OnInvasionStateEnter()
         {
             canEndInvasion = false;

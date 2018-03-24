@@ -18,6 +18,8 @@ namespace CCore.Senary.UI
         {
             GameStateMachine.Instance.GetState<SelectStartPlayerState>().EnterEvent += OnSelectStartPlayerStateEnter;
 
+            GameStateMachine.Instance.GetState<GameOverState>().EnterEvent += OnGameOverStateEnter;
+
             TurnController.Instance.TurnStartedEvent += OnTurnStarted;
 
             unFormattedString = playerTurnText.text;
@@ -26,6 +28,11 @@ namespace CCore.Senary.UI
         private void OnSelectStartPlayerStateEnter()
         {
             Show();
+        }
+
+        private void OnGameOverStateEnter()
+        {
+            Hide();
         }
 
         private void OnTurnStarted()

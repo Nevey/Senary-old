@@ -860,7 +860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loggingEnabled: 1
   loggingColor: {r: 1, g: 1, b: 1, a: 1}
-  layer: 0
+  layer: 3
   isAnimated: 0
   showAnimationDirection: 0
   showAnimationEase: 27

@@ -13,6 +13,11 @@ namespace CCore.Senary.Gameplay.WinLose
             GameStateMachine.Instance.GetState<CheckForWinLoseState>().EnterEvent += OnCheckForWinLostStateEnter;
         }
 
+        private void OnDestroy()
+        {
+            GameStateMachine.Instance.GetState<CheckForWinLoseState>().EnterEvent -= OnCheckForWinLostStateEnter;
+        }
+
         private void OnCheckForWinLostStateEnter()
         {
             List<Player> playerList = TurnController.Instance.PlayerList;

@@ -25,6 +25,11 @@ namespace CCore.Senary.Gameplay.Units
             GameStateMachine.Instance.GetState<ReceiveUnitsState>().EnterEvent += OnReceiveUnitsStateEnter;
         }
 
+        private void OnDestroy()
+        {
+            GameStateMachine.Instance.GetState<ReceiveUnitsState>().EnterEvent -= OnReceiveUnitsStateEnter;
+        }
+
         private void OnReceiveUnitsStateEnter()
         {
             // Player receives 1 unit for being alive plus 1 extra

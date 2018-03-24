@@ -39,6 +39,8 @@ namespace CCore.Senary.StateMachines.Game
             AddTransition<IncrementPlayerTurnTransition, IncrementPlayerTurnState>();
 
             AddTransition<GameOverTransition, GameOverState>();
+
+            AddTransition<IdleTransition, IdleState>();
         }
     }
 
@@ -72,6 +74,8 @@ namespace CCore.Senary.StateMachines.Game
 
     public class GameOverState : State { }
 
+    public class IdleState : State { }
+
     // --------- Transitions ---------- //
 
     public class CreateLevelTransition : Transition { }
@@ -101,4 +105,6 @@ namespace CCore.Senary.StateMachines.Game
     public class IncrementPlayerTurnTransition : Transition { }
 
     public class GameOverTransition : Transition { }
+
+    public class IdleTransition : Transition { }
 }

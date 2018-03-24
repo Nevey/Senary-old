@@ -31,6 +31,13 @@ namespace CCore.Senary.Gameplay.Turns
             GameStateMachine.Instance.GetState<IncrementPlayerTurnState>().EnterEvent += OnIncrementPlayerTurnStateEnter;
         }
 
+        private void OnDestroy()
+        {
+            GameStateMachine.Instance.GetState<SelectStartPlayerState>().EnterEvent -= OnSelectStartPlayerStateEnter;
+
+            GameStateMachine.Instance.GetState<IncrementPlayerTurnState>().EnterEvent -= OnIncrementPlayerTurnStateEnter;
+        }
+
         private void OnSelectStartPlayerStateEnter()
         {
             Log("Select Start Player...");

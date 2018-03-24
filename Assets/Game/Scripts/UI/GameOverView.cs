@@ -1,6 +1,9 @@
 using System;
+using CCore.Senary.Input;
 using CCore.Senary.StateMachines.Game;
+using CCore.Senary.StateMachines.UI;
 using CCore.UI;
+using UnityEngine;
 
 namespace CCore.Senary.UI
 {
@@ -15,12 +18,23 @@ namespace CCore.Senary.UI
 
         private void OnGameOverStateEnter()
         {
+            PlayerInput.Instance.TapEvent += OnTap;
+            
             Show();
         }
 
         private void OnGameOverStateExit()
         {
+            PlayerInput.Instance.TapEvent -= OnTap;
+
             Hide();
+        }
+
+        private void OnTap(Vector2 position)
+        {
+            GameStateMachine.Instance.DoTransition<IdleTransition>();
+
+            UIStateMachine.Instance.DoTransition<SplashTransition>();
         }
     }
 }

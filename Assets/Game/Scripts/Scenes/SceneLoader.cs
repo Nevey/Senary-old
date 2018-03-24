@@ -13,12 +13,19 @@ namespace CCore.Senary.Scenes
         {            
             UIStateMachine.Instance.GetState<GameState>().EnterEvent += OnGameStateEnter;
 
+            GameStateMachine.Instance.GetState<GameOverState>().ExitEvent += OnGameOverStateExit;
+
             LoadUIScene();
         }
 
         private void OnGameStateEnter()
         {
             LoadGameScene();
+        }
+
+        private void OnGameOverStateExit()
+        {
+            SceneController.UnLoadScene("Game");
         }
 
         private void LoadUIScene()

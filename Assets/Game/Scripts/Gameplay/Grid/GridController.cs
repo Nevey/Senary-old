@@ -32,6 +32,11 @@ namespace CCore.Senary.Gameplay.Grid
             GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent += OnCreateLevelStateEnter;
         }
 
+        private void OnDestroy()
+        {
+            GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent -= OnCreateLevelStateEnter;
+        }
+
         private void OnCreateLevelStateEnter()
         {
             string assetPath = String.Format(LevelConstants.levelAssetPath, levelName);

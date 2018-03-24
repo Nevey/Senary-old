@@ -31,6 +31,11 @@ namespace CCore.Senary.Gameplay.Attacking
             GameStateMachine.Instance.GetState<BattleState>().EnterEvent += OnBattleStateEnter;
         }
 
+        private void OnDestroy()
+        {
+            GameStateMachine.Instance.GetState<BattleState>().EnterEvent -= OnBattleStateEnter;
+        }
+
         private void OnBattleStateEnter()
         {
             throwDice = Instantiate(throwDicePrefab, Vector3.zero, Quaternion.identity, transform);
