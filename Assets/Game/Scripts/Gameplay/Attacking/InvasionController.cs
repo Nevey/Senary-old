@@ -16,6 +16,8 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private Player currentPlayer;
 
+        private bool canEndInvasion;
+
         public event Action AllowedToEndInvasionEvent;
 
         private void Awake()
@@ -27,6 +29,8 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private void OnInvasionStateEnter()
         {
+            canEndInvasion = false;
+
             attackingTile = AttackController.Instance.AttackingTile;
 
             defendingTile = AttackController.Instance.DefendingTile;
@@ -53,7 +57,6 @@ namespace CCore.Senary.Gameplay.Attacking
                 && defendingTile.TileInput.TapTile(position))
             {
                 attackingTile.AddUnits(-1, currentPlayer);
-
                 defendingTile.AddUnits(1, currentPlayer);
             }
 
@@ -61,13 +64,15 @@ namespace CCore.Senary.Gameplay.Attacking
                 && attackingTile.TileInput.TapTile(position))
             {
                 attackingTile.AddUnits(1, currentPlayer);
-
                 defendingTile.AddUnits(-1, currentPlayer);
             }
 
-            if (attackingTile.UnitCount >= 1
+            if (!canEndInvasion
+                && attackingTile.UnitCount >= 1
                 && defendingTile.UnitCount >= 1)
             {
+                canEndInvasion = true;
+
                 if (AllowedToEndInvasionEvent != null)
                 {
                     AllowedToEndInvasionEvent();

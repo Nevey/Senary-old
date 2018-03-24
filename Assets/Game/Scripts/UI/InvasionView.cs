@@ -27,9 +27,9 @@ namespace CCore.Senary.UI
 
         private void OnInvasionStateExit()
         {
-            Hide();
-
             endInvasionButton.onClick.RemoveListener(OnEndInvasionButtonClicked);
+
+            Hide();
         }
 
         private void OnEndInvasionButtonClicked()
