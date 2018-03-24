@@ -16,7 +16,7 @@ namespace CCore.Senary.Gameplay.Turns
 
         private Player currentPlayer;
 
-        public List<Player> PlayerList  { get { return playerList; } }
+        public List<Player> PlayerList { get { return playerList; } }
 
         public Player CurrentPlayer { get { return currentPlayer; } }
 
@@ -94,6 +94,11 @@ namespace CCore.Senary.Gameplay.Turns
         public int GetPlayerNumber(Player player)
         {
             return playerList.IndexOf(player) + 1;
+        }
+
+        public void RemovePlayerFromGame(Player player)
+        {
+            playerList.Remove(player);
         }
     }
 }
