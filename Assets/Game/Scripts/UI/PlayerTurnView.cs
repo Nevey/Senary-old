@@ -33,7 +33,7 @@ namespace CCore.Senary.UI
             string playerNumberAndColorString = String.Format(
                 "<color={0}>{1}</color>",
                 Converter.ColorToHex(TurnController.Instance.CurrentPlayer.PlayerID.Color),
-                TurnController.Instance.CurrentPlayerIndex);
+                TurnController.Instance.CurrentPlayerNumber);
 
             playerTurnText.text = string.Format(
                 unFormattedString,

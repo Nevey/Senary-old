@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace CCore.Senary.UI
 {
-    public class UnitCountView : UIView
+    public class PlayerInformationView : UIView
     {
         [SerializeField] private Text defaultUnitCountText;
 
@@ -34,9 +34,6 @@ namespace CCore.Senary.UI
 
         private void OnAddInitialUnitsStateEnter()
         {
-            // find all owned tiles of players
-            // calculate owned units on tiles owned by players
-
             Show();
 
             List<Player> playerList = TurnController.Instance.PlayerList;
@@ -101,13 +98,25 @@ namespace CCore.Senary.UI
 
                 Player player = TurnController.Instance.PlayerList[i];
 
+                string playerString = String.Format(
+                    "<color={0}>{1}</color>",
+                    Converter.ColorToHex(player.PlayerID.Color),
+                    TurnController.Instance.GetPlayerNumber(player));
+
+                string hqCountString = String.Format(
+                    "<color={0}>{1}</color>",
+                    Converter.ColorToHex(player.PlayerID.Color),
+                    player.OwnedHQCount);
+
                 string unitCountString = String.Format(
-                "<color={0}>{1}</color>",
-                Converter.ColorToHex(player.PlayerID.Color),
-                player.OwnedUnitCount);
+                    "<color={0}>{1}</color>",
+                    Converter.ColorToHex(player.PlayerID.Color),
+                    player.OwnedUnitCount);
 
                 unitCountText.text = string.Format(
                     unFormattedString,
+                    playerString,
+                    hqCountString,
                     unitCountString);
             }
         }

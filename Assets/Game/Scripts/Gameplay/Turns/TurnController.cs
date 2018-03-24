@@ -20,7 +20,7 @@ namespace CCore.Senary.Gameplay.Turns
 
         public Player CurrentPlayer { get { return currentPlayer; } }
 
-        public int CurrentPlayerIndex { get { return playerList.IndexOf(currentPlayer) + 1; } }
+        public int CurrentPlayerNumber { get { return playerList.IndexOf(currentPlayer) + 1; } }
 
         public event Action TurnStartedEvent;
 
@@ -81,7 +81,7 @@ namespace CCore.Senary.Gameplay.Turns
         {
             currentPlayer = player;
 
-            Log("Player {0}'s Turn!", CurrentPlayerIndex);
+            Log("Player {0}'s Turn!", CurrentPlayerNumber);
 
             if (TurnStartedEvent != null)
             {
@@ -89,6 +89,11 @@ namespace CCore.Senary.Gameplay.Turns
             }
 
             GameStateMachine.Instance.DoTransition<ReceiveUnitsTransition>();
+        }
+
+        public int GetPlayerNumber(Player player)
+        {
+            return playerList.IndexOf(player) + 1;
         }
     }
 }

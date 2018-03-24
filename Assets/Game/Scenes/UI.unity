@@ -1123,7 +1123,7 @@ GameObject:
   - component: {fileID: 1258563472}
   - component: {fileID: 1258563473}
   m_Layer: 5
-  m_Name: UnitCountView
+  m_Name: PlayerInformationView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1163,10 +1163,10 @@ MonoBehaviour:
   loggingColor: {r: 1, g: 1, b: 1, a: 1}
   layer: 3
   isAnimated: 1
-  showAnimationDirection: 3
+  showAnimationDirection: 2
   showAnimationEase: 27
   showAnimationTime: 0.5
-  hideAnimationDirection: 3
+  hideAnimationDirection: 2
   hideAnimationEase: 5
   hideAnimationTime: 0.5
   defaultUnitCountText: {fileID: 1979961606}
@@ -1182,7 +1182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 12
     m_Right: 12
     m_Top: 0
     m_Bottom: 0
@@ -1918,7 +1918,7 @@ GameObject:
   - component: {fileID: 1979961607}
   - component: {fileID: 1979961606}
   m_Layer: 5
-  m_Name: OwnedUnits
+  m_Name: PlayerInformationText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1940,7 +1940,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 65.98}
+  m_SizeDelta: {x: 0, y: 123.2}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1979961606
 MonoBehaviour:
@@ -1968,13 +1968,15 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 117
-    m_Alignment: 5
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '{0} OWNED UNITS'
+  m_Text: 'PLAYER {0}
+
+    {1} HQ''S - {2} UNITS'
 --- !u!222 &1979961607
 CanvasRenderer:
   m_ObjectHideFlags: 0

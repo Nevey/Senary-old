@@ -33,6 +33,24 @@ namespace CCore.Senary.Players
             }
         }
 
+        public int OwnedHQCount
+        {
+            get
+            {
+                int ownedHQCount = 0;
+
+                for (int i = 0; i < ownedTiles.Count; i++)
+                {
+                    if (ownedTiles[i].TileType == TileType.HQ)
+                    {
+                        ownedHQCount++;
+                    }
+                }
+
+                return ownedHQCount;
+            }
+        }
+
         public static Player Dummy
         {
             get
