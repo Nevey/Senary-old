@@ -7,15 +7,18 @@ using UnityEngine;
 
 namespace CCore.Senary.Gameplay.Units
 {
-    public class UnitsReceiver : MonoBehaviour
+    // TODO: Rename to reinforcements controller
+    public class UnitsReceiver : MonoBehaviourSingleton<UnitsReceiver>
     {
         [SerializeField] private GridController gridController;
 
         [SerializeField] private TurnController turnController;
 
-        private int newUnitsCount;
+        private int reinforcementsCount;
 
-        public int NewUnitsCount { get { return newUnitsCount; } }
+        public int ReinforcementsCount { get { return reinforcementsCount; } }
+
+        public event Action ReinforcementsCountUpdatedEvent;
 
         private void Awake()
         {
@@ -26,9 +29,11 @@ namespace CCore.Senary.Gameplay.Units
         {
             // Player receives 1 unit for being alive plus 1 extra
             // unit for every owned HQ
-            newUnitsCount = 1 + GetOwnedHQCount();
+            reinforcementsCount = 1 + GetOwnedHQCount();
 
-            Log("Received {0} new units", newUnitsCount);
+            Log("Received {0} reinforcement units!", reinforcementsCount);
+
+            DispatchReinforcementsCountUpdated();
 
             GameStateMachine.Instance.DoTransition<PlaceUnitsTransition>();
         }
@@ -50,11 +55,23 @@ namespace CCore.Senary.Gameplay.Units
             return ownedHQCount;
         }
 
+        private void DispatchReinforcementsCountUpdated()
+        {
+            if (ReinforcementsCountUpdatedEvent != null)
+            {
+                ReinforcementsCountUpdatedEvent();
+            }
+        }
+
         public bool DecrementNewUnitCount()
         {
-            newUnitsCount--;
+            reinforcementsCount--;
 
-            if (newUnitsCount == 0)
+            Log("Decremented reinforcement count, {0} reinforcements left...", reinforcementsCount);
+
+            DispatchReinforcementsCountUpdated();
+
+            if (reinforcementsCount == 0)
             {
                 return true;
             }
