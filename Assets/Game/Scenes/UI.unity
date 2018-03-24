@@ -622,11 +622,11 @@ RectTransform:
   m_Father: {fileID: 1536636490}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 12, y: 0}
-  m_SizeDelta: {x: 548.2, y: 65.98}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -12, y: 0}
+  m_SizeDelta: {x: 548.19995, y: 65.97998}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &600765887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,13 +653,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 117
-    m_Alignment: 3
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: REINFORCEMENTS {0}
+  m_Text: '{0} REINFORCEMENTS'
 --- !u!222 &600765888
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1121,6 +1121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1258563471}
   - component: {fileID: 1258563472}
+  - component: {fileID: 1258563473}
   m_Layer: 5
   m_Name: UnitCountView
   m_TagString: Untagged
@@ -1162,12 +1163,35 @@ MonoBehaviour:
   loggingColor: {r: 1, g: 1, b: 1, a: 1}
   layer: 3
   isAnimated: 1
-  showAnimationDirection: 0
+  showAnimationDirection: 3
   showAnimationEase: 27
   showAnimationTime: 0.5
   hideAnimationDirection: 3
   hideAnimationEase: 5
   hideAnimationTime: 0.5
+  defaultUnitCountText: {fileID: 1979961606}
+--- !u!114 &1258563473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1258563470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 12
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 2
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 0
 --- !u!1 &1320733507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,7 +1374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1402553893
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1553,10 +1577,10 @@ MonoBehaviour:
   loggingColor: {r: 1, g: 1, b: 1, a: 1}
   layer: 3
   isAnimated: 1
-  showAnimationDirection: 2
+  showAnimationDirection: 3
   showAnimationEase: 27
   showAnimationTime: 0.5
-  hideAnimationDirection: 2
+  hideAnimationDirection: 3
   hideAnimationEase: 5
   hideAnimationTime: 0.5
   reinforcementsText: {fileID: 600765887}
@@ -1913,10 +1937,10 @@ RectTransform:
   m_Father: {fileID: 1258563471}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12, y: 0}
-  m_SizeDelta: {x: 548.35, y: 65.98}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 65.98}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1979961606
 MonoBehaviour:

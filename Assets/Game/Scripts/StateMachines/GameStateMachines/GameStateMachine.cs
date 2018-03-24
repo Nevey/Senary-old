@@ -36,7 +36,9 @@ namespace CCore.Senary.StateMachines.Game
 
             AddTransition<CheckForWinLostTransition, CheckForWinLoseState>();
 
-            AddTransition<IncrementPlayerTurnTransition, IncrementPlayerTurn>();
+            AddTransition<IncrementPlayerTurnTransition, IncrementPlayerTurnState>();
+
+            AddTransition<GameOverTransition, GameOverState>();
         }
     }
 
@@ -66,7 +68,9 @@ namespace CCore.Senary.StateMachines.Game
 
     public class CheckForWinLoseState : State { }
 
-    public class IncrementPlayerTurn : State { }
+    public class IncrementPlayerTurnState : State { }
+
+    public class GameOverState : State { }
 
     // --------- Transitions ---------- //
 
@@ -95,4 +99,6 @@ namespace CCore.Senary.StateMachines.Game
     public class CheckForWinLostTransition : Transition { }
 
     public class IncrementPlayerTurnTransition : Transition { }
+
+    public class GameOverTransition : Transition { }
 }

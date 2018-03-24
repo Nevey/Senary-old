@@ -16,6 +16,8 @@ namespace CCore.Senary.Gameplay.Turns
 
         private Player currentPlayer;
 
+        public List<Player> PlayerList  { get { return playerList; } }
+
         public Player CurrentPlayer { get { return currentPlayer; } }
 
         public int CurrentPlayerIndex { get { return playerList.IndexOf(currentPlayer) + 1; } }
@@ -26,7 +28,7 @@ namespace CCore.Senary.Gameplay.Turns
         {
             GameStateMachine.Instance.GetState<SelectStartPlayerState>().EnterEvent += OnSelectStartPlayerStateEnter;
 
-            GameStateMachine.Instance.GetState<IncrementPlayerTurn>().EnterEvent += OnIncrementPlayerTurnStateEnter;
+            GameStateMachine.Instance.GetState<IncrementPlayerTurnState>().EnterEvent += OnIncrementPlayerTurnStateEnter;
         }
 
         private void OnSelectStartPlayerStateEnter()

@@ -16,7 +16,6 @@ namespace CCore.Senary.Gameplay.Tiles
 
         private Vector3 originalUnitTextScale;
 
-
         private void Awake()
         {
             tileData = GetComponent<TileData>();

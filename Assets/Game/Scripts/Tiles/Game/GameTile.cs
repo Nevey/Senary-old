@@ -108,18 +108,17 @@ namespace CCore.Senary.Tiles
         {
             if (owner == player || tileOwnedState == TileOwnedState.Free)
             {
+                // This order is very important here...
+                unitCount += amount;
+
                 SetOwner(player);
+
+                tileView.AnimateAddUnits(unitCount);
+
+                return true;
             }
-            else
-            {
-                return false;
-            }
 
-            unitCount += amount;
-
-            tileView.AnimateAddUnits(unitCount);
-
-            return true;
+            return false;
         }
 
         public void ClearUnits()

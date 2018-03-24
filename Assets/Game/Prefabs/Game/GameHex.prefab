@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1295244709602228}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.461704, y: 9.651411, z: 100.316444}
+  m_LocalPosition: {x: -8.8494835, y: -2.3999138, z: 100.316444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4348762562695644}
@@ -155,7 +155,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9e6d7437589481e438e410a8c29bb87b, type: 3}
+  - {fileID: 2100000, guid: a99be0aa532f59f42b6ca7c7f2b7175b, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -268,7 +268,7 @@ TextMesh:
   m_FontSize: 367
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 9e6d7437589481e438e410a8c29bb87b, type: 3}
+  m_Font: {fileID: 12800000, guid: a99be0aa532f59f42b6ca7c7f2b7175b, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
