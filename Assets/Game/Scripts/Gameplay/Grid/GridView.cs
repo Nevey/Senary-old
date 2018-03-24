@@ -9,15 +9,21 @@ namespace CCore.Senary.Gameplay.Grid
     [RequireComponent(typeof(GridController))]
     public class GridView : MonoBehaviour
     {
+        [Header("Grid View Properties")]
+
         [SerializeField] private Color groundTileColor;
         
         [SerializeField] private Color hqTileColor;
 
         [SerializeField] private Color takeOverColor;
 
-        [SerializeField] private Color victimColor;
+        [SerializeField] private Color defenderColor;
 
         [SerializeField] private Color attackerColor;
+
+        [SerializeField] private Color invadingFromColor;
+
+        [SerializeField] private Color invadingToColor;
 
         private GridController gridController;
 
@@ -70,7 +76,7 @@ namespace CCore.Senary.Gameplay.Grid
 
                         Color targetColor = groundTileColor;
 
-                        if (GameStateMachine.Instance.CurrentState() == GameStateMachine.Instance.GetState<PlaceUnitsState>())
+                        if (GameStateMachine.Instance.CurrentState is PlaceUnitsState)
                         {
                             if (tile.TileGameState == TileGameState.AvailableForTakeOver
                                 || tile.TileGameState == TileGameState.AvailableForReinforcement)
@@ -79,18 +85,31 @@ namespace CCore.Senary.Gameplay.Grid
                             }
                         }
 
-                        if (GameStateMachine.Instance.CurrentState() == GameStateMachine.Instance.GetState<AttackState>())
+                        if (GameStateMachine.Instance.CurrentState is AttackState)
                         {
                             if (tile.TileGameState == TileGameState.AvailableAsTarget
                                 || tile.TileGameState == TileGameState.SelectedAsTarget)
                             {
-                                targetColor = victimColor;
+                                targetColor = defenderColor;
                             }
 
                             if (tile.TileGameState == TileGameState.AvailableAsAttacker
                                 || tile.TileGameState == TileGameState.SelectedAsAttacker)
                             {
                                 targetColor = attackerColor;
+                            }
+                        }
+
+                        if (GameStateMachine.Instance.CurrentState is InvasionState)
+                        {
+                            if (tile.TileGameState == TileGameState.InvadingFrom)
+                            {
+                                targetColor = invadingFromColor;
+                            }
+                            
+                            if (tile.TileGameState == TileGameState.InvadingTo)
+                            {
+                                targetColor = invadingToColor;
                             }
                         }
 

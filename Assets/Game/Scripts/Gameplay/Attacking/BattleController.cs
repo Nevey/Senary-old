@@ -79,6 +79,8 @@ namespace CCore.Senary.Gameplay.Attacking
         private void Compare()
         {
             Destroy(throwDice);
+
+            AttackController.Instance.ResetTileStates();
             
             // Attacker only wins if throw is higher then defender throw
             if (attackerResult.FinalResult > defenderResult.FinalResult)
@@ -103,10 +105,6 @@ namespace CCore.Senary.Gameplay.Attacking
             defendingTile.ClearOwner();
 
             GameStateMachine.Instance.DoTransition<AttackerWinBattleTransition>();
-
-            // Go to attacker wins state
-            // Go to invasion state
-            // When done, go back to attack state
         }
 
         private void DefenderWins()
@@ -118,9 +116,6 @@ namespace CCore.Senary.Gameplay.Attacking
             attackingTile.AddUnits(-unitsToRemove, attackingTile.Owner);
 
             GameStateMachine.Instance.DoTransition<DefenderWinBattleTransition>();
-            
-            // Go to defender wins state
-            // Go back to attack state
         }
     }
 }

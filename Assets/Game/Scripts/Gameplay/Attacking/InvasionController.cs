@@ -16,6 +16,8 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private Player currentPlayer;
 
+        public event Action AllowedToEndInvasionEvent;
+
         private void Awake()
         {
             GameStateMachine.Instance.GetState<InvasionState>().EnterEvent += OnInvasionStateEnter;
@@ -31,24 +33,45 @@ namespace CCore.Senary.Gameplay.Attacking
 
             currentPlayer = TurnController.Instance.CurrentPlayer;
 
+            attackingTile.SetTileGameState(TileGameState.InvadingFrom);
+
+            defendingTile.SetTileGameState(TileGameState.InvadingTo);
+
             PlayerInput.Instance.TapEvent += OnTap;
         }
 
         private void OnInvasionStateExit()
         {
+            AttackController.Instance.ResetTileStates();
+            
             PlayerInput.Instance.TapEvent -= OnTap;
         }
 
         private void OnTap(Vector2 position)
         {
-            if (defendingTile.TileInput.TapTile(position))
+            if (attackingTile.UnitCount > 1
+                && defendingTile.TileInput.TapTile(position))
             {
-                // remove unit from attacking tile
-                // add unit to defending tile
-
                 attackingTile.AddUnits(-1, currentPlayer);
 
                 defendingTile.AddUnits(1, currentPlayer);
+            }
+
+            if (defendingTile.UnitCount > 1
+                && attackingTile.TileInput.TapTile(position))
+            {
+                attackingTile.AddUnits(1, currentPlayer);
+
+                defendingTile.AddUnits(-1, currentPlayer);
+            }
+
+            if (attackingTile.UnitCount >= 1
+                && defendingTile.UnitCount >= 1)
+            {
+                if (AllowedToEndInvasionEvent != null)
+                {
+                    AllowedToEndInvasionEvent();
+                }
             }
         }
     }

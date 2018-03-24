@@ -8,6 +8,8 @@ namespace CCore.Senary.Tiles
         AvailableAsTarget,
         AvailableAsAttacker,
         SelectedAsTarget,
-        SelectedAsAttacker
+        SelectedAsAttacker,
+        InvadingFrom,
+        InvadingTo
     }
 }

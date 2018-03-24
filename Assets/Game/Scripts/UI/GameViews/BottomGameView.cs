@@ -18,22 +18,44 @@ namespace CCore.Senary.UI
             GameStateMachine.Instance.GetState<AttackState>().EnterEvent += OnAttackStateEnter;
 
             GameStateMachine.Instance.GetState<AttackState>().ExitEvent += OnAttackStateExit;
+
+            GameStateMachine.Instance.GetState<InvasionState>().ExitEvent += OnInvasionStateExit;
+
+            InvasionController.Instance.AllowedToEndInvasionEvent += OnAllowedToEndInvasion;
         }
 
         private void OnAttackStateEnter()
         {
-            endTurnButton.onClick.AddListener(EndTurnButtonClicked);
+            EnableButtonListener();
         }
 
         private void OnAttackStateExit()
         {
-            OnHide();
+            DisableButtonListener();
+        }
+
+        private void OnInvasionStateExit()
+        {
+            DisableButtonListener();
+        }
+
+        private void OnAllowedToEndInvasion()
+        {
+            EnableButtonListener();
+        }
+
+        private void EnableButtonListener()
+        {
+            endTurnButton.onClick.AddListener(EndTurnButtonClicked);
+        }
+
+        private void DisableButtonListener()
+        {
+            endTurnButton.onClick.RemoveListener(EndTurnButtonClicked);
         }
 
         private void EndTurnButtonClicked()
         {
-            endTurnButton.onClick.RemoveListener(EndTurnButtonClicked);
-
             GameStateMachine.Instance.DoTransition<CheckForWinLostTransition>();
         }
     }

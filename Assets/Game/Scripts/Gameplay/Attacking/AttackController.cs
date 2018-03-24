@@ -48,6 +48,8 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private void OnAttackStateEnter()
         {
+            attackStep = AttackStep.SelectTarget;
+
             defendingTiles = GetTargetTiles();
 
             PlayerInput.Instance.TapEvent += OnTap;
@@ -186,6 +188,13 @@ namespace CCore.Senary.Gameplay.Attacking
 
                 GameStateMachine.Instance.DoTransition<BattleTransition>();
             }
+        }
+
+        public void ResetTileStates()
+        {
+            attackingTile.SetTileGameState(TileGameState.NotAvailable);
+            
+            defendingTile.SetTileGameState(TileGameState.NotAvailable);
         }
     }
 }

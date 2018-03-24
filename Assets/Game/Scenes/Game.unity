@@ -174,10 +174,12 @@ MonoBehaviour:
   loggingEnabled: 1
   loggingColor: {r: 0.2901961, g: 0.5019608, b: 0.8313726, a: 1}
   groundTileColor: {r: 1, g: 1, b: 1, a: 1}
-  hqTileColor: {r: 1, g: 0.8798107, b: 0.20784312, a: 1}
-  takeOverColor: {r: 0.14345856, g: 0.9044118, b: 0, a: 1}
-  victimColor: {r: 0.91764706, g: 0, b: 0, a: 1}
-  attackerColor: {r: 0, g: 0.7960785, b: 0.7294118, a: 1}
+  hqTileColor: {r: 1, g: 0.8627451, b: 0.41960785, a: 1}
+  takeOverColor: {r: 0.26666668, g: 1, b: 0.57254905, a: 1}
+  defenderColor: {r: 0, g: 0.79215693, b: 1, a: 1}
+  attackerColor: {r: 0.9921569, g: 0.27450982, b: 0.007843138, a: 1}
+  invadingFromColor: {r: 0.9921569, g: 0.27450982, b: 0.007843138, a: 1}
+  invadingToColor: {r: 0, g: 0.79215693, b: 1, a: 1}
 --- !u!1 &553931265
 GameObject:
   m_ObjectHideFlags: 0

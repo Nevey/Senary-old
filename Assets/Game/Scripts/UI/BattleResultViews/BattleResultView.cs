@@ -112,7 +112,7 @@ namespace CCore.Senary.UI
 
         private void OnTap(Vector2 position)
         {
-            if (GameStateMachine.Instance.CurrentState() is AttackerWinBattleState)
+            if (GameStateMachine.Instance.CurrentState is AttackerWinBattleState)
             {
                 GameStateMachine.Instance.DoTransition<InvasionTransition>();
             }
