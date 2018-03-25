@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace CCore.Senary.Gameplay.Grid
 {
-    [RequireComponent(typeof(GridController))]
     public class GridView : MonoBehaviour
     {
         [Header("Grid View Properties")]
@@ -25,14 +24,10 @@ namespace CCore.Senary.Gameplay.Grid
 
         [SerializeField] private Color invadingToColor;
 
-        private GridController gridController;
-
         private MaterialPropertyBlock propertyBlock;
 
         private void Awake()
         {
-            gridController = GetComponent<GridController>();
-
             propertyBlock = new MaterialPropertyBlock();
 
             GameStateMachine.Instance.GetState<AnimateHQState>().EnterEvent += OnAnimateHQStateEnter;
@@ -44,7 +39,7 @@ namespace CCore.Senary.Gameplay.Grid
 
         private void OnDestroy()
         {
-            GameStateMachine.Instance.GetState<CreateLevelState>().EnterEvent -= OnAnimateHQStateEnter;
+            GameStateMachine.Instance.GetState<AnimateHQState>().EnterEvent -= OnAnimateHQStateEnter;
         }
 
         private void OnAnimateHQStateEnter()
@@ -66,9 +61,9 @@ namespace CCore.Senary.Gameplay.Grid
 
         private void SetColors()
         {
-            for (int i = 0; i < gridController.Grid.FlattenedTiles.Length; i++)
+            for (int i = 0; i < GridController.Instance.Grid.FlattenedTiles.Length; i++)
             {
-                Tile tile = gridController.Grid.FlattenedTiles[i];
+                Tile tile = GridController.Instance.Grid.FlattenedTiles[i];
 
                 switch (tile.TileType)
                 {
@@ -135,9 +130,9 @@ namespace CCore.Senary.Gameplay.Grid
         {
             int hqIndex = 0;
 
-            for (int i = 0; i < gridController.Grid.FlattenedTiles.Length; i++)
+            for (int i = 0; i < GridController.Instance.Grid.FlattenedTiles.Length; i++)
             {
-                Tile tile = gridController.Grid.FlattenedTiles[i];
+                Tile tile = GridController.Instance.Grid.FlattenedTiles[i];
 
                 if (tile.TileType == TileType.HQ)
                 {

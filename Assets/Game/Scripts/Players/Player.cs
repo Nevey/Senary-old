@@ -11,45 +11,7 @@ namespace CCore.Senary.Players
         [SerializeField]
         private PlayerID playerID;
 
-        [SerializeField]
-        private List<Tile> ownedTiles;
-
         public PlayerID PlayerID { get { return playerID; } }
-
-        public List<Tile> OwnedTiles { get { return ownedTiles; } }
-
-        public int OwnedUnitCount
-        {
-            get
-            {
-                int ownedUnitCount = 0;
-
-                for (int i = 0; i < ownedTiles.Count; i++)
-                {
-                    ownedUnitCount += ownedTiles[i].UnitCount;
-                }
-
-                return ownedUnitCount;
-            }
-        }
-
-        public int OwnedHQCount
-        {
-            get
-            {
-                int ownedHQCount = 0;
-
-                for (int i = 0; i < ownedTiles.Count; i++)
-                {
-                    if (ownedTiles[i].TileType == TileType.HQ)
-                    {
-                        ownedHQCount++;
-                    }
-                }
-
-                return ownedHQCount;
-            }
-        }
 
         public static Player Dummy
         {
@@ -72,26 +34,6 @@ namespace CCore.Senary.Players
             {
                 OwnedTilesUpdatedEvent();
             }
-        }
-
-        public void AddTile(Tile tile)
-        {
-            if (!ownedTiles.Contains(tile))
-            {
-                ownedTiles.Add(tile);
-            }
-
-            DispatchOwnedTilesUpdated();
-        }
-
-        public void RemoveTile(Tile tile)
-        {
-            if (ownedTiles.Contains(tile))
-            {
-                ownedTiles.Remove(tile);
-            }
-
-            DispatchOwnedTilesUpdated();
         }
     }
 }

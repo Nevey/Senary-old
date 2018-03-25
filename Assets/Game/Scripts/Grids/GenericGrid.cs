@@ -8,6 +8,8 @@ namespace CCore.Senary.Grids
     public class GenericGrid : GenericGrid<Tile>
     {
         public GenericGrid(int width, int height) : base(width, height) { }
+
+        public GenericGrid(int width, int height, Tile[] flattenedTiles) : base (width, height, flattenedTiles) { }
     }
 
     [Serializable]
@@ -54,6 +56,19 @@ namespace CCore.Senary.Grids
                     index++;
                 }
             }
+            
+            CreateTwoDimensionalGrid();
+        }
+
+        public GenericGrid(int width, int height, T[] tiles)
+        {
+            this.width = width;
+
+            this.height = height;
+
+            flattenedTiles = new T[tiles.Length];
+
+            Array.Copy(tiles, flattenedTiles, tiles.Length);
             
             CreateTwoDimensionalGrid();
         }

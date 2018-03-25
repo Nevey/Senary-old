@@ -72,17 +72,13 @@ namespace CCore.Senary.Tiles
 
         public void SetOwner(Player owner)
         {
-            owner.AddTile(this);
-
             this.owner = owner;
 
             tileOwnedState = TileOwnedState.Owned;
         }
 
         public void ClearOwner()
-        {
-            owner.RemoveTile(this);
-            
+        {            
             owner = Player.Dummy;
 
             tileOwnedState = TileOwnedState.Free;

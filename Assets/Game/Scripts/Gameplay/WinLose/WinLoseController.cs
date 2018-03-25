@@ -27,7 +27,7 @@ namespace CCore.Senary.Gameplay.WinLose
                 Player player = playerList[i];
 
                 // If a player has no more HQ's, player has lost
-                if (player.OwnedHQCount == 0)
+                if (PlayerOwnedTiles.Instance.GetOwnedHQCount(player) == 0)
                 {
                     TurnController.Instance.RemovePlayerFromGame(player);
                 }

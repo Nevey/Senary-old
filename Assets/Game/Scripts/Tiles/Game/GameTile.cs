@@ -12,11 +12,15 @@ namespace CCore.Senary.Tiles
 
         private int unitCount;
 
+        private int initialUnitCount;
+
         private TileGameState tileGameState;
 
         private TileData tileData;
 
         private TileView tileView;
+
+        private Player initialOwner;
 
         private TileInput tileInput;
 
@@ -95,11 +99,27 @@ namespace CCore.Senary.Tiles
             SetupPosition(gridWidth, gridHeight);
 
             SetupHQVizualizer();
+
+            initialOwner = owner;
+
+            initialUnitCount = unitCount;
         }
 
         public void SetTileGameState(TileGameState tileGameState)
         {
             this.tileGameState = tileGameState;
+
+            if (tileGameObject != null)
+            {
+                if (tileGameState == TileGameState.NotAvailable)
+                {
+                    tileGameObject.name = Name;
+                }
+                else
+                {
+                    tileGameObject.name = Name + "-" + tileGameState.ToString();
+                }
+            }
 
             // Do some visualization..
         }
@@ -126,6 +146,21 @@ namespace CCore.Senary.Tiles
             unitCount = 0;
 
             tileView.AnimateAddUnits(unitCount);
+        }
+
+        public void ResetTile()
+        {
+            ClearOwner();
+
+            if (initialOwner != null
+                && initialOwner.PlayerID.ID != Player.Dummy.PlayerID.ID)
+            {
+                SetOwner(initialOwner);
+            }
+
+            unitCount = initialUnitCount;
+
+            SetTileGameState(TileGameState.NotAvailable);
         }
     }
 }

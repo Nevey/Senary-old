@@ -17,19 +17,25 @@ namespace CCore.Senary.Gameplay.Grid
         // TODO: Define loading the level better
         [SerializeField] private string levelName = "Level_1";
 
-        [SerializeField] private GameObject tilePrefab;
-
-        [SerializeField] private TurnController turnController;
-
-        [SerializeField] private UnitsPlacer unitsPlacer;
-
         private GenericGrid grid;
+
+        private GridBuilder gridBuilder;
 
         public GenericGrid Grid { get { return grid; } }
 
         private void Awake()
         {
             GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent += OnCreateLevelStateEnter;
+
+            GameStateMachine.Instance.GetState<GameOverState>().ExitEvent += OnGameOverStateExit;
+        }
+
+        private void OnGameOverStateExit()
+        {
+            for (int i = 0; i < grid.FlattenedTiles.Length; i++)
+            {
+                grid.FlattenedTiles[i].ResetTile();
+            }
         }
 
         private void OnDestroy()
@@ -39,21 +45,9 @@ namespace CCore.Senary.Gameplay.Grid
 
         private void OnCreateLevelStateEnter()
         {
-            string assetPath = String.Format(LevelConstants.levelAssetPath, levelName);
+            gridBuilder = FindObjectOfType<GridBuilder>();
 
-            LevelConfig levelConfig = AssetHelper.LoadAssetAtPath<LevelConfig>(assetPath);
-
-            grid = levelConfig.Grid;
-
-            grid.CreateTwoDimensionalGrid();
-            
-            for (int x = 0; x < grid.Width; x++)
-            {
-                for (int y = 0; y < grid.Height; y++)
-                {
-                    grid.Tiles[x, y].SetupTile(tilePrefab, transform, grid.Width, grid.Height);
-                }
-            }
+            grid = gridBuilder.Build(levelName);
 
             GameStateMachine.Instance.DoTransition<AnimateHQTransition>();
         }

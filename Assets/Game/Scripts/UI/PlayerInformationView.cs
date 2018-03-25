@@ -20,6 +20,14 @@ namespace CCore.Senary.UI
         private string unFormattedString;
 
         private Vector3 originalUnitTextScale;
+
+        private void Update()
+        {
+            if (unitCountTexts != null)
+            {
+                UpdateUnitCountText();
+            }
+        }
         
         protected override void Setup()
         {
@@ -42,10 +50,6 @@ namespace CCore.Senary.UI
 
             for (int i = 0; i < playerList.Count; i++)
             {
-                Player player = playerList[i];
-
-                player.OwnedTilesUpdatedEvent += OnOwnedTilesUpdated;
-
                 Text unitCountText = Instantiate(
                     defaultUnitCountText,
                     defaultUnitCountText.transform.position,
@@ -58,21 +62,11 @@ namespace CCore.Senary.UI
 
             defaultUnitCountText.gameObject.SetActive(false);
 
-            SetUnitCountText();
+            UpdateUnitCountText();
         }
 
         private void OnGameOverStateEnter()
         {
-            List<Player> playerList = TurnController.Instance.PlayerList;
-
-            for (int i = 0; i < playerList.Count; i++)
-            {
-                Player player = playerList[i];
-
-                player.OwnedTilesUpdatedEvent -= OnOwnedTilesUpdated;
-            }
-
-            // Could do this in the above loop...
             for (int i = 0; i < unitCountTexts.Count; i++)
             {
                 Destroy(unitCountTexts[i].gameObject);
@@ -80,17 +74,14 @@ namespace CCore.Senary.UI
 
             unitCountTexts.Clear();
 
+            unitCountTexts = null;
+
             defaultUnitCountText.gameObject.SetActive(true);
 
             Hide();
         }
 
-        private void OnOwnedTilesUpdated()
-        {
-            SetUnitCountText();
-        }
-
-        private void SetUnitCountText()
+        private void UpdateUnitCountText()
         {
             for (int i = 0; i < unitCountTexts.Count; i++)
             {
@@ -106,12 +97,12 @@ namespace CCore.Senary.UI
                 string hqCountString = String.Format(
                     "<color={0}>{1}</color>",
                     Converter.ColorToHex(player.PlayerID.Color),
-                    player.OwnedHQCount);
+                    PlayerOwnedTiles.Instance.GetOwnedHQCount(player));
 
                 string unitCountString = String.Format(
                     "<color={0}>{1}</color>",
                     Converter.ColorToHex(player.PlayerID.Color),
-                    player.OwnedUnitCount);
+                    PlayerOwnedTiles.Instance.GetOwnedUnitCount(player));
 
                 unitCountText.text = string.Format(
                     unFormattedString,
