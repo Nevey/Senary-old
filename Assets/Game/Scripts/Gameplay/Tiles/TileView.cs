@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace CCore.Senary.Gameplay.Tiles
 {
+    // TODO: Rename to tile units view, add a Tile HQ View and Tile Game State View
     [RequireComponent(typeof(TileData))]
     public class TileView : MonoBehaviour
     {
