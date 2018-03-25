@@ -79,17 +79,15 @@ namespace CCore.Senary.Gameplay.Units
                 {
                     Tile adjacentTile = adjacentTiles[k];
 
-                    if (adjacentTile.TileOwnedState == TileOwnedState.Owned)
+                    if (adjacentTile.TileOwnedState == TileOwnedState.Owned
+                        && adjacentTile.Owner == TurnController.Instance.CurrentPlayer
+                        && adjacentTile.UnitCount < 5)
                     {
-                        if (adjacentTile.Owner == TurnController.Instance.CurrentPlayer)
-                        {
-                            // adjacentTile.SetTileGameState(TileGameState.AvailableAsTarget);
-                            adjacentTile.SetTileGameState(TileGameState.AvailableForReinforcement);
+                        adjacentTile.SetTileGameState(TileGameState.AvailableForReinforcement);
 
-                            if (!tiles.Contains(adjacentTile))
-                            {
-                                tiles.Add(adjacentTile);
-                            }
+                        if (!tiles.Contains(adjacentTile))
+                        {
+                            tiles.Add(adjacentTile);
                         }
                     }
                     else if (adjacentTile.TileOwnedState == TileOwnedState.Free)
