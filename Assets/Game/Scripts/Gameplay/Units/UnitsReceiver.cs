@@ -68,7 +68,7 @@ namespace CCore.Senary.Gameplay.Units
             }
         }
 
-        public bool DecrementNewUnitCount()
+        public int DecrementNewUnitCount()
         {
             reinforcementsCount--;
 
@@ -76,12 +76,7 @@ namespace CCore.Senary.Gameplay.Units
 
             DispatchReinforcementsCountUpdated();
 
-            if (reinforcementsCount == 0)
-            {
-                return true;
-            }
-
-            return false;
+            return reinforcementsCount;
         }
     }
 }

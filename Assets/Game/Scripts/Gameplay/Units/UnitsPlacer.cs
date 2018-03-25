@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using CCore.Senary.Gameplay.Grid;
 using CCore.Senary.Gameplay.Tiles;
@@ -52,11 +53,21 @@ namespace CCore.Senary.Gameplay.Units
             PlayerInput.Instance.TapEvent += OnTap;
 
             availableTiles = GetAvailableTiles();
+
+            if (availableTiles.Count == 0)
+            {
+                StartCoroutine(WaitOneFrame(() =>
+                {
+                    GameStateMachine.Instance.DoTransition<AttackTransition>();
+                }));
+            }
         }
 
         private void OnPlaceUnitsStateExit()
         {
             PlayerInput.Instance.TapEvent -= OnTap;
+
+            ResetAvailableTiles();
         }
 
         private List<Tile> GetAvailableTiles()
@@ -107,7 +118,7 @@ namespace CCore.Senary.Gameplay.Units
 
         private void OnTap(Vector2 position)
         {
-            bool isFinished = false;
+            int reinforcementsCount = 0;
 
             for (int i = 0; i < availableTiles.Count; i++)
             {
@@ -121,24 +132,37 @@ namespace CCore.Senary.Gameplay.Units
                     {
                         Log("Added one unit to tapped tile. Unit count is now {0}.", tile.UnitCount);
 
-                        isFinished = UnitsReceiver.Instance.DecrementNewUnitCount();
+                        reinforcementsCount = UnitsReceiver.Instance.DecrementNewUnitCount();
                     }
                 }
             }
 
+            // Reset available tiles after placing a unit
+            ResetAvailableTiles();
+
+            // Get new available tiles
+            availableTiles = GetAvailableTiles();
+
+            if (reinforcementsCount == 0 || availableTiles.Count == 0)
+            {
+                GameStateMachine.Instance.DoTransition<AttackTransition>();
+            }
+        }
+
+        private void ResetAvailableTiles()
+        {
             for (int i = 0; i < availableTiles.Count; i++)
             {
                 availableTiles[i].SetTileGameState(TileGameState.NotAvailable);
             }
+        }
 
-            if (isFinished)
-            {
-                GameStateMachine.Instance.DoTransition<AttackTransition>();
-            }
-            else
-            {
-                availableTiles = GetAvailableTiles();
-            }
+        // TODO: Move this to it's own class
+        private IEnumerator WaitOneFrame(Action callback)
+        {
+            yield return new WaitForEndOfFrame();
+
+            callback();
         }
     }
 }
