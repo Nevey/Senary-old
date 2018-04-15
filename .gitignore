@@ -34,5 +34,8 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-#VSCode
+# VSCode
 .vscode/
+
+# Rider
+.idea/
