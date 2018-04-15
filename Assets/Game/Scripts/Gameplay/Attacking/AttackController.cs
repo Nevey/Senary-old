@@ -18,7 +18,7 @@ namespace CCore.Senary.Gameplay.Attacking
             SelectAttacker,
         }
 
-        private AttackStep attackStep = new AttackStep();
+        private AttackStep attackStep;
 
         private List<Tile> defendingTiles;
 
@@ -91,17 +91,17 @@ namespace CCore.Senary.Gameplay.Attacking
                 {
                     Tile adjacentTile = adjacentTiles[k];
 
-                    if (adjacentTile.TileOwnedState == TileOwnedState.Owned)
+                    if (adjacentTile.TileOwnedState != TileOwnedState.Owned
+                        || adjacentTile.Owner == TurnController.Instance.CurrentPlayer)
                     {
-                        if (adjacentTile.Owner != TurnController.Instance.CurrentPlayer)
-                        {
-                            adjacentTile.SetTileGameState(TileGameState.AvailableAsTarget);
+                        continue;
+                    }
+                    
+                    adjacentTile.SetTileGameState(TileGameState.AvailableAsTarget);
 
-                            if (!targetTiles.Contains(adjacentTile))
-                            {
-                                targetTiles.Add(adjacentTile);
-                            }
-                        }
+                    if (!targetTiles.Contains(adjacentTile))
+                    {
+                        targetTiles.Add(adjacentTile);
                     }
                 }
             }
@@ -140,18 +140,20 @@ namespace CCore.Senary.Gameplay.Attacking
                 {
                     Tile tile = defendingTiles[i];
 
-                    if (tile.TileInput.TapTile(position))
+                    if (!tile.TileInput.TapTile(position))
                     {
-                        tile.SetTileGameState(TileGameState.SelectedAsTarget);
-
-                        defendingTile = tile;
-
-                        attackingTiles = GetAttackerTiles();
-
-                        attackStep = AttackStep.SelectAttacker;
-
-                        break;
+                        continue;
                     }
+                    
+                    tile.SetTileGameState(TileGameState.SelectedAsTarget);
+
+                    defendingTile = tile;
+
+                    attackingTiles = GetAttackerTiles();
+
+                    attackStep = AttackStep.SelectAttacker;
+
+                    break;
                 }
 
                 // Reset all tiles
@@ -173,14 +175,16 @@ namespace CCore.Senary.Gameplay.Attacking
                 {
                     Tile tile = attackingTiles[i];
 
-                    if (tile.TileInput.TapTile(position))
+                    if (!tile.TileInput.TapTile(position))
                     {
-                        tile.SetTileGameState(TileGameState.SelectedAsAttacker);
-
-                        attackingTile = tile;
-
-                        break;
+                        continue;
                     }
+                    
+                    tile.SetTileGameState(TileGameState.SelectedAsAttacker);
+
+                    attackingTile = tile;
+
+                    break;
                 }
 
                 // Reset all tiles
