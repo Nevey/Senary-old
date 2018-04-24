@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using CCore.Senary.Gameplay.Dice;
-using CCore.Senary.Scenes;
 using CCore.Senary.StateMachines.Game;
 using CCore.Senary.Tiles;
 using UnityEngine;
@@ -18,13 +15,9 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private int receivedResultCount = 0;
 
-        private BattleResult attackerResult;
+        public BattleResult AttackerResult { get; private set; }
 
-        private BattleResult defenderResult;
-
-        public BattleResult AttackerResult { get { return attackerResult; } }
-
-        public BattleResult DefenderResult { get { return defenderResult; } }
+        public BattleResult DefenderResult { get; private set; }
 
         private void Awake()
         {
@@ -54,7 +47,7 @@ namespace CCore.Senary.Gameplay.Attacking
             {
                 case DieType.Attacker:
 
-                    attackerResult = new BattleResult(
+                    AttackerResult = new BattleResult(
                         e.throwResult,
                         AttackController.Instance.AttackingTile.UnitCount
                     );
@@ -63,7 +56,7 @@ namespace CCore.Senary.Gameplay.Attacking
                 
                 case DieType.Defender:
 
-                    defenderResult = new BattleResult(
+                    DefenderResult = new BattleResult(
                         e.throwResult,
                         AttackController.Instance.DefendingTile.UnitCount
                     );
@@ -73,12 +66,14 @@ namespace CCore.Senary.Gameplay.Attacking
 
             receivedResultCount++;
 
-            if (receivedResultCount == throwResults.Length)
+            if (receivedResultCount != throwResults.Length)
             {
-                receivedResultCount = 0;
-
-                Compare();
+                return;
             }
+            
+            receivedResultCount = 0;
+
+            Compare();
         }
 
         private void Compare()
@@ -88,15 +83,15 @@ namespace CCore.Senary.Gameplay.Attacking
             AttackController.Instance.ResetTileStates();
             
             // Attacker only wins if throw is higher then defender throw
-            if (attackerResult.FinalResult > defenderResult.FinalResult)
+            if (AttackerResult.FinalResult > DefenderResult.FinalResult)
             {
-                Log("Attacker wins with {0} vs {1}", attackerResult.FinalResult, defenderResult.FinalResult);
+                Log("Attacker wins with {0} vs {1}", AttackerResult.FinalResult, DefenderResult.FinalResult);
 
                 AttackerWins();
             }
             else
             {
-                Log("Defender wins with {0} vs {1}", defenderResult.FinalResult, attackerResult.FinalResult);
+                Log("Defender wins with {0} vs {1}", DefenderResult.FinalResult, AttackerResult.FinalResult);
 
                 DefenderWins();
             }

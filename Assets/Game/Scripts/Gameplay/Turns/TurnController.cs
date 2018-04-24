@@ -95,7 +95,7 @@ namespace CCore.Senary.Gameplay.Turns
                 TurnStartedEvent();
             }
 
-            GameStateMachine.Instance.DoTransition<ReceiveUnitsTransition>();
+            GameStateMachine.Instance.DoTransition<AttackTransition>();
         }
 
         public int GetPlayerNumber(Player player)

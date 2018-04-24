@@ -17,11 +17,9 @@ namespace CCore.Senary.Gameplay.Grid
         // TODO: Define loading the level better
         [SerializeField] private string levelName = "Level_1";
 
-        private GenericGrid grid;
-
         private GridBuilder gridBuilder;
 
-        public GenericGrid Grid { get { return grid; } }
+        public GenericGrid Grid { get; private set; }
 
         private void Awake()
         {
@@ -32,9 +30,9 @@ namespace CCore.Senary.Gameplay.Grid
 
         private void OnGameOverStateExit()
         {
-            for (int i = 0; i < grid.FlattenedTiles.Length; i++)
+            for (int i = 0; i < Grid.FlattenedTiles.Length; i++)
             {
-                grid.FlattenedTiles[i].ResetTile();
+                Grid.FlattenedTiles[i].ResetTile();
             }
         }
 
@@ -47,7 +45,7 @@ namespace CCore.Senary.Gameplay.Grid
         {
             gridBuilder = FindObjectOfType<GridBuilder>();
 
-            grid = gridBuilder.Build(levelName);
+            Grid = gridBuilder.Build(levelName);
 
             GameStateMachine.Instance.DoTransition<AnimateHQTransition>();
         }
@@ -104,17 +102,21 @@ namespace CCore.Senary.Gameplay.Grid
 
         private void AddTileToList(ref List<Tile> tiles, Vector2 gridPosition)
         {
-            if (gridPosition.x >= 0 && gridPosition.x < grid.Width)
+            if (!(gridPosition.x >= 0) || !(gridPosition.x < Grid.Width))
             {
-                if (gridPosition.y >= 0 && gridPosition.y < grid.Height)
-                {
-                    Tile tile = grid.Tiles[(int)gridPosition.x, (int)gridPosition.y];
+                return;
+            }
 
-                    if (tile.TileType != TileType.None && !tiles.Contains(tile))
-                    {
-                        tiles.Add(tile);
-                    }
-                }
+            if (!(gridPosition.y >= 0) || !(gridPosition.y < Grid.Height))
+            {
+                return;
+            }
+            
+            Tile tile = Grid.Tiles[(int)gridPosition.x, (int)gridPosition.y];
+
+            if (tile.TileType != TileType.None && !tiles.Contains(tile))
+            {
+                tiles.Add(tile);
             }
         }
     }

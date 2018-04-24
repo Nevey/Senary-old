@@ -1,4 +1,3 @@
-using System;
 using CCore.Senary.StateMachines.UI;
 using CCore.UI;
 using UnityEngine;

@@ -123,12 +123,12 @@ GameObject:
   - component: {fileID: 67695329}
   - component: {fileID: 67695330}
   m_Layer: 5
-  m_Name: EndTurnView
+  m_Name: EndAttackView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &67695329
 RectTransform:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   hideAnimationDirection: 3
   hideAnimationEase: 5
   hideAnimationTime: 0.5
-  endTurnButton: {fileID: 1561548851}
+  endAttackButton: {fileID: 1561548851}
 --- !u!1 &159155444
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: END TURN
+  m_Text: FINISH ATTACK
 --- !u!222 &191369705
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1603,7 +1603,7 @@ GameObject:
   - component: {fileID: 1561548852}
   - component: {fileID: 1561548851}
   m_Layer: 5
-  m_Name: EndTurnButton
+  m_Name: EndAttackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

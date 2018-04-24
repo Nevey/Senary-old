@@ -1,17 +1,13 @@
-using System;
-using CCore.Senary.Gameplay.Attacking;
 using CCore.Senary.StateMachines.Game;
-using CCore.Senary.StateMachines.UI;
-using CCore.Senary.Tiles;
 using CCore.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace CCore.Senary.UI
 {
-    public class EndTurnView : UIView
+    public class EndAttackView : UIView
     {
-        [SerializeField] private Button endTurnButton;
+        [SerializeField] private Button endAttackButton;
         
         protected override void Setup()
         {
@@ -24,19 +20,19 @@ namespace CCore.Senary.UI
         {
             Show();
 
-            endTurnButton.onClick.AddListener(EndTurnButtonClicked);
+            endAttackButton.onClick.AddListener(EndTurnButtonClicked);
         }
 
         private void OnAttackStateExit()
         {
             Hide();
             
-            endTurnButton.onClick.RemoveListener(EndTurnButtonClicked);
+            endAttackButton.onClick.RemoveListener(EndTurnButtonClicked);
         }
 
         private void EndTurnButtonClicked()
         {
-            GameStateMachine.Instance.DoTransition<CheckForWinLostTransition>();
+            GameStateMachine.Instance.DoTransition<ReceiveUnitsTransition>();
         }
     }
 }

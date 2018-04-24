@@ -1,4 +1,3 @@
-using System;
 using CCore.Senary.Input;
 using CCore.Senary.StateMachines.Game;
 using CCore.Senary.StateMachines.UI;

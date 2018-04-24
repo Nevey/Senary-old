@@ -1,4 +1,3 @@
-using System;
 using CCore.Senary.StateMachines.Game;
 using CCore.UI;
 using DG.Tweening;

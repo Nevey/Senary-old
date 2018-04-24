@@ -58,7 +58,7 @@ namespace CCore.Senary.Gameplay.Units
             {
                 StartCoroutine(WaitOneFrame(() =>
                 {
-                    GameStateMachine.Instance.DoTransition<AttackTransition>();
+                    GameStateMachine.Instance.DoTransition<IncrementPlayerTurnTransition>();
                 }));
             }
         }
@@ -124,17 +124,21 @@ namespace CCore.Senary.Gameplay.Units
             {
                 Tile tile = availableTiles[i];
 
-                if (tile.TileInput.TapTile(position))
+                if (!tile.TileInput.TapTile(position))
                 {
-                    bool addUnitsSuccess = tile.AddUnits(1, TurnController.Instance.CurrentPlayer);
-
-                    if (addUnitsSuccess)
-                    {
-                        Log("Added one unit to tapped tile. Unit count is now {0}.", tile.UnitCount);
-
-                        reinforcementsCount = UnitsReceiver.Instance.DecrementNewUnitCount();
-                    }
+                    continue;
                 }
+                
+                bool addUnitsSuccess = tile.AddUnits(1, TurnController.Instance.CurrentPlayer);
+
+                if (!addUnitsSuccess)
+                {
+                    continue;
+                }
+                
+                Log("Added one unit to tapped tile. Unit count is now {0}.", tile.UnitCount);
+
+                reinforcementsCount = UnitsReceiver.Instance.DecrementNewUnitCount();
             }
 
             // Reset available tiles after placing a unit
@@ -145,7 +149,7 @@ namespace CCore.Senary.Gameplay.Units
 
             if (reinforcementsCount == 0 || availableTiles.Count == 0)
             {
-                GameStateMachine.Instance.DoTransition<AttackTransition>();
+                GameStateMachine.Instance.DoTransition<IncrementPlayerTurnTransition>();
             }
         }
 

@@ -19,10 +19,6 @@ namespace CCore.Senary.StateMachines.Game
             AddTransition<AddInitialUnitsTransition, AddInitialUnitsState>();
 
             AddTransition<SelectStartPlayerTransition, SelectStartPlayerState>();
-            
-            AddTransition<ReceiveUnitsTransition, ReceiveUnitsState>();
-
-            AddTransition<PlaceUnitsTransition, PlaceUnitsState>();
 
             AddTransition<AttackTransition, AttackState>();
 
@@ -32,9 +28,13 @@ namespace CCore.Senary.StateMachines.Game
 
             AddTransition<DefenderWinBattleTransition, DefenderWinBattleState>();
 
+            AddTransition<CheckForWinLostTransition, CheckForWinLoseState>();
+            
             AddTransition<InvasionTransition, InvasionState>();
 
-            AddTransition<CheckForWinLostTransition, CheckForWinLoseState>();
+            AddTransition<ReceiveUnitsTransition, ReceiveUnitsState>();
+
+            AddTransition<PlaceUnitsTransition, PlaceUnitsState>();
 
             AddTransition<IncrementPlayerTurnTransition, IncrementPlayerTurnState>();
 

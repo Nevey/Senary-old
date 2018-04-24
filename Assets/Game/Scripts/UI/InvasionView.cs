@@ -1,4 +1,3 @@
-using System;
 using CCore.Senary.Gameplay.Attacking;
 using CCore.Senary.StateMachines.Game;
 using CCore.UI;

@@ -5,7 +5,6 @@ using CCore.Senary.Players;
 using CCore.Senary.StateMachines.Game;
 using CCore.UI;
 using CCore.Utilities;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,8 +17,6 @@ namespace CCore.Senary.UI
         private List<Text> unitCountTexts;
 
         private string unFormattedString;
-
-        private Vector3 originalUnitTextScale;
 
         private void Update()
         {
@@ -36,8 +33,6 @@ namespace CCore.Senary.UI
             GameStateMachine.Instance.GetState<GameOverState>().EnterEvent += OnGameOverStateEnter;
 
             unFormattedString = defaultUnitCountText.text;
-
-            originalUnitTextScale = defaultUnitCountText.transform.localScale;
         }
 
         private void OnAddInitialUnitsStateEnter()
