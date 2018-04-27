@@ -43,7 +43,7 @@ namespace CCore.Senary.Gameplay.Tiles
         {
             TileType tileType = tileData.Tile.TileType;
 
-            bool isOwned = tileData.Tile.TileOwnedState == TileOwnedState.Owned;
+            bool isOwned = tileData.Tile.OwnerState == TileOwnedState.Owned;
 
             hqOwnedSpriteRenderer.enabled = false;
 

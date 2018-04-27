@@ -6,6 +6,7 @@ using CCore.Senary.Constants;
 using CCore.Senary.Gameplay.Turns;
 using CCore.Senary.Gameplay.Units;
 using CCore.Senary.Grids;
+using CCore.Senary.Input;
 using CCore.Senary.StateMachines.Game;
 using CCore.Senary.Tiles;
 using UnityEngine;
@@ -28,17 +29,19 @@ namespace CCore.Senary.Gameplay.Grid
             GameStateMachine.Instance.GetState<GameOverState>().ExitEvent += OnGameOverStateExit;
         }
 
+        private void OnDestroy()
+        {
+            GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent -= OnCreateLevelStateEnter;
+            
+            GameStateMachine.Instance.GetState<GameOverState>().ExitEvent -= OnGameOverStateExit;
+        }
+        
         private void OnGameOverStateExit()
         {
             for (int i = 0; i < Grid.FlattenedTiles.Length; i++)
             {
                 Grid.FlattenedTiles[i].ResetTile();
             }
-        }
-
-        private void OnDestroy()
-        {
-            GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent -= OnCreateLevelStateEnter;
         }
 
         private void OnCreateLevelStateEnter()
@@ -50,6 +53,26 @@ namespace CCore.Senary.Gameplay.Grid
             GameStateMachine.Instance.DoTransition<AnimateHQTransition>();
         }
 
+        private void AddTileToList(ref List<Tile> tiles, Vector2 gridPosition)
+        {
+            if (!(gridPosition.x >= 0) || !(gridPosition.x < Grid.Width))
+            {
+                return;
+            }
+
+            if (!(gridPosition.y >= 0) || !(gridPosition.y < Grid.Height))
+            {
+                return;
+            }
+            
+            Tile tile = Grid.Tiles[(int)gridPosition.x, (int)gridPosition.y];
+
+            if (tile.TileType != TileType.None && !tiles.Contains(tile))
+            {
+                tiles.Add(tile);
+            }
+        }
+        
         /// <summary>
         /// Returns a list of tiles adjacent to given tile, including given tile
         /// </summary>
@@ -57,9 +80,7 @@ namespace CCore.Senary.Gameplay.Grid
         /// <returns></returns>
         public List<Tile> GetAdjacentTiles(Tile tile)
         {
-            List<Tile> adjacentTiles = new List<Tile>();
-
-            adjacentTiles.Add(tile);
+            List<Tile> adjacentTiles = new List<Tile> {tile};
 
             Vector2 gridPosition = new Vector2(
                 tile.GridCoordinates.X,
@@ -100,24 +121,34 @@ namespace CCore.Senary.Gameplay.Grid
             return adjacentTiles;
         }
 
-        private void AddTileToList(ref List<Tile> tiles, Vector2 gridPosition)
+        public bool IsTileConnectedToHQ(Tile tile, ref List<Tile> tiles)
         {
-            if (!(gridPosition.x >= 0) || !(gridPosition.x < Grid.Width))
+            List<Tile> adjacentTiles = GetAdjacentTiles(tile);
+
+            for (int i = 0; i < adjacentTiles.Count; i++)
             {
-                return;
+                Tile adjacentTile = adjacentTiles[i];
+
+                if (adjacentTile.TileType == TileType.HQ
+                    && adjacentTile.OwnerState == TileOwnedState.Owned
+                    && adjacentTile.Owner == tile.Owner)
+                {
+                    return true;
+                }
+
+                if (tiles.Contains(adjacentTile)
+                    || adjacentTile.OwnerState == TileOwnedState.Free
+                    || adjacentTile.Owner != tile.Owner)
+                {
+                    continue;
+                }
+                
+                tiles.Add(adjacentTile);
+                
+                return IsTileConnectedToHQ(adjacentTile, ref tiles);
             }
 
-            if (!(gridPosition.y >= 0) || !(gridPosition.y < Grid.Height))
-            {
-                return;
-            }
-            
-            Tile tile = Grid.Tiles[(int)gridPosition.x, (int)gridPosition.y];
-
-            if (tile.TileType != TileType.None && !tiles.Contains(tile))
-            {
-                tiles.Add(tile);
-            }
+            return false;
         }
     }
 }

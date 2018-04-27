@@ -99,7 +99,7 @@ namespace CCore.Senary.Gameplay.Attacking
                 {
                     Tile adjacentTile = adjacentTiles[k];
 
-                    if (adjacentTile.TileOwnedState != TileOwnedState.Owned
+                    if (adjacentTile.OwnerState != TileOwnedState.Owned
                         || adjacentTile.Owner == TurnController.Instance.CurrentPlayer)
                     {
                         continue;
@@ -141,7 +141,6 @@ namespace CCore.Senary.Gameplay.Attacking
 
         private void OnTap(Vector2 position)
         {
-            // TODO: Split this up in several game states?
             if (attackStep == AttackStep.SelectTarget)
             {
                 for (int i = 0; i < defendingTiles.Count; i++)

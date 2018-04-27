@@ -30,6 +30,8 @@ namespace CCore.Senary.StateMachines.Game
 
             AddTransition<CheckForWinLostTransition, CheckForWinLoseState>();
             
+            AddTransition<CheckForHQConnectionTransition, CheckForHQConnectionState>();
+            
             AddTransition<InvasionTransition, InvasionState>();
 
             AddTransition<ReceiveUnitsTransition, ReceiveUnitsState>();
@@ -54,10 +56,6 @@ namespace CCore.Senary.StateMachines.Game
 
     public class SelectStartPlayerState : State { }
 
-    public class ReceiveUnitsState : State { }
-
-    public class PlaceUnitsState : State { }
-
     public class AttackState : State { }
 
     public class BattleState : State { }
@@ -65,10 +63,16 @@ namespace CCore.Senary.StateMachines.Game
     public class AttackerWinBattleState : State { }
 
     public class DefenderWinBattleState : State { }
+    
+    public class CheckForHQConnectionState : State { }
+
+    public class CheckForWinLoseState : State { }
 
     public class InvasionState : State { }
 
-    public class CheckForWinLoseState : State { }
+    public class ReceiveUnitsState : State { }
+
+    public class PlaceUnitsState : State { }
 
     public class IncrementPlayerTurnState : State { }
 
@@ -86,10 +90,6 @@ namespace CCore.Senary.StateMachines.Game
 
     public class SelectStartPlayerTransition : Transition { }
 
-    public class ReceiveUnitsTransition : Transition { }
-
-    public class PlaceUnitsTransition : Transition { }
-
     public class AttackTransition : Transition { }
 
     public class BattleTransition : Transition { }
@@ -97,10 +97,16 @@ namespace CCore.Senary.StateMachines.Game
     public class AttackerWinBattleTransition : Transition { }
 
     public class DefenderWinBattleTransition : Transition { }
+    
+    public class CheckForHQConnectionTransition : Transition { }
+
+    public class CheckForWinLostTransition : Transition { }
 
     public class InvasionTransition : Transition { }
 
-    public class CheckForWinLostTransition : Transition { }
+    public class ReceiveUnitsTransition : Transition { }
+
+    public class PlaceUnitsTransition : Transition { }
 
     public class IncrementPlayerTurnTransition : Transition { }
 

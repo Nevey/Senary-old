@@ -90,7 +90,7 @@ namespace CCore.Senary.Gameplay.Units
                 {
                     Tile adjacentTile = adjacentTiles[k];
 
-                    if (adjacentTile.TileOwnedState == TileOwnedState.Owned
+                    if (adjacentTile.OwnerState == TileOwnedState.Owned
                         && adjacentTile.Owner == TurnController.Instance.CurrentPlayer
                         && adjacentTile.UnitCount < 5)
                     {
@@ -101,7 +101,7 @@ namespace CCore.Senary.Gameplay.Units
                             tiles.Add(adjacentTile);
                         }
                     }
-                    else if (adjacentTile.TileOwnedState == TileOwnedState.Free)
+                    else if (adjacentTile.OwnerState == TileOwnedState.Free)
                     {
                         adjacentTile.SetTileGameState(TileGameState.AvailableForTakeOver);
 
