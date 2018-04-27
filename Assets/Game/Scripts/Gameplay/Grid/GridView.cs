@@ -65,60 +65,51 @@ namespace CCore.Senary.Gameplay.Grid
             {
                 Tile tile = GridController.Instance.Grid.FlattenedTiles[i];
 
-                switch (tile.TileType)
+                if (tile.TileType == TileType.None)
                 {
-                    case TileType.Ground:
-
-                        Color targetColor = groundTileColor;
-
-                        if (GameStateMachine.Instance.CurrentState is PlaceUnitsState)
-                        {
-                            if (tile.TileGameState == TileGameState.AvailableForTakeOver
-                                || tile.TileGameState == TileGameState.AvailableForReinforcement)
-                            {
-                                targetColor = takeOverColor;
-                            }
-                        }
-
-                        if (GameStateMachine.Instance.CurrentState is AttackState)
-                        {
-                            if (tile.TileGameState == TileGameState.AvailableAsTarget
-                                || tile.TileGameState == TileGameState.SelectedAsTarget)
-                            {
-                                targetColor = defenderColor;
-                            }
-
-                            if (tile.TileGameState == TileGameState.AvailableAsAttacker
-                                || tile.TileGameState == TileGameState.SelectedAsAttacker)
-                            {
-                                targetColor = attackerColor;
-                            }
-                        }
-
-                        if (GameStateMachine.Instance.CurrentState is InvasionState)
-                        {
-                            if (tile.TileGameState == TileGameState.InvadingFrom)
-                            {
-                                targetColor = invadingFromColor;
-                            }
-                            
-                            if (tile.TileGameState == TileGameState.InvadingTo)
-                            {
-                                targetColor = invadingToColor;
-                            }
-                        }
-
-                        propertyBlock.SetColor("_Color", targetColor);
-
-                        break;
-                    
-                    case TileType.HQ:
-                        propertyBlock.SetColor("_Color", hqTileColor);
-                        break;
-                    
-                    default:
-                        continue;
+                    continue;
                 }
+                
+                Color targetColor = groundTileColor;
+
+                if (GameStateMachine.Instance.CurrentState is PlaceUnitsState)
+                {
+                    if (tile.TileGameState == TileGameState.AvailableForTakeOver
+                        || tile.TileGameState == TileGameState.AvailableForReinforcement)
+                    {
+                        targetColor = takeOverColor;
+                    }
+                }
+
+                if (GameStateMachine.Instance.CurrentState is AttackState)
+                {
+                    if (tile.TileGameState == TileGameState.AvailableAsTarget
+                        || tile.TileGameState == TileGameState.SelectedAsTarget)
+                    {
+                        targetColor = defenderColor;
+                    }
+
+                    if (tile.TileGameState == TileGameState.AvailableAsAttacker
+                        || tile.TileGameState == TileGameState.SelectedAsAttacker)
+                    {
+                        targetColor = attackerColor;
+                    }
+                }
+
+                if (GameStateMachine.Instance.CurrentState is InvasionState)
+                {
+                    if (tile.TileGameState == TileGameState.InvadingFrom)
+                    {
+                        targetColor = invadingFromColor;
+                    }
+                    
+                    if (tile.TileGameState == TileGameState.InvadingTo)
+                    {
+                        targetColor = invadingToColor;
+                    }
+                }
+
+                propertyBlock.SetColor("_Color", targetColor);
                 
                 Renderer tileRenderer = tile.TileMesh.GetComponent<Renderer>();
 

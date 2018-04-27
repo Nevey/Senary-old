@@ -31,17 +31,45 @@ namespace CCore.Senary.Gameplay.Tiles
 
         private void Update()
         {
-            UpdateTileSprite();
+            UpdateTileTypeSprite();
+            
+            UpdateTileStateSprite();
         }
 
-        private void UpdateTileSprite()
+        /// <summary>
+        /// Updates the tile (hq) sprite and color
+        /// </summary>
+        private void UpdateTileTypeSprite()
         {
             TileType tileType = tileData.Tile.TileType;
 
-            hqOwnedSpriteRenderer.enabled = tileType == TileType.HQ;
+            bool isOwned = tileData.Tile.TileOwnedState == TileOwnedState.Owned;
 
-            ownedSpriteRenderer.enabled = tileType == TileType.Ground;
+            hqOwnedSpriteRenderer.enabled = false;
+
+            ownedSpriteRenderer.enabled = false;
+
+            if (!isOwned)
+            {
+                return;
+            }
             
+            SpriteRenderer spriteRenderer = tileType == TileType.HQ
+                ? hqOwnedSpriteRenderer
+                : ownedSpriteRenderer;
+
+            spriteRenderer.enabled = true;
+                
+            Color playerColor = tileData.Tile.Owner.PlayerID.Color;
+
+            spriteRenderer.color = playerColor;
+        }
+
+        /// <summary>
+        /// Updates the tile state sprites, based on current game state and tile state
+        /// </summary>
+        private void UpdateTileStateSprite()
+        {
             TileGameState tileGameState = tileData.Tile.TileGameState;
             
             switch (tileData.Tile.TileType)
