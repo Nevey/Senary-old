@@ -1,4 +1,5 @@
 using System;
+using CCore.Senary.StateMachines.Game;
 using CCore.Senary.Tiles;
 using DG.Tweening;
 using UnityEngine;
@@ -13,6 +14,10 @@ namespace CCore.Senary.Gameplay.Tiles
 
         [SerializeField] private TextMesh unitText;
 
+        [SerializeField] private SpriteRenderer hqOwnedSpriteRenderer;
+
+        [SerializeField] private SpriteRenderer ownedSpriteRenderer;
+
         private TileData tileData;
 
         private Vector3 originalUnitTextScale;
@@ -22,6 +27,77 @@ namespace CCore.Senary.Gameplay.Tiles
             tileData = GetComponent<TileData>();
 
             originalUnitTextScale = unitText.transform.localScale;
+        }
+
+        private void Update()
+        {
+            UpdateTileSprite();
+        }
+
+        private void UpdateTileSprite()
+        {
+            TileType tileType = tileData.Tile.TileType;
+
+            hqOwnedSpriteRenderer.enabled = tileType == TileType.HQ;
+
+            ownedSpriteRenderer.enabled = tileType == TileType.Ground;
+            
+            TileGameState tileGameState = tileData.Tile.TileGameState;
+            
+            switch (tileData.Tile.TileType)
+            {
+                case TileType.Ground:
+
+                    // Show ground sprite
+                    if (GameStateMachine.Instance.CurrentState is PlaceUnitsState)
+                    {
+                        if (tileGameState == TileGameState.AvailableForTakeOver
+                            || tileGameState == TileGameState.AvailableForReinforcement)
+                        {
+//                            targetColor = takeOverColor;
+                            // TODO: Create take over sprite
+                        }
+                    }
+
+                    if (GameStateMachine.Instance.CurrentState is AttackState)
+                    {
+                        if (tileGameState == TileGameState.AvailableAsTarget
+                            || tileGameState == TileGameState.SelectedAsTarget)
+                        {
+//                            targetColor = defenderColor;
+                            // TODO: Create defender state sprite
+                        }
+
+                        if (tileGameState == TileGameState.AvailableAsAttacker
+                            || tileGameState == TileGameState.SelectedAsAttacker)
+                        {
+//                            targetColor = attackerColor;
+                            // TODO: Create attackter state sprite
+                        }
+                    }
+
+                    if (GameStateMachine.Instance.CurrentState is InvasionState)
+                    {
+                        if (tileGameState == TileGameState.InvadingFrom)
+                        {
+//                            targetColor = invadingFromColor;
+                            // TODO: Create invading from state sprite
+                        }
+                        
+                        if (tileGameState == TileGameState.InvadingTo)
+                        {
+//                            targetColor = invadingToColor;
+                            // TODO: Create invading to state sprite
+                        }
+                    }
+
+                    break;
+                
+                case TileType.HQ:
+                    // Show hq
+                    
+                    break;
+            }
         }
 
         public void SetHQTextVisible(bool visible)
