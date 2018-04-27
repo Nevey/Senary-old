@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using CCore.Senary.Gameplay;
 using CCore.Senary.Gameplay.Tiles;
 using CCore.Senary.Players;
 using UnityEngine;
@@ -38,7 +36,7 @@ namespace CCore.Senary.Tiles
 
         private void CreateMesh(GameObject prefab, Transform parent)
         {
-            tileGameObject = GameObject.Instantiate(prefab);
+            tileGameObject = Object.Instantiate(prefab);
 
             tileGameObject.transform.parent = parent;
 
@@ -53,33 +51,31 @@ namespace CCore.Senary.Tiles
             tileInput = tileGameObject.GetComponent<TileInput>();
         }
 
-        private void SetupPosition(int gridWidth, int gridHeight)
+        private void SetupPosition(int gridWidth, int gridHeight, float offset)
         {
             Renderer tileRenderer = tileGameObject.GetComponent<Renderer>();
 
             Vector3 tileSize = tileRenderer.bounds.size;
 
-            Vector3 position = new Vector3(
-                tileSize.x * gridCoordinates.X,
+            Vector3 tilePosition = new Vector3(
+                (tileSize.x + offset) * gridCoordinates.X,
                 0f,
-                -(tileSize.z * 0.75f) * gridCoordinates.Y
+                -((tileSize.z * 0.75f) + offset) * gridCoordinates.Y
             );
 
-            position.x -= tileSize.x * (gridWidth * 0.5f);
-            position.z += tileSize.z * (gridHeight * 0.5f);
+            tilePosition.x -= tileSize.x * (gridWidth * 0.5f);
+            tilePosition.z += tileSize.z * (gridHeight * 0.5f);
 
             if (gridCoordinates.Y % 2 == 0)
             {
-                position.x += tileSize.x * 0.5f;
+                tilePosition.x += tileSize.x * 0.5f;
             }
 
-            tileGameObject.transform.localPosition = position;
+            tileGameObject.transform.localPosition = tilePosition;
         }
 
-        public void SetupHQVizualizer()
+        private void SetupHQVizualizer()
         {
-            TileView tileView = tileGameObject.GetComponent<TileView>();
-
             bool isVisible = tileType == TileType.HQ;
 
             tileView.SetHQTextVisible(isVisible);
@@ -87,7 +83,7 @@ namespace CCore.Senary.Tiles
             tileView.SetUnitTextVisible(false);
         }
 
-        public void SetupTile(GameObject prefab, Transform parent, int gridWidth, int gridHeight)
+        public void SetupTile(GameObject prefab, Transform parent, int gridWidth, int gridHeight, float offset)
         {
             if (tileType == TileType.None)
             {
@@ -96,7 +92,7 @@ namespace CCore.Senary.Tiles
 
             CreateMesh(prefab, parent);
 
-            SetupPosition(gridWidth, gridHeight);
+            SetupPosition(gridWidth, gridHeight, offset);
 
             SetupHQVizualizer();
 
@@ -109,19 +105,19 @@ namespace CCore.Senary.Tiles
         {
             this.tileGameState = tileGameState;
 
-            if (tileGameObject != null)
+            if (tileGameObject == null)
             {
-                if (tileGameState == TileGameState.NotAvailable)
-                {
-                    tileGameObject.name = Name;
-                }
-                else
-                {
-                    tileGameObject.name = Name + "-" + tileGameState.ToString();
-                }
+                return;
             }
-
-            // Do some visualization..
+            
+            if (tileGameState == TileGameState.NotAvailable)
+            {
+                tileGameObject.name = Name;
+            }
+            else
+            {
+                tileGameObject.name = Name + "-" + tileGameState.ToString();
+            }
         }
 
         public bool AddUnits(int amount, Player player)

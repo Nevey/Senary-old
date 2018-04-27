@@ -10,6 +10,8 @@ namespace CCore.Senary.Gameplay.Grid
     public class GridBuilder : MonoBehaviour
     {
         [SerializeField] private GameObject tilePrefab;
+
+        [SerializeField] private float offset;
         
         public GenericGrid Build(string levelName)
         {
@@ -27,7 +29,7 @@ namespace CCore.Senary.Gameplay.Grid
             {
                 for (int y = 0; y < grid.Height; y++)
                 {
-                    grid.Tiles[x, y].SetupTile(tilePrefab, transform, grid.Width, grid.Height);
+                    grid.Tiles[x, y].SetupTile(tilePrefab, transform, grid.Width, grid.Height, offset);
                 }
             }
 
