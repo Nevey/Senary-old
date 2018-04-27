@@ -35,7 +35,8 @@ namespace CCore.Senary.Gameplay.WinLose
 
             if (playerList.Count > 1)
             {
-                GameStateMachine.Instance.DoTransition<InvasionTransition>();
+//                GameStateMachine.Instance.DoTransition<InvasionTransition>();
+                GameStateMachine.Instance.DoTransition<CheckForHQConnectionTransition>();
             }
             else
             {

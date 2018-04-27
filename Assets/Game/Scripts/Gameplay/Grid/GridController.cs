@@ -1,12 +1,6 @@
-using System;
 using System.Collections.Generic;
-using CCore.Assets;
-using CCore.Senary.Configs;
-using CCore.Senary.Constants;
 using CCore.Senary.Gameplay.Turns;
-using CCore.Senary.Gameplay.Units;
 using CCore.Senary.Grids;
-using CCore.Senary.Input;
 using CCore.Senary.StateMachines.Game;
 using CCore.Senary.Tiles;
 using UnityEngine;
@@ -27,6 +21,8 @@ namespace CCore.Senary.Gameplay.Grid
             GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent += OnCreateLevelStateEnter;
 
             GameStateMachine.Instance.GetState<GameOverState>().ExitEvent += OnGameOverStateExit;
+            
+            GameStateMachine.Instance.GetState<CheckForHQConnectionState>().PostEnterEvent += OnCheckForHQConnectionStateEnter;
         }
 
         private void OnDestroy()
@@ -34,8 +30,18 @@ namespace CCore.Senary.Gameplay.Grid
             GameStateMachine.Instance.GetState<CreateLevelState>().PostEnterEvent -= OnCreateLevelStateEnter;
             
             GameStateMachine.Instance.GetState<GameOverState>().ExitEvent -= OnGameOverStateExit;
+            
+            GameStateMachine.Instance.GetState<CheckForHQConnectionState>().PostEnterEvent -= OnCheckForHQConnectionStateEnter;
         }
-        
+
+        private void Update()
+        {
+            if (UnityEngine.Input.GetKey(KeyCode.A))
+            {
+                OnCheckForHQConnectionStateEnter();
+            }
+        }
+
         private void OnGameOverStateExit()
         {
             for (int i = 0; i < Grid.FlattenedTiles.Length; i++)
@@ -51,6 +57,82 @@ namespace CCore.Senary.Gameplay.Grid
             Grid = gridBuilder.Build(levelName);
 
             GameStateMachine.Instance.DoTransition<AnimateHQTransition>();
+        }
+
+        private void OnCheckForHQConnectionStateEnter()
+        {
+            for (int i = 0; i < Grid.FlattenedTiles.Length; i++)
+            {
+                Tile tile = Grid.FlattenedTiles[i];
+
+                if (tile.TileType == TileType.None
+                    || tile.TileType == TileType.HQ
+                    || tile.OwnerState == TileOwnedState.Free)
+                {
+                    continue;
+                }
+
+                bool isConnected = IsTileConnectedToHQ(tile);
+
+                if (!isConnected)
+                {
+                    Log("Should kill tile {0}", tile.Name);
+                }
+            }
+            
+            // TODO: Kill tiles with animation, when that's done, continue...
+            
+            GameStateMachine.Instance.DoTransition<InvasionTransition>();
+        }
+
+        private bool IsTileConnectedToHQ(Tile tile)
+        {
+            List<Tile> tiles = new List<Tile>();
+
+            return IsTileConnectedToHQ(tile, ref tiles);
+        }
+
+        private bool IsTileConnectedToHQ(Tile tile, ref List<Tile> tiles)
+        {
+            bool isTileConnectedToHQ = false;
+            
+            List<Tile> adjacentTiles = GetAdjacentTiles(tile);
+            
+            List<Tile> newTiles = new List<Tile>();
+
+            for (int i = 0; i < adjacentTiles.Count; i++)
+            {
+                Tile adjacentTile = adjacentTiles[i];
+
+                if (adjacentTile.TileType == TileType.HQ
+                    && adjacentTile.Owner == tile.Owner)
+                {
+                    isTileConnectedToHQ = true;
+                    
+                    break;
+                }
+
+                if (tiles.Contains(adjacentTile)
+                    || adjacentTile.OwnerState == TileOwnedState.Free
+                    || adjacentTile.Owner != tile.Owner)
+                {
+                    continue;
+                }
+
+                tiles.Add(adjacentTile);
+
+                newTiles.Add(adjacentTile);
+            }
+
+            if (!isTileConnectedToHQ)
+            {
+                for (int i = 0; i < newTiles.Count; i++)
+                {
+                    isTileConnectedToHQ = IsTileConnectedToHQ(newTiles[i], ref tiles);
+                }
+            }
+
+            return isTileConnectedToHQ;
         }
 
         private void AddTileToList(ref List<Tile> tiles, Vector2 gridPosition)
@@ -72,7 +154,7 @@ namespace CCore.Senary.Gameplay.Grid
                 tiles.Add(tile);
             }
         }
-        
+
         /// <summary>
         /// Returns a list of tiles adjacent to given tile, including given tile
         /// </summary>
@@ -119,36 +201,6 @@ namespace CCore.Senary.Gameplay.Grid
             AddTileToList(ref adjacentTiles, bottomRight);
 
             return adjacentTiles;
-        }
-
-        public bool IsTileConnectedToHQ(Tile tile, ref List<Tile> tiles)
-        {
-            List<Tile> adjacentTiles = GetAdjacentTiles(tile);
-
-            for (int i = 0; i < adjacentTiles.Count; i++)
-            {
-                Tile adjacentTile = adjacentTiles[i];
-
-                if (adjacentTile.TileType == TileType.HQ
-                    && adjacentTile.OwnerState == TileOwnedState.Owned
-                    && adjacentTile.Owner == tile.Owner)
-                {
-                    return true;
-                }
-
-                if (tiles.Contains(adjacentTile)
-                    || adjacentTile.OwnerState == TileOwnedState.Free
-                    || adjacentTile.Owner != tile.Owner)
-                {
-                    continue;
-                }
-                
-                tiles.Add(adjacentTile);
-                
-                return IsTileConnectedToHQ(adjacentTile, ref tiles);
-            }
-
-            return false;
         }
     }
 }
