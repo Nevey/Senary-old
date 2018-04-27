@@ -10,9 +10,7 @@ namespace CCore.Senary.Gameplay.Grid
     {
         [Header("Grid View Properties")]
 
-        [SerializeField] private Color groundTileColor;
-        
-        [SerializeField] private Color hqTileColor;
+        [SerializeField] private Color defaultTileColor;
 
         [SerializeField] private Color takeOverColor;
 
@@ -70,7 +68,7 @@ namespace CCore.Senary.Gameplay.Grid
                     continue;
                 }
                 
-                Color targetColor = groundTileColor;
+                Color targetColor = defaultTileColor;
 
                 if (GameStateMachine.Instance.CurrentState is PlaceUnitsState)
                 {
@@ -125,20 +123,22 @@ namespace CCore.Senary.Gameplay.Grid
             {
                 Tile tile = GridController.Instance.Grid.FlattenedTiles[i];
 
-                if (tile.TileType == TileType.HQ)
+                if (tile.TileType != TileType.HQ)
                 {
-                    tile.TileMesh.GetComponent<TileView>().AnimateStartHQ(0.25f * hqIndex, () =>
-                    {
-                        hqIndex--;
-
-                        if (hqIndex == 0)
-                        {
-                            GameStateMachine.Instance.DoTransition<AddInitialUnitsTransition>();
-                        }
-                    });
-
-                    hqIndex++;
+                    continue;
                 }
+                
+                tile.TileMesh.GetComponent<TileView>().AnimateStartHQ(0.25f * hqIndex, () =>
+                {
+                    hqIndex--;
+
+                    if (hqIndex == 0)
+                    {
+                        GameStateMachine.Instance.DoTransition<AddInitialUnitsTransition>();
+                    }
+                });
+
+                hqIndex++;
             }
         }
     }
