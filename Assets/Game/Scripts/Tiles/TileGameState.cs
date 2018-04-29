@@ -10,6 +10,7 @@ namespace CCore.Senary.Tiles
         SelectedAsTarget,
         SelectedAsAttacker,
         InvadingFrom,
-        InvadingTo
+        InvadingTo,
+        Disconnected
     }
 }

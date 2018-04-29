@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CCore.Senary.Gameplay.Turns;
 using CCore.Senary.Grids;
@@ -76,10 +77,10 @@ namespace CCore.Senary.Gameplay.Grid
 
                 if (!isConnected)
                 {
-                    Log("Should kill tile {0}", tile.Name);
+                    tile.SetTileGameState(TileGameState.Disconnected);
                     
-//                    tile.ClearUnits();
-//                    tile.ClearOwner();
+                    tile.ClearUnits();
+                    tile.ClearOwner();
                 }
             }
             
@@ -99,7 +100,7 @@ namespace CCore.Senary.Gameplay.Grid
         {
             bool isTileConnectedToHQ = false;
             
-            List<Tile> adjacentTiles = GetAdjacentTiles(tile);
+            List<Tile> adjacentTiles = GetAdjacentTiles(tile, false);
             
             List<Tile> newTiles = new List<Tile>();
 
@@ -132,6 +133,11 @@ namespace CCore.Senary.Gameplay.Grid
                 for (int i = 0; i < newTiles.Count; i++)
                 {
                     isTileConnectedToHQ = IsTileConnectedToHQ(newTiles[i], ref tiles);
+
+                    if (isTileConnectedToHQ)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -162,10 +168,16 @@ namespace CCore.Senary.Gameplay.Grid
         /// Returns a list of tiles adjacent to given tile, including given tile
         /// </summary>
         /// <param name="tile"></param>
+        /// <param name="includeThisTile"></param>
         /// <returns></returns>
-        public List<Tile> GetAdjacentTiles(Tile tile)
+        public List<Tile> GetAdjacentTiles(Tile tile, bool includeThisTile = true)
         {
-            List<Tile> adjacentTiles = new List<Tile> {tile};
+            List<Tile> adjacentTiles = new List<Tile>();
+
+            if (includeThisTile)
+            {
+                adjacentTiles.Add(tile);
+            }
 
             Vector2 gridPosition = new Vector2(
                 tile.GridCoordinates.X,
