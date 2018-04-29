@@ -122,7 +122,7 @@ namespace CCore.Senary.Tiles
 
         public bool AddUnits(int amount, Player player)
         {
-            if (owner == player || _ownerState == TileOwnedState.Free)
+            if (owner == player || ownerState == TileOwnedState.Free)
             {
                 // This order is very important here...
                 unitCount += amount;

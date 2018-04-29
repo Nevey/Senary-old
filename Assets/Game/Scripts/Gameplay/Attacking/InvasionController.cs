@@ -74,16 +74,17 @@ namespace CCore.Senary.Gameplay.Attacking
                 defendingTile.AddUnits(-1, currentPlayer);
             }
 
-            if (!canEndInvasion
-                && attackingTile.UnitCount >= 1
-                && defendingTile.UnitCount >= 1)
+            if (canEndInvasion || attackingTile.UnitCount < 1 ||
+                defendingTile.UnitCount < 1)
             {
-                canEndInvasion = true;
+                return;
+            }
+            
+            canEndInvasion = true;
 
-                if (AllowedToEndInvasionEvent != null)
-                {
-                    AllowedToEndInvasionEvent();
-                }
+            if (AllowedToEndInvasionEvent != null)
+            {
+                AllowedToEndInvasionEvent();
             }
         }
     }

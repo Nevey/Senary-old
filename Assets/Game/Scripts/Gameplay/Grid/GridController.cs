@@ -77,6 +77,9 @@ namespace CCore.Senary.Gameplay.Grid
                 if (!isConnected)
                 {
                     Log("Should kill tile {0}", tile.Name);
+                    
+                    tile.ClearUnits();
+                    tile.ClearOwner();
                 }
             }
             
