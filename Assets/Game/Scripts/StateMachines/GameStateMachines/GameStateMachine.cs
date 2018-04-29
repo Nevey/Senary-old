@@ -1,4 +1,5 @@
 using CCore.StateMachines;
+using UnityEngine.Analytics;
 
 namespace CCore.Senary.StateMachines.Game
 {
@@ -9,40 +10,48 @@ namespace CCore.Senary.StateMachines.Game
         public GameStateMachine()
         {
             Instance = this;
+
+            AddTransition<CreateLevelState, AnimateHQState, AnimateHQTransition>();
+
+            AddTransition<AnimateHQState, AddInitialUnitsState, AddInitialUnitsTransition>();
+
+            AddTransition<AddInitialUnitsState, SelectStartPlayerState, SelectStartPlayerTransition>();
+
             
-            // TODO: Add a state where the transition has to start from...
-
-            AddTransition<CreateLevelTransition, CreateLevelState>();
-
-            AddTransition<AnimateHQTransition, AnimateHQState>();
-
-            AddTransition<AddInitialUnitsTransition, AddInitialUnitsState>();
-
-            AddTransition<SelectStartPlayerTransition, SelectStartPlayerState>();
-
-            AddTransition<AttackTransition, AttackState>();
-
-            AddTransition<BattleTransition, BattleState>();
-
-            AddTransition<AttackerWinBattleTransition, AttackerWinBattleState>();
-
-            AddTransition<DefenderWinBattleTransition, DefenderWinBattleState>();
-
-            AddTransition<CheckForWinLostTransition, CheckForWinLoseState>();
+            AddTransition<SelectStartPlayerState, AttackState, AttackTransition>();
             
-            AddTransition<CheckForHQConnectionTransition, CheckForHQConnectionState>();
+            AddTransition<IncrementPlayerTurnState, AttackState, AttackTransition>();
             
-            AddTransition<InvasionTransition, InvasionState>();
+            AddTransition<DefenderWinBattleState, AttackState, AttackTransition>();
+            
+            AddTransition<InvasionState, AttackState, AttackTransition>();
+            
 
-            AddTransition<ReceiveUnitsTransition, ReceiveUnitsState>();
-
-            AddTransition<PlaceUnitsTransition, PlaceUnitsState>();
-
-            AddTransition<IncrementPlayerTurnTransition, IncrementPlayerTurnState>();
-
-            AddTransition<GameOverTransition, GameOverState>();
-
-            AddTransition<IdleTransition, IdleState>();
+            AddTransition<AttackState, BattleState, BattleTransition>();
+            
+            AddTransition<BattleState, AttackerWinBattleState, AttackerWinBattleTransition>();
+            
+            AddTransition<BattleState, DefenderWinBattleState, DefenderWinBattleTransition>();
+            
+            AddTransition<AttackerWinBattleState, CheckForWinLoseState, CheckForWinLoseTransition>();
+            
+            AddTransition<CheckForWinLoseState, CheckForHQConnectionState, CheckForHQConnectionTransition>();
+            
+            AddTransition<CheckForHQConnectionState, InvasionState, InvasionTransition>();
+            
+            
+            AddTransition<AttackState, ReceiveUnitsState, ReceiveUnitsTransition>();
+            
+            AddTransition<InvasionState, ReceiveUnitsState, ReceiveUnitsTransition>();
+            
+            
+            AddTransition<ReceiveUnitsState, PlaceUnitsState, PlaceUnitsTransition>();
+            
+            AddTransition<PlaceUnitsState, IncrementPlayerTurnState, IncrementPlayerTurnTransition>();
+            
+            AddTransition<CheckForWinLoseState, GameOverState, GameOverTransition>();
+            
+            AddTransition<GameOverState, IdleState, IdleTransition>();
         }
     }
 
@@ -100,7 +109,7 @@ namespace CCore.Senary.StateMachines.Game
     
     public class CheckForHQConnectionTransition : Transition { }
 
-    public class CheckForWinLostTransition : Transition { }
+    public class CheckForWinLoseTransition : Transition { }
 
     public class InvasionTransition : Transition { }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using CCore.Scenes;
+using CCore.Senary.StateMachines;
 using CCore.Senary.StateMachines.Game;
 using CCore.Senary.StateMachines.UI;
 using UnityEngine;
@@ -30,14 +31,7 @@ namespace CCore.Senary.Scenes
 
         private void LoadUIScene()
         {
-            SceneController.LoadSceneAdditive("UI", () =>
-            {
-                // Need to wait for end of frame so Awake and Start can be called on components first
-                StartCoroutine(WaitOneFrame(() =>
-                {
-                    UIStateMachine.Instance.DoTransition<SplashTransition>();
-                }));
-            });
+            SceneController.LoadSceneAdditive("UI");
         }
 
         private void LoadGameScene()
@@ -47,7 +41,7 @@ namespace CCore.Senary.Scenes
                 // Need to wait for end of frame so Awake and Start can be called on components first
                 StartCoroutine(WaitOneFrame(() =>
                 {
-                    GameStateMachine.Instance.DoTransition<CreateLevelTransition>();
+                    StateMachineController.Instance.StartGameStateMachine();
                 }));
             });
         }

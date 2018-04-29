@@ -114,8 +114,7 @@ namespace CCore.Senary.UI
         {
             if (GameStateMachine.Instance.CurrentState is AttackerWinBattleState)
             {
-                GameStateMachine.Instance.DoTransition<CheckForWinLostTransition>();
-//                GameStateMachine.Instance.DoTransition<InvasionTransition>();
+                GameStateMachine.Instance.DoTransition<CheckForWinLoseTransition>();
             }
             else
             {
