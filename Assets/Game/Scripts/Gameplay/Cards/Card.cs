@@ -9,18 +9,24 @@ namespace Game.Scripts.Gameplay.Cards
         [SerializeField] private CardConfig cardConfig;
 
         [SerializeField] private Renderer cardBackRenderer;
+
+        private Camera cardsCamera;
         
         private Vector3 targetPosition;
 
         private Vector3 currentPosition;
 
         private Vector3 movementVelocity;
-        
-        private Camera cardsCamera;
+
 
         private Vector3 dragOffset;
 
         private bool isDragging;
+
+        public Renderer CardBackRenderer
+        {
+            get { return cardBackRenderer; }
+        }
 
         public event Action<Card> StartDraggingEvent;
 

@@ -7,10 +7,6 @@ namespace Game.Scripts.Gameplay.Cards
 {
     public class CardHolder : MonoBehaviour
     {
-        [SerializeField] private Transform centerPoint;
-
-        [SerializeField] private float cardPadding;
-        
         private List<Card> cards;
 
         private void Awake()
@@ -61,8 +57,14 @@ namespace Game.Scripts.Gameplay.Cards
 
         private void HoldCard(int index)
         {
-            Vector3 heldPosition = centerPoint.position;
-            heldPosition.x += cardPadding * (index / 2f);
+            Card card = cards[index];
+            
+            float cardWidth = card.CardBackRenderer.bounds.size.x;
+            
+            Vector3 heldPosition = transform.position;
+            heldPosition.x += cardWidth * index;
+            heldPosition.x -= (cardWidth * cards.Count) / 2f;
+            heldPosition.x += cardWidth / 2f;
 
             cards[index].SetTargetPosition(heldPosition);
         }
