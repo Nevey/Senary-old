@@ -9,9 +9,13 @@ namespace Game.Scripts.Gameplay.Cards
     {
         private List<Card> cards;
 
+        private float cardPadding;
+
         private void Awake()
         {
             cards = GetComponentsInChildren<Card>().ToList();
+
+            cardPadding = cards[0].CardBackRenderer.bounds.size.x;
             
             for (int i = 0; i < cards.Count; i++)
             {
@@ -57,14 +61,10 @@ namespace Game.Scripts.Gameplay.Cards
 
         private void HoldCard(int index)
         {
-            Card card = cards[index];
-            
-            float cardWidth = card.CardBackRenderer.bounds.size.x;
-            
             Vector3 heldPosition = transform.position;
-            heldPosition.x += cardWidth * index;
-            heldPosition.x -= (cardWidth * cards.Count) / 2f;
-            heldPosition.x += cardWidth / 2f;
+            heldPosition.x += cardPadding * index;
+            heldPosition.x -= (cardPadding * cards.Count) / 2f;
+            heldPosition.x += cardPadding / 2f;
 
             cards[index].SetTargetPosition(heldPosition);
         }

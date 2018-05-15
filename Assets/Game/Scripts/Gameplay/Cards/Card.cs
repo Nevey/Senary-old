@@ -9,15 +9,12 @@ namespace Game.Scripts.Gameplay.Cards
         [SerializeField] private CardConfig cardConfig;
 
         [SerializeField] private Renderer cardBackRenderer;
-
+        
         private Camera cardsCamera;
         
         private Vector3 targetPosition;
 
-        private Vector3 currentPosition;
-
         private Vector3 movementVelocity;
-
 
         private Vector3 dragOffset;
 
@@ -80,7 +77,7 @@ namespace Game.Scripts.Gameplay.Cards
 
         private void UpdatePosition()
         {
-            if (Deadzone.InReach(currentPosition, targetPosition))
+            if (Deadzone.InReach(transform.position, targetPosition))
             {
                 return;
             }
@@ -89,10 +86,8 @@ namespace Game.Scripts.Gameplay.Cards
 
             float maxMoveSpeed = isDragging ? cardConfig.HoldMaxMoveSpeed : cardConfig.MaxMoveSpeed;
             
-            currentPosition = Vector3.SmoothDamp(currentPosition, targetPosition,
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition,
                 ref movementVelocity, moveDuration, maxMoveSpeed);
-
-            transform.position = currentPosition;
         }
 
         public void Initialize()
@@ -101,12 +96,14 @@ namespace Game.Scripts.Gameplay.Cards
 
             transform.position = GetSpawnPosition();
 
-            targetPosition = currentPosition = transform.position;
+            targetPosition = transform.position;
         }
 
         public void SetTargetPosition(Vector3 position)
         {
             targetPosition = position;
+            
+            Log("Set Target Position {0}", position);
         }
     }
 }
