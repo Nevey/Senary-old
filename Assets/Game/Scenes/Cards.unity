@@ -322,6 +322,11 @@ Prefab:
       propertyPath: m_Name
       value: Card (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114475705115289472, guid: 0a7b4b233fa853947b9d91ebf79b9546,
+        type: 2}
+      propertyPath: rotationStrength
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a7b4b233fa853947b9d91ebf79b9546, type: 2}
   m_IsPrefabParent: 0
@@ -380,6 +385,11 @@ Prefab:
     - target: {fileID: 1020519670656046, guid: 0a7b4b233fa853947b9d91ebf79b9546, type: 2}
       propertyPath: m_Name
       value: Card (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114475705115289472, guid: 0a7b4b233fa853947b9d91ebf79b9546,
+        type: 2}
+      propertyPath: rotationStrength
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a7b4b233fa853947b9d91ebf79b9546, type: 2}
@@ -548,6 +558,11 @@ Prefab:
     - target: {fileID: 1020519670656046, guid: 0a7b4b233fa853947b9d91ebf79b9546, type: 2}
       propertyPath: m_Name
       value: Card (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114475705115289472, guid: 0a7b4b233fa853947b9d91ebf79b9546,
+        type: 2}
+      propertyPath: rotationStrength
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a7b4b233fa853947b9d91ebf79b9546, type: 2}

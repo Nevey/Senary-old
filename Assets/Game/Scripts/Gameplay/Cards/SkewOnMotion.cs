@@ -43,6 +43,7 @@ namespace Game.Scripts.Gameplay.Cards
 
             motionSpeed.x = -(currentPosition.y - previousPosition.y);
             motionSpeed.y = currentPosition.x - previousPosition.x;
+            motionSpeed.z = previousPosition.x - currentPosition.x;
 
             previousPosition = currentPosition;
 

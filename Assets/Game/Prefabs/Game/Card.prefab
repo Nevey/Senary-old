@@ -417,4 +417,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loggingEnabled: 1
   loggingColor: {r: 0.8745099, g: 0.69803923, b: 0.38431376, a: 1}
-  rotationStrength: 100
+  rotationStrength: 20
