@@ -36,10 +36,6 @@ namespace Game.Scripts.Gameplay.Cards
         
         private void OnMouseDown()
         {
-            Vector3 cardScreenPosition = cardsCamera.WorldToScreenPoint(transform.position);
-
-            dragOffset = cardScreenPosition - Input.mousePosition;
-            
             isDragging = true;
 
             if (StartDraggingEvent != null)
@@ -50,8 +46,14 @@ namespace Game.Scripts.Gameplay.Cards
 
         private void OnMouseDrag()
         {
-            Vector3 dragPosition = cardsCamera.ScreenToWorldPoint(Input.mousePosition + dragOffset);
-            dragPosition.z = transform.position.z;
+            Vector3 dragPosition =
+                cardsCamera.ScreenToWorldPoint(
+                    new Vector3(
+                        Input.mousePosition.x,
+                        Input.mousePosition.y,
+                        -cardsCamera.transform.position.z - cardConfig.DragCardHeigt));
+            
+            dragPosition.z = -cardConfig.DragCardHeigt;
 
             targetPosition = dragPosition;
         }
@@ -82,9 +84,9 @@ namespace Game.Scripts.Gameplay.Cards
                 return;
             }
 
-            float moveDuration = isDragging ? cardConfig.HoldMoveDuration : cardConfig.MoveDuration;
+            float moveDuration = isDragging ? cardConfig.DragMoveDuration : cardConfig.MoveDuration;
 
-            float maxMoveSpeed = isDragging ? cardConfig.HoldMaxMoveSpeed : cardConfig.MaxMoveSpeed;
+            float maxMoveSpeed = isDragging ? cardConfig.DragMaxMoveSpeed : cardConfig.MaxMoveSpeed;
             
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition,
                 ref movementVelocity, moveDuration, maxMoveSpeed);
@@ -102,8 +104,6 @@ namespace Game.Scripts.Gameplay.Cards
         public void SetTargetPosition(Vector3 position)
         {
             targetPosition = position;
-            
-            Log("Set Target Position {0}", position);
         }
     }
 }

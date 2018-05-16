@@ -13,5 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDuration: 0.1
   maxMoveSpeed: 40
-  holdMoveDuration: 0.01
-  holdMaxMoveSpeed: 200
+  dragMoveDuration: 0.01
+  dragMaxMoveSpeed: 1000
+  dragCardHeigt: 2

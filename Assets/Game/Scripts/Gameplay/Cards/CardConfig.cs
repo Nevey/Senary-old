@@ -10,10 +10,12 @@ namespace Game.Scripts.Gameplay.Cards
 
         [SerializeField] private float maxMoveSpeed = 100f;
 
-        [Header("Card Movement When Held")]
-        [SerializeField] private float holdMoveDuration = 0.1f;
+        [Header("Card Movement When Dragged")]
+        [SerializeField] private float dragMoveDuration = 0.1f;
 
-        [SerializeField] private float holdMaxMoveSpeed = 100f;
+        [SerializeField] private float dragMaxMoveSpeed = 100f;
+
+        [SerializeField] private float dragCardHeigt = 15f;
 
         public float MoveDuration
         {
@@ -25,14 +27,19 @@ namespace Game.Scripts.Gameplay.Cards
             get { return maxMoveSpeed; }
         }
 
-        public float HoldMoveDuration
+        public float DragMoveDuration
         {
-            get { return holdMoveDuration; }
+            get { return dragMoveDuration; }
         }
 
-        public float HoldMaxMoveSpeed
+        public float DragMaxMoveSpeed
         {
-            get { return holdMaxMoveSpeed; }
+            get { return dragMaxMoveSpeed; }
+        }
+
+        public float DragCardHeigt
+        {
+            get { return dragCardHeigt; }
         }
     }
 }
