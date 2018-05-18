@@ -42,6 +42,8 @@ namespace CCore.Senary.Scenes
                 StartCoroutine(WaitOneFrame(() =>
                 {
                     StateMachineController.Instance.StartGameStateMachine();
+                    
+                    SceneController.LoadSceneAdditive("Cards");
                 }));
             });
         }
