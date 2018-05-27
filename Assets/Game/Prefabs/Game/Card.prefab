@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1958760212987510}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.147, z: -0.009999999}
+  m_LocalPosition: {x: 0, y: -0.147, z: -0.035}
   m_LocalScale: {x: 1.0000001, y: 0.99999976, z: 0.99999976}
   m_Children: []
   m_Father: {fileID: 4648635959565878}
@@ -375,7 +375,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1958760212987510}
-  m_Text: Card DescrIPTION
+  m_Text: Card Description
   m_OffsetZ: 0
   m_CharacterSize: 0.04
   m_LineSpacing: 1
